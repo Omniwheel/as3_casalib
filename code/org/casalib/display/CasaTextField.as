@@ -1,6 +1,6 @@
 /*
 	CASA Lib for ActionScript 3.0
-	Copyright (c) 2008, Aaron Clinger & Contributors of CASA Lib
+	Copyright (c) 2009, Aaron Clinger & Contributors of CASA Lib
 	All rights reserved.
 	
 	Redistribution and use in source and binary forms, with or without
@@ -30,17 +30,20 @@
 	POSSIBILITY OF SUCH DAMAGE.
 */
 package org.casalib.display {
+	import flash.display.Stage;
+	import flash.events.Event;
 	import flash.text.TextField;
+	import org.casalib.core.IDestroyable;
 	import org.casalib.events.IRemovableEventDispatcher;
 	import org.casalib.events.ListenerManager;
-	import org.casalib.core.IDestroyable;
+	import org.casalib.util.StageReference;
 	
 	
 	/**
 		A base TextField that implements {@link IRemovableEventDispatcher} and {@link IDestroyable}.
 		
 		@author Aaron Clinger
-		@version 10/27/08
+		@version 06/10/09
 	*/
 	public class CasaTextField extends TextField implements IRemovableEventDispatcher, IDestroyable {
 		protected var _listenerManager:ListenerManager;
@@ -54,6 +57,16 @@ package org.casalib.display {
 			super();
 			
 			this._listenerManager = ListenerManager.getManager(this);
+		}
+		
+		/**
+			@exclude
+		*/
+		override public function dispatchEvent(event:Event):Boolean {
+			if (this.willTrigger(event.type))
+				return super.dispatchEvent(event);
+			
+			return true;
 		}
 		
 		/**
@@ -84,6 +97,19 @@ package org.casalib.display {
 			this._listenerManager.removeEventListeners();
 		}
 		
+		/**
+			The Stage of the display object or if the display object is not added to the display list and {@link StageReference} is defined <code>stage</code> will return the {@link StageReference#STAGE_DEFAULT default stage}; otherwise <code>null</code>.
+		*/
+		override public function get stage():Stage {
+			if (super.stage == null) {
+				try {
+					return StageReference.getStage();
+				} catch (e:Error) {}
+			}
+			
+			return super.stage;
+		}
+		
 		public function get destroyed():Boolean {
 			return this._isDestroyed;
 		}
@@ -91,7 +117,7 @@ package org.casalib.display {
 		/**
 			{@inheritDoc}
 			
-			Calling {@code destroy()} on a CASA display object also removes it from its current parent.
+			Calling <code>destroy()</code> on a CASA display object also removes it from its current parent.
 		*/
 		public function destroy():void {
 			this.removeEventListeners();

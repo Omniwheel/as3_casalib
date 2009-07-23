@@ -1,6 +1,6 @@
 /*
 	CASA Lib for ActionScript 3.0
-	Copyright (c) 2008, Aaron Clinger & Contributors of CASA Lib
+	Copyright (c) 2009, Aaron Clinger & Contributors of CASA Lib
 	All rights reserved.
 	
 	Redistribution and use in source and binary forms, with or without
@@ -47,10 +47,10 @@ package org.casalib.ui {
 	[Event(name="sequence", type="org.casalib.events.KeyComboEvent")]
 	
 	/**
-		Key class that simplifies listening to global key strokes and adds additional keyboard events. Key enables you to recieve events when multiple keys are {@link KeyComboEvent held/released} and when a {@link KeyComboEvent#SEQUENCE sequence of keys are pressed}.
+		Key class that simplifies listening to global key strokes and adds additional keyboard events. Key enables you to receive events when multiple keys are {@link KeyComboEvent held/released} and when a {@link KeyComboEvent#SEQUENCE sequence of keys are pressed}.
 		
 		@author Aaron Clinger
-		@version 10/26/08
+		@version 04/27/09
 		@usageNote You must first initialize {@link StageReference} before using this class.
 		@example
 			<code>
@@ -159,7 +159,7 @@ package org.casalib.ui {
 			Determines if is key is down.
 			
 			@param keyCode: The key code value assigned to a specific key or a Keyboard class constant associated with the key.
-			@return Returns {@code true} if key is currently pressed; otherwise {@code false}.
+			@return Returns <code>true</code> if key is currently pressed; otherwise <code>false</code>.
 		*/
 		public function isDown(keyCode:uint):Boolean {
 			return this._keysDown[keyCode];
@@ -250,7 +250,7 @@ package org.casalib.ui {
 		protected function _onKeyUp(e:KeyboardEvent):void {
 			var l:uint = this._combosDown.length;
 			while (l--) {
-				if (this._combosDown[l].keyCodes.indexOf(e.keyCode) != -1) {
+				if (this._combosDown[l].keyCodes.indexOf(e.keyCode) > -1) {
 					var keyComboHold:KeyComboEvent = new KeyComboEvent(KeyComboEvent.RELEASE);
 					keyComboHold.keyCombo = this._combosDown[l];
 					

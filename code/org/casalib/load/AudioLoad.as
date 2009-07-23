@@ -1,6 +1,6 @@
 /*
 	CASA Lib for ActionScript 3.0
-	Copyright (c) 2008, Aaron Clinger & Contributors of CASA Lib
+	Copyright (c) 2009, Aaron Clinger & Contributors of CASA Lib
 	All rights reserved.
 	
 	Redistribution and use in source and binary forms, with or without
@@ -37,13 +37,12 @@ package org.casalib.load {
 	import org.casalib.load.LoadItem;
 	
 	[Event(name="id3", type="flash.events.Event")]
-	[Event(name="open", type="flash.events.Event")]
 	
 	/**
 		Provides an easy and standardized way to load audio files.
 		
 		@author Aaron Clinger
-		@version 10/26/08
+		@version 04/19/09
 		@example
 			<code>
 				package {
@@ -78,7 +77,7 @@ package org.casalib.load {
 		/**
 			Creates and defines an AudioLoad.
 			
-			@param request: A {@code String} or an {@code URLRequest} reference to the file you wish to load.
+			@param request: A <code>String</code> or an <code>URLRequest</code> reference to the file you wish to load.
 			@param context: An optional SoundLoaderContext object.
 		*/
 		public function AudioLoad(request:*, context:SoundLoaderContext = null) {
@@ -97,8 +96,7 @@ package org.casalib.load {
 		}
 		
 		override public function destroy():void {
-			this._dispatcher.removeEventListener(Event.ID3, this.dispatchEvent, false);
-			this._dispatcher.removeEventListener(Event.OPEN, this.dispatchEvent, false);
+			this._dispatcher.removeEventListener(Event.ID3, this.dispatchEvent);
 			
 			super.destroy();
 		}
@@ -109,13 +107,11 @@ package org.casalib.load {
 		
 		/**
 			@sends Event#ID3 - Dispatched when ID3 data is available.
-			@sends Event#OPEN - Dispatched when a load operation starts.
 		*/
 		override protected function _initListeners(dispatcher:IEventDispatcher):void {
 			super._initListeners(dispatcher);
 			
 			this._dispatcher.addEventListener(Event.ID3, this.dispatchEvent, false, 0, true);
-			this._dispatcher.addEventListener(Event.OPEN, this.dispatchEvent, false, 0, true);
 		}
 	}
 }

@@ -1,6 +1,6 @@
 /*
 	CASA Lib for ActionScript 3.0
-	Copyright (c) 2008, Aaron Clinger & Contributors of CASA Lib
+	Copyright (c) 2009, Aaron Clinger & Contributors of CASA Lib
 	All rights reserved.
 	
 	Redistribution and use in source and binary forms, with or without
@@ -85,7 +85,7 @@ package org.casalib.util {
 			@param r: A uint from 0 to 255 representing the red color value.
 			@param g: A uint from 0 to 255 representing the green color value.
 			@param b: A uint from 0 to 255 representing the blue color value.
-			@param a: A uint from 0 to 255 representing the alpha value. Default is {@code 255}.
+			@param a: A uint from 0 to 255 representing the alpha value. Default is <code>255</code>.
 			@return Returns a hexidecimal color as a String.
 			@example
 				<code>

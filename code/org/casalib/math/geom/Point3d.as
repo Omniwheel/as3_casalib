@@ -1,6 +1,6 @@
 /*
 	CASA Lib for ActionScript 3.0
-	Copyright (c) 2008, Aaron Clinger & Contributors of CASA Lib
+	Copyright (c) 2009, Aaron Clinger & Contributors of CASA Lib
 	All rights reserved.
 	
 	Redistribution and use in source and binary forms, with or without
@@ -127,10 +127,10 @@ package org.casalib.math.geom {
 		}
 		
 		/**
-			Determines if the point specified in the {@code point} parameter is equal to this point object.
+			Determines if the point specified in the <code>point</code> parameter is equal to this point object.
 			
 			@param point: A Point3d object.
-			@return Returns {@code true} if shape's location is identical; otherwise {@code false}.
+			@return Returns <code>true</code> if shape's location is identical; otherwise <code>false</code>.
 		*/
 		public function equals(point:Point3d):Boolean {
 			return this.x == point.x && this.y == point.y && this.z == point.z;
@@ -165,7 +165,7 @@ package org.casalib.math.geom {
 			
 			@param firstPoint: The first Point3d.
 			@param secondPoint: The second Point3d.
-			@param amount: The level of interpolation between the two points. If {@code 0%}, {@code firstPoint} is returned; if {@code 100%}, {@code secondPoint} is returned.
+			@param amount: The level of interpolation between the two points. If <code>0%</code>, <code>firstPoint</code> is returned; if <code>100%</code>, <code>secondPoint</code> is returned.
 			@return The new, interpolated point.
 		*/
 		public static function interpolate(firstPoint:Point3d, secondPoint:Point3d, amount:Percent):Point3d {

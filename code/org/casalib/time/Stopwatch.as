@@ -1,6 +1,6 @@
 /*
 	CASA Lib for ActionScript 3.0
-	Copyright (c) 2008, Aaron Clinger & Contributors of CASA Lib
+	Copyright (c) 2009, Aaron Clinger & Contributors of CASA Lib
 	All rights reserved.
 	
 	Redistribution and use in source and binary forms, with or without
@@ -38,7 +38,7 @@ package org.casalib.time {
 		
 		@author Aaron Clinger
 		@author Mike Creighton
-		@version 10/25/08
+		@version 01/08/09
 		@example
 			<code>
 				package {
@@ -72,7 +72,7 @@ package org.casalib.time {
 	public class Stopwatch implements IResumable {
 		protected var _elapsedTime:int;
 		protected var _startTime:int;
-		protected var _stopped:Boolean;
+		protected var _isRunning:Boolean;
 		
 		
 		/**
@@ -80,6 +80,9 @@ package org.casalib.time {
 		*/
 		public function Stopwatch() {
 			super();
+			
+			this._startTime   = 0;
+			this._elapsedTime = 0;
 		}
 		
 		/**
@@ -88,7 +91,7 @@ package org.casalib.time {
 		public function start():void {
 			this._elapsedTime = 0;
 			this._startTime   = this._timer;
-			this._stopped     = false;
+			this._isRunning   = true;
 		}
 			
 		/**
@@ -97,15 +100,22 @@ package org.casalib.time {
 		public function stop():void {
 			this._elapsedTime = this.time;
 			this._startTime   = 0;
-			this._stopped     = true;
+			this._isRunning   = false;
 		}
 		
 		/**
 			Resumes stopwatch from {@link Stopwatch#stop}.
 		*/
 		public function resume():void {
-			if (this._stopped)
+			if (!this.running)
 				this._startTime = this._timer;
+		}
+		
+		/**
+			Determines if the stopwatch is currently running <code>true</code>, or if it isn't <code>false</code>.
+		*/
+		public function get running():Boolean {
+			return this._isRunning;
 		}
 		
 		/**

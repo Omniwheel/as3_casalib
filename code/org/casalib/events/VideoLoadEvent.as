@@ -1,6 +1,6 @@
 /*
 	CASA Lib for ActionScript 3.0
-	Copyright (c) 2008, Aaron Clinger & Contributors of CASA Lib
+	Copyright (c) 2009, Aaron Clinger & Contributors of CASA Lib
 	All rights reserved.
 	
 	Redistribution and use in source and binary forms, with or without
@@ -38,7 +38,7 @@ package org.casalib.events {
 		An event dispatched from {@link VideoLoad}.
 		
 		@author Aaron Clinger
-		@version 10/27/08
+		@version 04/19/09
 	*/
 	public class VideoLoadEvent extends LoadEvent {
 		public static const BUFFERED:String = 'buffered';
@@ -61,7 +61,7 @@ package org.casalib.events {
 		/**
 			The time remaining in milliseconds until the video has completely buffered.
 			
-			@usageNote {@link VideoLoad} will report {@code -1} milliseconds until two seconds of load time has elapsed.
+			@usageNote {@link VideoLoad} will report <code>-1</code> milliseconds until two seconds of load time has elapsed.
 		*/
 		public function get millisecondsUntilBuffered():int {
 			return this._millisecondsUntilBuffered;
@@ -74,7 +74,7 @@ package org.casalib.events {
 		/**
 			The percent the video has buffered.
 			
-			@usageNote {@link VideoLoad} will report {@code 0} percent until two seconds of load time has elapsed.
+			@usageNote {@link VideoLoad} will report <code>0</code> percent until two seconds of load time has elapsed.
 		*/
 		public function get buffer():Percent {
 			return this._buffer.clone();
@@ -88,7 +88,7 @@ package org.casalib.events {
 			@return A string containing all the properties of the event.
 		*/
 		override public function toString():String {
-			return formatToString('VideoLoadEvent', 'type', 'bubbles', 'cancelable', 'Bps', 'buffer', 'bytesLoaded', 'bytesTotal', 'millisecondsUntilBuffered', 'progress');
+			return this.formatToString('VideoLoadEvent', 'type', 'bubbles', 'cancelable', 'attempts', 'Bps', 'buffer', 'bytesLoaded', 'bytesTotal', 'httpStatus', 'latency', 'millisecondsUntilBuffered', 'progress', 'retries', 'time');
 		}
 		
 		/**
@@ -96,12 +96,17 @@ package org.casalib.events {
 		*/
 		override public function clone():Event {
 			var e:VideoLoadEvent        = new VideoLoadEvent(this.type, this.bubbles, this.cancelable);
-			e.progress                  = this.progress;
+			e.attempts                  = this.attempts;
 			e.Bps                       = this.Bps;
+			e.buffer                    = this.buffer;
 			e.bytesLoaded               = this.bytesLoaded;
 			e.bytesTotal                = this.bytesTotal;
+			e.httpStatus                = this.httpStatus;
+			e.latency                   = this.latency;
 			e.millisecondsUntilBuffered = this.millisecondsUntilBuffered;
-			e.buffer                    = this.buffer;
+			e.progress                  = this.progress;
+			e.retries                   = this.retries;
+			e.time                      = this.time;
 			
 			return e;
 		}

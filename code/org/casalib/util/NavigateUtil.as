@@ -1,6 +1,6 @@
 /*
 	CASA Lib for ActionScript 3.0
-	Copyright (c) 2008, Aaron Clinger & Contributors of CASA Lib
+	Copyright (c) 2009, Aaron Clinger & Contributors of CASA Lib
 	All rights reserved.
 	
 	Redistribution and use in source and binary forms, with or without
@@ -38,7 +38,7 @@ package org.casalib.util {
 	
 	
 	/**
-		Simplifies {@code navigateToURL} and {@code window.open} requests.
+		Simplifies <code>navigateToURL</code> and <code>window.open</code> requests.
 		
 		@author Aaron Clinger
 		@version 12/04/08
@@ -51,11 +51,11 @@ package org.casalib.util {
 		
 		
 		/**
-			Simlifies {@code navigateToURL} by allowing you to either use a {@code String} or an {@code URLRequest} reference to the URL. This method also helps prevent pop-up blocking by trying to use {@link #openWindow} before calling {@code navigateToURL}.
+			Simlifies <code>navigateToURL</code> by allowing you to either use a <code>String</code> or an <code>URLRequest</code> reference to the URL. This method also helps prevent pop-up blocking by trying to use {@link #openWindow} before calling <code>navigateToURL</code>.
 			
-			@param request: A {@code String} or an {@code URLRequest} reference to the URL you wish to open/navigate to.
-			@param window: The browser window or HTML frame in which to display the URL indicated by the {@code request} parameter.
-			@throws ArguementTypeError if you pass a value type other than a {@code String} or {@code URLRequest} to parameter {@code request}.
+			@param request: A <code>String</code> or an <code>URLRequest</code> reference to the URL you wish to open/navigate to.
+			@param window: The browser window or HTML frame in which to display the URL indicated by the <code>request</code> parameter.
+			@throws ArguementTypeError if you pass a value type other than a <code>String</code> or <code>URLRequest</code> to parameter <code>request</code>.
 		*/
 		public static function openUrl(request:*, window:String = NavigateUtil.WINDOW_SELF):void {
 			if (request is String)
@@ -71,12 +71,12 @@ package org.casalib.util {
 		}
 		
 		/**
-			A Flash wrapper for JavaScript’s {@code window.open}.
+			A Flash wrapper for JavaScript’s <code>window.open</code>.
 			
 			@param url: Specifies the URL you wish to open/navigate to.
-			@param window: The browser window or HTML frame in which to display the URL indicated by the {@code url} parameter.
+			@param window: The browser window or HTML frame in which to display the URL indicated by the <code>url</code> parameter.
 			@param features: Defines the various window features to be included.
-			@return Returns {@code true} if the window was successfully created; otherwise {@code false}.
+			@return Returns <code>true</code> if the window was successfully created; otherwise <code>false</code>.
 			@see <a href="http://google.com/search?q=JavaScript+window.open+documentation">JavaScript documentation for window.open</a>.
 		*/
 		public static function openWindow(url:String, window:String = NavigateUtil.WINDOW_BLANK, features:String = ""):Boolean {

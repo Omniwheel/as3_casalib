@@ -1,6 +1,6 @@
 /*
 	CASA Lib for ActionScript 3.0
-	Copyright (c) 2008, Aaron Clinger & Contributors of CASA Lib
+	Copyright (c) 2009, Aaron Clinger & Contributors of CASA Lib
 	All rights reserved.
 	
 	Redistribution and use in source and binary forms, with or without
@@ -141,11 +141,11 @@ package org.casalib.math.geom {
 		}
 		
 		/**
-			Finds the {@code x}, {@code y} position of the degree along the circumference of the ellipse.
+			Finds the <code>x</code>, <code>y</code> position of the degree along the circumference of the ellipse.
 			
 			@param degree: Number representing a degree on the ellipse.
 			@return A Point object.
-			@usageNote {@code degree} can be over 360 or even negitive numbers; minding {@code 0 = 360 = 720}, {@code 540 = 180}, {@code -90 = 270}, etc.
+			@usageNote <code>degree</code> can be over 360 or even negitive numbers; minding <code>0 = 360 = 720</code>, <code>540 = 180</code>, <code>-90 = 270</code>, etc.
 		*/
 		public function getPointOfDegree(degree:Number):Point {
 			var radian:Number  = (degree - 90) * (Math.PI / 180);
@@ -159,7 +159,7 @@ package org.casalib.math.geom {
 			Finds if point is contained inside the ellipse perimeter.
 			
 			@param point: A Point object.
-			@return Returns {@code true} if shape's area contains point; otherwise {@code false}.
+			@return Returns <code>true</code> if shape's area contains point; otherwise <code>false</code>.
 		*/
 		public function containsPoint(point:Point):Boolean {
 			var xRadius:Number = this.width * 0.5;
@@ -171,10 +171,10 @@ package org.casalib.math.geom {
 		}
 		
 		/**
-			Determines if the Ellipse specified in the {@code ellipse} parameter is equal to this Ellipse object.
+			Determines if the Ellipse specified in the <code>ellipse</code> parameter is equal to this Ellipse object.
 			
 			@param ellipse: An Ellipse object.
-			@return Returns {@code true} if object is equal to this Ellipse; otherwise {@code false}.
+			@return Returns <code>true</code> if object is equal to this Ellipse; otherwise <code>false</code>.
 		*/
 		public function equals(ellipse:Ellipse):Boolean {
 			return this.x == ellipse.x && this.y == ellipse.y && this.width == ellipse.width && this.height == ellipse.height;

@@ -1,6 +1,6 @@
 /*
 	CASA Lib for ActionScript 3.0
-	Copyright (c) 2008, Aaron Clinger & Contributors of CASA Lib
+	Copyright (c) 2009, Aaron Clinger & Contributors of CASA Lib
 	All rights reserved.
 	
 	Redistribution and use in source and binary forms, with or without
@@ -92,7 +92,7 @@ package org.casalib.util {
 		
 		
 		/**
-			Draws a rounded rectangle. Act identically to {@code Graphics.drawRoundRect} but allows the specification of which corners are rounded.
+			Draws a rounded rectangle. Act identically to <code>Graphics.drawRoundRect</code> but allows the specification of which corners are rounded.
 			
 			@param graphics: The location where drawing should occur.
 			@param x: The horizontal position of the rectangle.
@@ -101,10 +101,10 @@ package org.casalib.util {
 			@param height: The height of the rectangle.
 			@param ellipseWidth: The width in pixels of the ellipse used to draw the rounded corners.
 			@param ellipseHeight: The height in pixels of the ellipse used to draw the rounded corners. 
-			@param topLeft: Specifies if the top left corner of the rectangle should be rounded {@code true}, or should be square {@code false}.
-			@param topRight:Specifies if the top right corner of the rectangle should be rounded {@code true}, or should be square {@code false}. 
-			@param bottomRight: Specifies if the bottom right corner of the rectangle should be rounded {@code true}, or should be square {@code false}.
-			@param bottomLeft: Specifies if the bottom left corner of the rectangle should be rounded {@code true}, or should be square {@code false}.
+			@param topLeft: Specifies if the top left corner of the rectangle should be rounded <code>true</code>, or should be square <code>false</code>.
+			@param topRight:Specifies if the top right corner of the rectangle should be rounded <code>true</code>, or should be square <code>false</code>. 
+			@param bottomRight: Specifies if the bottom right corner of the rectangle should be rounded <code>true</code>, or should be square <code>false</code>.
+			@param bottomLeft: Specifies if the bottom left corner of the rectangle should be rounded <code>true</code>, or should be square <code>false</code>.
 			@usage
 				<code>
 					this.graphics.beginFill(0xFF00FF);

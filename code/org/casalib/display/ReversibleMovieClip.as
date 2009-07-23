@@ -1,6 +1,6 @@
 /*
 	CASA Lib for ActionScript 3.0
-	Copyright (c) 2008, Aaron Clinger & Contributors of CASA Lib
+	Copyright (c) 2009, Aaron Clinger & Contributors of CASA Lib
 	All rights reserved.
 	
 	Redistribution and use in source and binary forms, with or without
@@ -39,7 +39,7 @@ package org.casalib.display {
 		Provides additional timeline controlling functions: {@link #reverse} and {@link #gotoAndReverse}.
 		
 		@author Aaron Clinger
-		@version 10/27/08
+		@version 05/30/09
 	*/
 	public class ReversibleMovieClip extends CasaMovieClip {
 		protected var _isReversing:Boolean;
@@ -65,7 +65,7 @@ package org.casalib.display {
 		/**
 			Sends the playhead to the specified frame on and reverses from that frame.
 			
-			@param frame: A number representing the frame number, or a string representing the label of the frame, to which the playhead is sent.
+			@param frame: A number representing the frame number or a string representing the label of the frame to which the playhead is sent.
 		*/
 		public function gotoAndReverse(frame:Object):void {
 			super.gotoAndStop(frame);
@@ -110,14 +110,14 @@ package org.casalib.display {
 		}
 		
 		/**
-			Determines if the MovieClip is currently reversing {@code true}, or is stopped or playing {@code false}.
+			Determines if the MovieClip is currently reversing <code>true</code>, or is stopped or playing <code>false</code>.
 		*/
 		public function get reversing():Boolean {
 			return this._isReversing;
 		}
 		
 		override public function destroy():void {
-			this._reverseController.removeEventListener(Event.ENTER_FRAME, this._gotoFrameBefore);
+			this._stopReversing();
 			
 			super.destroy();
 		}
@@ -137,7 +137,7 @@ package org.casalib.display {
 			
 			this._isReversing = true;
 			
-			this._reverseController.addEventListener(Event.ENTER_FRAME, this._gotoFrameBefore);
+			this._reverseController.addEventListener(Event.ENTER_FRAME, this._gotoFrameBefore, false, 0, true);
 		}
 		
 		protected function _gotoFrameBefore(e:Event):void {

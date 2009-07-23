@@ -1,6 +1,6 @@
 /*
 	CASA Lib for ActionScript 3.0
-	Copyright (c) 2008, Aaron Clinger & Contributors of CASA Lib
+	Copyright (c) 2009, Aaron Clinger & Contributors of CASA Lib
 	All rights reserved.
 	
 	Redistribution and use in source and binary forms, with or without
@@ -31,14 +31,14 @@
 */
 package org.casalib.layout {
 	import flash.display.DisplayObject;
-	import flash.display.Sprite;
+	import org.casalib.display.CasaSprite;
 	
 	/**
 		Creates the mechanism to distribute DisplayObjects to a vertical or horzontal grid of columns and rows.
 		
 		@author Aaron Clinger
 		@author Jon Adams
-		@version 10/26/08
+		@version 03/07/09
 		@example
 			<code>
 				package {
@@ -76,7 +76,7 @@ package org.casalib.layout {
 				}
 			</code>
 	*/
-	public class Distribution extends Sprite {
+	public class Distribution extends CasaSprite {
 		protected var _marginTop:Number;
 		protected var _marginRight:Number;
 		protected var _marginBottom:Number;
@@ -89,9 +89,9 @@ package org.casalib.layout {
 		/**
 			Creates a Distribution.
 			
-			@param size: The maximum width or height of the distrubution. If {@code isVertical} argument is {@code false} you are setting the width of the distrubution before wrapping, if {@code true} you're setting the height before wrapping.
-			@param isVertical: Indicates to position children left-to-right top-to-bottom {@code false}, or to position children top-to-bottom left-to-right {@code true}.
-			@param snapToPixel: Force the position of all children to whole pixels {@code true}, or to let items be positioned on sub-pixels {@code false}.
+			@param size: The maximum width or height of the distrubution. If <code>isVertical</code> argument is <code>false</code> you are setting the width of the distrubution before wrapping, if <code>true</code> you're setting the height before wrapping.
+			@param isVertical: Indicates to position children left-to-right top-to-bottom <code>false</code>, or to position children top-to-bottom left-to-right <code>true</code>.
+			@param snapToPixel: Force the position of all children to whole pixels <code>true</code>, or to let items be positioned on sub-pixels <code>false</code>.
 		*/
 		public function Distribution(size:Number = Number.POSITIVE_INFINITY, isVertical:Boolean = false, snapToPixel:Boolean = true) {
 			super();
@@ -165,7 +165,7 @@ package org.casalib.layout {
 		}
 		
 		/**
-			The maximum width or height of the distrubution. If {@link #vertical} is {@code false} you are setting the width of the distrubution before wrapping, if {@code true} you're setting the height before wrapping.
+			The maximum width or height of the distrubution. If {@link #vertical} is <code>false</code> you are setting the width of the distrubution before wrapping, if <code>true</code> you're setting the height before wrapping.
 		*/
 		public function set size(s:Number):void {
 			this._size = s;
@@ -176,7 +176,7 @@ package org.casalib.layout {
 		}
 		
 		/**
-			Indicates to position children left-to-right top-to-bottom {@code false}, or to position children top-to-bottom left-to-right {@code true}.
+			Indicates to position children left-to-right top-to-bottom <code>false</code>, or to position children top-to-bottom left-to-right <code>true</code>.
 		*/
 		public function set vertical(isVertical:Boolean):void {
 			this._isVert = isVertical;

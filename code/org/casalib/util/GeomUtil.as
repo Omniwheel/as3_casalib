@@ -1,6 +1,6 @@
 /*
 	CASA Lib for ActionScript 3.0
-	Copyright (c) 2008, Aaron Clinger & Contributors of CASA Lib
+	Copyright (c) 2009, Aaron Clinger & Contributors of CASA Lib
 	All rights reserved.
 	
 	Redistribution and use in source and binary forms, with or without
@@ -38,7 +38,8 @@ package org.casalib.util {
 		Utilities for positioning, calculating and manipulating geometeric shapes.
 		
 		@author Aaron Clinger
-		@version 04/27/08
+		@author Jon Adams
+		@version 02/19/08
 	*/
 	public class GeomUtil {
 		
@@ -67,7 +68,7 @@ package org.casalib.util {
 			@return The degree between the two points.
 		*/
 		public static function angle(first:Point, second:Point):Number {
-			return Math.atan((first.y - second.y) / (first.x - second.x)) / (Math.PI / 180);
+			return Math.atan2(second.y - first.y, second.x - first.x) / (Math.PI / 180);
 		}
 		
 		/**

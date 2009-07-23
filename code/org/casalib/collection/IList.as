@@ -1,6 +1,6 @@
 /*
 	CASA Lib for ActionScript 3.0
-	Copyright (c) 2008, Aaron Clinger & Contributors of CASA Lib
+	Copyright (c) 2009, Aaron Clinger & Contributors of CASA Lib
 	All rights reserved.
 	
 	Redistribution and use in source and binary forms, with or without
@@ -36,7 +36,7 @@ package org.casalib.collection {
 		
 		@author Aaron Clinger
 		@author Dave Nelson
-		@version 09/29/08
+		@version 06/04/09
 	*/
 	public interface IList {
 		
@@ -45,7 +45,7 @@ package org.casalib.collection {
 			Appends the specified item to the end of this list.
 			
 			@param item: Element to be inserted.
-			@return Returns {@code true} if the list was changed as a result of the call; otherwise {@code false}.
+			@return Returns <code>true</code> if the list was changed as a result of the call; otherwise <code>false</code>.
 		*/
 		function addItem(item:*):Boolean;
 		
@@ -54,7 +54,7 @@ package org.casalib.collection {
 			
 			@param item: Element to be inserted.
 			@param index: Position where the elements should be added.
-			@return Returns {@code true} if the list was changed as a result of the call; otherwise {@code false}.
+			@return Returns <code>true</code> if the list was changed as a result of the call; otherwise <code>false</code>.
 		*/
 		function addItemAt(item:*, index:int):Boolean;
 		
@@ -62,7 +62,7 @@ package org.casalib.collection {
 			Modifies original list by adding all the elements from another list.
 			
 			@param items: List of elements to add.
-			@return Returns {@code true} if the list was changed as a result of the call; otherwise {@code false}.
+			@return Returns <code>true</code> if the list was changed as a result of the call; otherwise <code>false</code>.
 		*/
 		function addItems(items:IList):Boolean;
 		
@@ -71,7 +71,7 @@ package org.casalib.collection {
 			
 			@param items: List of elements to add.
 			@param index: Position where the elements should be added.
-			@return Returns {@code true} if the list was changed as a result of the call; otherwise {@code false}.
+			@return Returns <code>true</code> if the list was changed as a result of the call; otherwise <code>false</code>.
 		*/
 		function addItemsAt(items:IList, index:int = 0x7fffffff):Boolean;
 		
@@ -84,7 +84,7 @@ package org.casalib.collection {
 			Determines if this list contains a specified element.
 			
 			@param item: Element to search for.
-			@return The amount of {@code item}s found; if none were found returns {@code 0}.
+			@return Returns <code>true</code> if the list contains the element; otherwise <code>false</code>.
 		*/
 		function contains(item:*):Boolean;
 		
@@ -92,15 +92,15 @@ package org.casalib.collection {
 			Determines if this list contains all of the elements of the specified list.
 			
 			@param items: List of elements to be checked for containment.
-			@return Returns {@code true} if list contains all elements of the list; otherwise {@code false}.
+			@return Returns <code>true</code> if list contains all elements of the list; otherwise <code>false</code>.
 		*/
 		function containsAll(items:IList):Boolean;
 		
 		/**
-			Determines if the list specified in the {@code list} parameter is equal to this list object.
+			Determines if the list specified in the <code>list</code> parameter is equal to this list object.
 			
 			@param list: An object that implements {@link IList}.
-			@return Returns {@code true} if the object is equal to this list; otherwise {@code false}.
+			@return Returns <code>true</code> if the object is equal to this list; otherwise <code>false</code>.
 		*/
 		function equals(list:IList):Boolean;
 		
@@ -126,14 +126,14 @@ package org.casalib.collection {
 			
 			@param item: The element to search for.
 			@param fromIndex: The position in the list from which to start searching for the item.
-			@return Returns the index of the last occurrence, or {@code -1} if the element doesn't exist.
+			@return Returns the index of the last occurrence, or <code>-1</code> if the element doesn't exist.
 		*/
 		function indexOf(item:*, fromIndex:int = 0):int;
 		
 		/**
 			Determines if this list contains no elements.
 			
-			@return Returns {@code true} if the list contains no items; otherwise {@code false}.
+			@return Returns <code>true</code> if the list contains no items; otherwise <code>false</code>.
 		*/
 		function isEmpty():Boolean;
 		
@@ -142,7 +142,7 @@ package org.casalib.collection {
 			
 			@param item: The element to search for.
 			@param fromIndex: The position in the list from which to start searching for the item.
-			@return Returns the index of the last occurrence, or {@code -1} if the element doesn't exist.
+			@return Returns the index of the last occurrence, or <code>-1</code> if the element doesn't exist.
 		*/
 		function lastIndexOf(item:*, fromIndex:int = 0x7fffffff):int;
 		
@@ -155,7 +155,7 @@ package org.casalib.collection {
 			Modifies the list by removing all items that are identical to the specified item.
 			
 			@param item: Element to remove.
-			@return Returns {@code true} if the list was changed as a result of the call; otherwise {@code false}.
+			@return Returns <code>true</code> if the list was changed as a result of the call; otherwise <code>false</code>.
 		*/
 		function removeAllInstancesOfItem(item:*):Boolean;
 		
@@ -163,7 +163,7 @@ package org.casalib.collection {
 			Removes the first occurance of the specified item in the list.
 			
 			@param item: Element to remove.
-			@return Returns {@code true} if the list contained the item; otherwise {@code false}.
+			@return Returns <code>true</code> if the list contained the item; otherwise <code>false</code>.
 		*/
 		function removeItem(item:*):Boolean;
 		
@@ -179,7 +179,7 @@ package org.casalib.collection {
 			Removes only the specified items in a list.
 			
 			@param items: List of elements to remove.
-			@return Returns {@code true} if the list was changed as a result of the call; otherwise {@code false}.
+			@return Returns <code>true</code> if the list was changed as a result of the call; otherwise <code>false</code>.
 		*/
 		function removeItems(items:IList):Boolean;
 		
@@ -187,7 +187,7 @@ package org.casalib.collection {
 			Retains only the specified items in a list.
 			
 			@param items: List of elements to keep.
-			@return Returns {@code true} if the list was changed as a result of the call; otherwise {@code false}.
+			@return Returns <code>true</code> if the list was changed as a result of the call; otherwise <code>false</code>.
 		*/
 		function retainItems(items:IList):Boolean;
 		

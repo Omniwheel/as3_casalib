@@ -1,6 +1,6 @@
 /*
 	CASA Lib for ActionScript 3.0
-	Copyright (c) 2008, Aaron Clinger & Contributors of CASA Lib
+	Copyright (c) 2009, Aaron Clinger & Contributors of CASA Lib
 	All rights reserved.
 	
 	Redistribution and use in source and binary forms, with or without
@@ -46,7 +46,7 @@ package org.casalib.util {
 			Determines if the SWF is being served on the internet.
 			
 			@param location: DisplayObject to get location of.
-			@return Returns {@code true} if SWF is being served on the internet; otherwise {@code false}.
+			@return Returns <code>true</code> if SWF is being served on the internet; otherwise <code>false</code>.
 			@usage
 				<code>
 					trace(LocationUtil.isWeb(_root));
@@ -61,7 +61,7 @@ package org.casalib.util {
 			
 			@param location: MovieClip to compare location of.
 			@param domain: Web domain.
-			@return Returns {@code true} if file's embed location matched passed domain; otherwise {@code false}.
+			@return Returns <code>true</code> if file's embed location matched passed domain; otherwise <code>false</code>.
 			@usage
 				To check for domain:
 				<code>
@@ -97,7 +97,7 @@ package org.casalib.util {
 		/**
 			Determines if the SWF is running in a browser plug-in.
 			
-			@return Returns {@code true} if SWF is running in the Flash Player browser plug-in; otherwise {@code false}.
+			@return Returns <code>true</code> if SWF is running in the Flash Player browser plug-in; otherwise <code>false</code>.
 		*/
 		public static function isPlugin():Boolean {
 			return Capabilities.playerType == 'PlugIn' || Capabilities.playerType == 'ActiveX';
@@ -106,7 +106,7 @@ package org.casalib.util {
 		/**
 			Determines if the SWF is running in the IDE.
 			
-			@return Returns {@code true} if SWF is running in the Flash Player version used by the external player or test movie mode; otherwise {@code false}.
+			@return Returns <code>true</code> if SWF is running in the Flash Player version used by the external player or test movie mode; otherwise <code>false</code>.
 		*/
 		public static function isIde():Boolean {
 			return Capabilities.playerType == 'External';
@@ -115,7 +115,7 @@ package org.casalib.util {
 		/**
 			Determines if the SWF is running in the StandAlone player.
 			
-			@return Returns {@code true} if SWF is running in the Flash StandAlone Player; otherwise {@code false}.
+			@return Returns <code>true</code> if SWF is running in the Flash StandAlone Player; otherwise <code>false</code>.
 		*/
 		public static function isStandAlone():Boolean {
 			return Capabilities.playerType == 'StandAlone';
@@ -124,7 +124,7 @@ package org.casalib.util {
 		/**
 			Determines if the runtime environment is an Air application.
 			
-			@return Returns {@code true} if the runtime environment is an Air application; otherwise {@code false}.
+			@return Returns <code>true</code> if the runtime environment is an Air application; otherwise <code>false</code>.
 		*/
 		public static function isAirApplication():Boolean {
 			return Capabilities.playerType == 'Desktop';

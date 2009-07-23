@@ -1,6 +1,6 @@
 /*
 	CASA Lib for ActionScript 3.0
-	Copyright (c) 2008, Aaron Clinger & Contributors of CASA Lib
+	Copyright (c) 2009, Aaron Clinger & Contributors of CASA Lib
 	All rights reserved.
 	
 	Redistribution and use in source and binary forms, with or without
@@ -37,11 +37,11 @@ package org.casalib.time {
 	[Event(name="enterFrame", type="flash.events.Event")]
 	
 	/**
-		Creates a centralized {@code enterFrame} event. Also enables classes that do not extend a display object to react to an {@code enterFrame} event.
+		Creates a centralized <code>enterFrame</code> event. Also enables classes that do not extend a display object to react to an <code>enterFrame</code> event.
 		
 		@author Aaron Clinger
 		@author Mike Creighton
-		@version 11/11/08
+		@version 05/30/09
 		@example
 			<code>
 				package {
@@ -90,6 +90,13 @@ package org.casalib.time {
 			this._createBeacon();
 		}
 		
+		/**
+			@throws Error if called. Cannot destroy a singleton.
+		*/
+		override public function destroy():void {
+			throw new Error('Cannot destroy a singleton.');
+		}
+		
 		protected function _createBeacon():void {
 			EnterFrame._pulseShape = new Shape();
 			EnterFrame._pulseShape.addEventListener(Event.ENTER_FRAME, this._handlePulseEnterFrame);
@@ -103,4 +110,5 @@ package org.casalib.time {
 		}
 	}
 }
+
 class SingletonEnforcer {}

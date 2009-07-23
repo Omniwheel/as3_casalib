@@ -1,6 +1,6 @@
 /*
 	CASA Lib for ActionScript 3.0
-	Copyright (c) 2008, Aaron Clinger & Contributors of CASA Lib
+	Copyright (c) 2009, Aaron Clinger & Contributors of CASA Lib
 	All rights reserved.
 	
 	Redistribution and use in source and binary forms, with or without
@@ -35,17 +35,17 @@ package org.casalib.util {
 	import org.casalib.util.ObjectUtil;
 	
 	/**
-		Provides utility functions for formatting and manipulating {@code Date} objects.
+		Provides utility functions for formatting and manipulating <code>Date</code> objects.
 		
 		@author Aaron Clinger
 		@author Shane McCartney
 		@author David Nelson
-		@version 09/29/08
+		@version 06/18/09
 	*/
 	public class DateUtil {
 		
 		/**
-			Formats a Date object for display. Acts almost identically to the PHP {@code date} function.
+			Formats a Date object for display. Acts almost identically to the PHP <code>date</code> function.
 			<table border="1">
 				<tr style="background-color:#e1e1e1;">
 					<th style="width:150px;">Format character</th>
@@ -226,7 +226,7 @@ package org.casalib.util {
 			
 			@param dateToFormat: The Date object you wish to format.
 			@param formatString: The format of the outputted date String. See the format characters options above.
-			@usageNote You can prevent a recognized character in the format string from being expanded by escaping it with a preceding {@code ^}.
+			@usageNote You can prevent a recognized character in the format string from being expanded by escaping it with a preceding <code>^</code>.
 			@example
 				<code>
 					trace(DateUtil.formatDate(new Date(), "l ^t^h^e dS ^of F Y h:i:s A"));
@@ -427,23 +427,23 @@ package org.casalib.util {
 		public static function iso8601ToDate(iso8601:String):Date {
 			var parts:Array      = iso8601.toUpperCase().split('T');
 			var date:Array       = parts[0].split('-');
-			var time:Array       = parts[1].split(':');
-			var year:uint        = ObjectUtil.isEmpty(date[0]) ? undefined : Number(date[0]);
-			var month:uint       = ObjectUtil.isEmpty(date[1]) ? undefined : Number(date[1] - 1);
-			var day:uint         = ObjectUtil.isEmpty(date[2]) ? undefined : Number(date[2]);
-			var hour:uint        = ObjectUtil.isEmpty(time[0]) ? undefined : Number(time[0]);
-			var minute:uint      = ObjectUtil.isEmpty(time[1]) ? undefined : Number(time[1]);
-			var second:uint      = undefined;
-			var millisecond:uint = undefined;
+			var time:Array       = (parts.length <= 1) ? new Array() : parts[1].split(':');
+			var year:uint        = ObjectUtil.isEmpty(date[0]) ? 0 : Number(date[0]);
+			var month:uint       = ObjectUtil.isEmpty(date[1]) ? 0 : Number(date[1] - 1);
+			var day:uint         = ObjectUtil.isEmpty(date[2]) ? 1 : Number(date[2]);
+			var hour:int         = ObjectUtil.isEmpty(time[0]) ? 0 : Number(time[0]);
+			var minute:uint      = ObjectUtil.isEmpty(time[1]) ? 0 : Number(time[1]);
+			var second:uint      = 0;
+			var millisecond:uint = 0;
 			
 			if (time[2] != undefined) {
 				var index:int = time[2].length;
 				var temp:Number;
-				if (time[2].indexOf('+') != -1)
+				if (time[2].indexOf('+') > -1)
 					index = time[2].indexOf('+');
-				else if (time[2].indexOf('-') != -1)
+				else if (time[2].indexOf('-') > -1)
 					index = time[2].indexOf('-');
-				else if (time[2].indexOf('Z') != -1)
+				else if (time[2].indexOf('Z') > -1)
 					index = time[2].indexOf('Z');
 				
 				if (isNaN(index)) {
@@ -558,7 +558,7 @@ package org.casalib.util {
 			Determines if time is Ante meridiem or Post meridiem.
 			
 			@param hours: The hour to find the meridiem of (an integer from 0 to 23).
-			@return Returns either {@code "AM"} or {@code "PM"}
+			@return Returns either <code>"AM"</code> or <code>"PM"</code>
 			@example
 				<code>
 					trace(DateUtil.getMeridiem(17)); // Traces PM
@@ -588,7 +588,7 @@ package org.casalib.util {
 			
 			@param startDate: The starting date.
 			@param endDate: The ending date.
-			@return Returns an Object with the properties {@code days}, {@code hours}, {@code minutes}, {@code seconds} and {@code milliseconds} defined as numbers.
+			@return Returns an Object with the properties <code>days</code>, <code>hours</code>, <code>minutes</code>, <code>seconds</code> and <code>milliseconds</code> defined as numbers.
 			@example
 				<code>
 					var countdown:Object = DateUtil.getCountdownUntil(new Date(2006, 11, 31, 21, 36), new Date(2007, 0, 1));
@@ -667,7 +667,7 @@ package org.casalib.util {
 			Determines if year is a leap year or a common year.
 			
 			@param year: The full year.
-			@return Returns {@code true} if year is a leap year; otherwise {@code false}.
+			@return Returns <code>true</code> if year is a leap year; otherwise <code>false</code>.
 			@example
 				<code>
 					var myDate:Date = new Date(2000, 0, 1);
@@ -683,7 +683,7 @@ package org.casalib.util {
 			Determines if or not the date is in daylight saving time.
 			
 			@param d: Date to find if it is during daylight savings time.
-			@return Returns {@code true} if daylight savings time; otherwise {@code false}.
+			@return Returns <code>true</code> if daylight savings time; otherwise <code>false</code>.
 		*/
 		public static function isDaylightSavings(d:Date):Boolean {
 			var months:uint = 12;
@@ -741,9 +741,9 @@ package org.casalib.util {
 		/**
 			Determines if two Dates are the same time.
 			
-			@param first: First Date to compare to {@code second}.
-			@param second: Second Date to compare to {@code first}.
-			@return Returns {@code true} if Dates are the same; otherwise {@code false}.
+			@param first: First Date to compare to <code>second</code>.
+			@param second: Second Date to compare to <code>first</code>.
+			@return Returns <code>true</code> if Dates are the same; otherwise <code>false</code>.
 		*/
 		public static function equals(first:Date, second:Date):Boolean {
 			return first.valueOf() == second.valueOf();

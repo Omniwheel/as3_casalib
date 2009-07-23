@@ -1,6 +1,6 @@
 /*
 	CASA Lib for ActionScript 3.0
-	Copyright (c) 2008, Aaron Clinger & Contributors of CASA Lib
+	Copyright (c) 2009, Aaron Clinger & Contributors of CASA Lib
 	All rights reserved.
 	
 	Redistribution and use in source and binary forms, with or without
@@ -90,7 +90,7 @@ package org.casalib.util {
 			Checks to if query string key exists.
 			
 			@param key: The name of the key to check for existence.
-			@return Returns {@code true} if the key exists; otherwise {@code false}.
+			@return Returns <code>true</code> if the key exists; otherwise <code>false</code>.
 		*/
 		public static function hasKey(key:String):Boolean {
 			return QueryStringUtil.getValue(key) ? true : false;

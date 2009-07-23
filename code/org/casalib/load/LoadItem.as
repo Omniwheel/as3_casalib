@@ -1,6 +1,6 @@
 /*
 	CASA Lib for ActionScript 3.0
-	Copyright (c) 2008, Aaron Clinger & Contributors of CASA Lib
+	Copyright (c) 2009, Aaron Clinger & Contributors of CASA Lib
 	All rights reserved.
 	
 	Redistribution and use in source and binary forms, with or without
@@ -39,12 +39,14 @@ package org.casalib.load {
 	import org.casalib.errors.ArguementTypeError;
 	import org.casalib.events.LoadEvent;
 	import org.casalib.events.RetryEvent;
-	import org.casalib.load.BaseLoadItem;
 	import org.casalib.math.Percent;
 	import org.casalib.util.LoadUtil;
+	import org.casalib.process.Process;
+	import flash.events.HTTPStatusEvent;
 	
 	[Event(name="complete", type="org.casalib.events.LoadEvent")]
 	[Event(name="ioError", type="flash.events.IOErrorEvent")]
+	[Event(name="open", type="flash.events.Event")]
 	[Event(name="progress", type="org.casalib.events.LoadEvent")]
 	[Event(name="retry", type="org.casalib.events.RetryEvent")]
 	[Event(name="start", type="org.casalib.events.LoadEvent")]
@@ -54,16 +56,18 @@ package org.casalib.load {
 		Base class used by load classes. LoadItem is not designed to be used on its own and needs to be extended to function.
 		
 		@author Aaron Clinger
-		@version 11/05/08
+		@version 05/30/09
 	*/
-	public class LoadItem extends BaseLoadItem {
+	public class LoadItem extends Process {
 		protected var _attempts:uint;
-		protected var _baseUrl:String;
 		protected var _loaded:Boolean;
 		protected var _preventCache:Boolean;
 		protected var _retries:uint;
 		protected var _dispatcher:IEventDispatcher;
 		protected var _Bps:int;
+		protected var _time:uint;
+		protected var _latency:uint;
+		protected var _httpStatus:uint;
 		protected var _loadItem:*;
 		protected var _progress:Percent;
 		protected var _request:URLRequest;
@@ -75,19 +79,14 @@ package org.casalib.load {
 			
 			@param load: The load object.
 			@param request: A String or an URLRequest reference to the file you wish to load.
-			@throws ArguementTypeError if you pass a value type other than a String or URLRequest to parameter {@code request}.
+			@throws ArguementTypeError if you pass a value type other than a String or URLRequest to parameter <code>request</code>.
 		*/
 		public function LoadItem(load:*, request:*) {
 			super();
 			
-			if (request is String)
-				request = new URLRequest(request);
-			else if (!(request is URLRequest))
-				throw new ArguementTypeError('request');
+			this._createRequest(request);
 			
-			this._baseUrl  = request.url;
 			this._loadItem = load;
-			this._request  = request;
 			this._retries  = 2;
 			this._Bps      = -1;
 			this._progress = new Percent();
@@ -109,14 +108,12 @@ package org.casalib.load {
 			this._attempts  = 0;
 			this._progress  = new Percent();
 			this._Bps       = -1;
+			this._time      = 0;
 			
 			if (this._preventCache) {
 				var cache:String = 'casaCache=' + int(1000 * Math.random());
 				
-				if (this._baseUrl.indexOf('?') == -1)
-					this._request.url = this._baseUrl + '?' + cache;
-				else
-					this._request.url = this._baseUrl + '&' + cache;
+				this._request.url = (this._request.url.indexOf('?') == -1) ? this._request.url + '?' + cache : this._request.url + '&' + cache;
 			}
 			
 			this._load();
@@ -137,27 +134,27 @@ package org.casalib.load {
 				return;
 			
 			super.stop();
-				
+			
 			this._loadItem.close();
 			this.dispatchEvent(this._createDefinedLoadEvent(LoadEvent.STOP));
 		}
 		
 		/**
-			Specifies if a random value name/value pair should be appended to the query string to help prevent caching {@code true}, or not append {@code false}; defaults to {@code false}.
+			Specifies if a random value name/value pair should be appended to the query string to help prevent caching <code>true</code>, or not append <code>false</code>; defaults to <code>false</code>.
 		*/
-		override public function get preventCache():Boolean {
+		public function get preventCache():Boolean {
 			return this._preventCache;
 		}
 		
-		override public function set preventCache(cache:Boolean):void {
+		public function set preventCache(cache:Boolean):void {
 			this._preventCache = cache;
 		}
 		
 		/**
 			The total number of bytes of the requested file.
 		*/
-		public function get bytesTotal():uint {
-			return this._loadItem.bytesTotal;
+		public function get bytesTotal():Number {
+			return (this._loadItem.bytesTotal == 0 && this.bytesLoaded != 0) ? Number.POSITIVE_INFINITY : this._loadItem.bytesTotal;
 		}
 		
 		/**
@@ -170,19 +167,19 @@ package org.casalib.load {
 		/**
 			The percent that the requested file has loaded.
 		*/
-		override public function get progress():Percent {
+		public function get progress():Percent {
 			return this._progress.clone();
 		}
 		
 		/**
-			The number of times the file has attempted to load after {@link #start start} was called.
+			The number of additional times the file has attempted to load after {@link #start start} was called.
 		*/
 		public function get attempts():uint {
 			return this._attempts;
 		}
 		
 		/**
-			The number of additional load retires the class should attempt before failing; defaults to {@code 2} additional retries / {@code 3} total load attempts.
+			The number of additional load retries the class should attempt before failing; defaults to <code>2</code> additional retries / <code>3</code> total load attempts.
 		*/
 		public function get retries():uint {
 			return this._retries;
@@ -200,23 +197,59 @@ package org.casalib.load {
 		}
 		
 		/**
-			Determines if the requested file has loaded {@code true}, or hasn't finished loading {@code false}.
+			The URL of the requested file.
 		*/
-		override public function get loaded():Boolean {
+		public function get url():String {
+			return this.urlRequest.url;
+		}
+		
+		/**
+			Determines if the requested file is loading <code>true</code>, or if it isn't currently loading <code>false</code>.
+		*/
+		public function get loading():Boolean {
+			return this.running;
+		}
+		
+		/**
+			Determines if the requested file has loaded <code>true</code>, or hasn't finished loading <code>false</code>.
+		*/
+		public function get loaded():Boolean {
 			return this._loaded;
 		}
 		
 		/**
 			The current download speed of the requested file in bytes per second.
 		*/
-		override public function get Bps():int {
+		public function get Bps():int {
 			return this._Bps;
 		}
 		
+		/**
+			The current time duration in milliseconds the load has taken.
+		*/
+		public function get time():uint {
+			return this._time;
+		}
+		
+		/**
+			The time in milliseconds that the server took to respond.
+		*/
+		public function get latency():uint {
+			return this._latency;
+		}
+		
+		/**
+			The HTTP status code returned by the server; or <code>0</code> if no status has/can been received or the load is a stream.
+		*/
+		public function get httpStatus():uint {
+			return this._httpStatus;
+		}
+		
 		override public function destroy():void {
-			this._dispatcher.removeEventListener(Event.COMPLETE, this._onComplete, false);
-			this._dispatcher.removeEventListener(IOErrorEvent.IO_ERROR, this._onLoadError, false);
-			this._dispatcher.removeEventListener(ProgressEvent.PROGRESS, this._onProgress, false);
+			this._dispatcher.removeEventListener(Event.COMPLETE, this._onComplete);
+			this._dispatcher.removeEventListener(Event.OPEN, this._onOpen);
+			this._dispatcher.removeEventListener(IOErrorEvent.IO_ERROR, this._onLoadError);
+			this._dispatcher.removeEventListener(ProgressEvent.PROGRESS, this._onProgress);
 			
 			super.destroy();
 		}
@@ -225,12 +258,22 @@ package org.casalib.load {
 			this._dispatcher = dispatcher;
 			
 			this._dispatcher.addEventListener(Event.COMPLETE, this._onComplete, false, 0, true);
+			this._dispatcher.addEventListener(Event.OPEN, this._onOpen, false, 0, true);
 			this._dispatcher.addEventListener(IOErrorEvent.IO_ERROR, this._onLoadError, false, 0, true);
 			this._dispatcher.addEventListener(ProgressEvent.PROGRESS, this._onProgress, false, 0, true);
 		}
 		
 		protected function _load():void {
 			this._loadItem.load(this._request);
+		}
+		
+		protected function _createRequest(request:*):void {
+			if (request is String)
+				request = new URLRequest(request);
+			else if (!(request is URLRequest))
+				throw new ArguementTypeError('request');
+			
+			this._request = request;
 		}
 		
 		/**
@@ -252,6 +295,21 @@ package org.casalib.load {
 			}
 		}
 		
+		/**
+			@sends Event#OPEN - Dispatched when a load operation starts.
+		*/
+		protected function _onOpen(e:Event):void {
+			this._latency = getTimer() - this._startTime;
+			
+			this.dispatchEvent(e);
+		}
+		
+		protected function _onHttpStatus(e:HTTPStatusEvent):void {
+			this._httpStatus = e.status;
+			
+			this.dispatchEvent(e);
+		}
+		
 		protected function _onProgress(progress:ProgressEvent):void {
 			this._calculateLoadProgress();
 		}
@@ -260,7 +318,10 @@ package org.casalib.load {
 			@sends LoadEvent#PROGRESS - Dispatched as data is received during the download process.
 		*/
 		protected function _calculateLoadProgress():void {
-			this._Bps = LoadUtil.calculateBps(this.bytesLoaded, this._startTime, getTimer());
+			var currentTime:int = getTimer();
+			
+			this._Bps  = LoadUtil.calculateBps(this.bytesLoaded, this._startTime, currentTime);
+			this._time = currentTime - this._startTime;
 			
 			this._progress.decimalPercentage = this.bytesLoaded / this.bytesTotal;
 			
@@ -278,21 +339,26 @@ package org.casalib.load {
 		
 		protected function _createDefinedLoadEvent(type:String):LoadEvent {
 			var loadEvent:LoadEvent = new LoadEvent(type);
+			loadEvent.attempts      = this.attempts;
+			loadEvent.Bps           = this.Bps;
 			loadEvent.bytesLoaded   = this.bytesLoaded;
 			loadEvent.bytesTotal    = this.bytesTotal;
+			loadEvent.latency       = this.latency;
 			loadEvent.progress      = this.progress;
-			loadEvent.Bps           = this.Bps;
+			loadEvent.retries       = this.retries;
+			loadEvent.time          = this.time;
 			
 			return loadEvent;
 		}
 		
 		override protected function _complete():void {
-			this._loaded  = true;
-			this._Bps     = LoadUtil.calculateBps(this.bytesTotal, this._startTime, getTimer());
+			var currentTime:int              = getTimer();
+			this._Bps                        = LoadUtil.calculateBps(this.bytesTotal, this._startTime, currentTime);
+			this._time                       = currentTime - this._startTime;
+			this._loaded                     = true;
+			this._progress.decimalPercentage = 1;
 			
 			super._complete();
-			
-			this._progress.decimalPercentage = 1;
 		}
 	}
 }

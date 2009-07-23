@@ -1,6 +1,6 @@
 /*
 	CASA Lib for ActionScript 3.0
-	Copyright (c) 2008, Aaron Clinger & Contributors of CASA Lib
+	Copyright (c) 2009, Aaron Clinger & Contributors of CASA Lib
 	All rights reserved.
 	
 	Redistribution and use in source and binary forms, with or without
@@ -32,13 +32,14 @@
 package org.casalib.process {
 	import org.casalib.events.ProcessEvent;
 	import org.casalib.process.Process;
+	import org.casalib.util.ArrayUtil;
 	
 	
 	/**
 		Manages and threads {@link Process processes}.
 		
 		@author Aaron Clinger
-		@version 12/04/08
+		@version 07/15/09
 		@example
 			<code>
 				package {
@@ -88,7 +89,8 @@ package org.casalib.process {
 			</code>
 	*/
 	public class ProcessGroup extends Process {
-		public static var NORM_THREADS:int = 1; /**< The default amount of threads for all ProcessGroup instances. */ 
+		public static var NORM_THREADS:uint  = 1; /**< The default amount of threads for all ProcessGroup instances. */
+		public static const MAX_THREADS:uint = uint.MAX_VALUE;  /**< The maximum amount of threads for a ProcessGroup instance. Use this value if you wish to disable threading. */
 		protected var _threads:uint;
 		protected var _processes:Array;
 		protected var _autoStart:Boolean;
@@ -123,7 +125,7 @@ package org.casalib.process {
 		}
 		
 		/**
-			Instructs the ProcessGroup to {@link #start} automatically with each {@link #addProcess added} uncompleted Process {@code true}, or wait for a implicit {@link #start} {@code false}. Defaults to {@code false}.
+			Instructs the ProcessGroup to {@link #start} automatically if it contains an incomplete {@link Process} or if an incomplete is {@link Process#addProcess added}.
 		*/
 		public function get autoStart():Boolean {
 			return this._autoStart;
@@ -131,6 +133,9 @@ package org.casalib.process {
 		
 		public function set autoStart(autoStart:Boolean):void {
 			this._autoStart = autoStart;
+			
+			if (!this.completed && !this.running)
+				this.start();
 		}
 		
 		/**
@@ -146,8 +151,7 @@ package org.casalib.process {
 			
 			this.removeProcess(process);
 			
-			process.addEventListener(ProcessEvent.STOP, this._processStopped);
-			process.addEventListener(ProcessEvent.COMPLETE, this._processCompleted);
+			this._addProcessListeners(process);
 			
 			this._hasCompleted = process.completed;
 			
@@ -212,10 +216,48 @@ package org.casalib.process {
 		}
 		
 		/**
+			Determines if this ProcessGroup contains a specific process.
+			
+			@param process: The process to search for.
+			@return Returns <code>true</code> if the ProcessGroup contains the process; otherwise <code>false</code>.
+		*/
+		public function hasProcess(process:Process):Boolean {
+			return this._processes.indexOf(process) > -1;
+		}
+		
+		/**
 			The processes that compose the group.
 		*/
 		public function get processes():Array {
-			return this._processes.slice();
+			return this._processes.concat();
+		}
+		
+		/**
+			The processes that are neither complete or running.
+		*/
+		public function get queuedProcesses():Array {
+			return ArrayUtil.getItemsByKey(this.incompletedProcesses, 'running', false);
+		}
+		
+		/**
+			The processes that are currently running.
+		*/
+		public function get runningProcesses():Array {
+			return ArrayUtil.getItemsByKey(this.processes, 'running', true);
+		}
+		
+		/**
+			The processes that have not completed.
+		*/
+		public function get incompletedProcesses():Array {
+			return ArrayUtil.getItemsByKey(this.processes, 'completed', false);
+		}
+		
+		/**
+			The processes that have completed.
+		*/
+		public function get completedProcesses():Array {
+			return ArrayUtil.getItemsByKey(this.processes, 'completed', true);
 		}
 		
 		/**
@@ -261,10 +303,10 @@ package org.casalib.process {
 				
 				p = this._processes[i];
 				
-				if (p.running) {
+				if (p.running)
 					t--;
-				} else if (!p.completed) {
-					this._startProcess(p);
+				else if (!p.completed) {
+					p.start();
 					t--;
 				}
 			}
@@ -273,21 +315,22 @@ package org.casalib.process {
 				this._complete();
 		}
 		
-		protected function _startProcess(process:Process):void {
-			process.start();
-		}
-		
-		protected function _processStopped(e:ProcessEvent):void {
+		protected function _onProcessStopped(e:ProcessEvent):void {
 			this._checkThreads();
 		}
 		
-		protected function _processCompleted(e:ProcessEvent):void {
+		protected function _onProcessCompleted(e:ProcessEvent):void {
 			this._checkThreads();
+		}
+		
+		protected function _addProcessListeners(process:Process):void {
+			process.addEventListener(ProcessEvent.STOP, this._onProcessStopped, false, 0, true);
+			process.addEventListener(ProcessEvent.COMPLETE, this._onProcessCompleted, false, 0, true);
 		}
 		
 		protected function _removeProcessListeners(process:Process):void {
-			process.removeEventListener(ProcessEvent.STOP, this._processStopped);
-			process.removeEventListener(ProcessEvent.COMPLETE, this._processCompleted);
+			process.removeEventListener(ProcessEvent.STOP, this._onProcessStopped);
+			process.removeEventListener(ProcessEvent.COMPLETE, this._onProcessCompleted);
 		}
 	}
 }

@@ -1,6 +1,6 @@
 /*
 	CASA Lib for ActionScript 3.0
-	Copyright (c) 2008, Aaron Clinger & Contributors of CASA Lib
+	Copyright (c) 2009, Aaron Clinger & Contributors of CASA Lib
 	All rights reserved.
 	
 	Redistribution and use in source and binary forms, with or without
@@ -36,10 +36,10 @@ package org.casalib.util {
 	
 	
 	/**
-		Stores a reference to Stage for classes that cannot easily access it. This class allows you to stored multiple references by ID to different {@code Stage}s which is helpful in an AIR environment.
+		Stores a reference to Stage for classes that cannot easily access it. This class allows you to stored multiple references by ID to different <code>Stage</code>}s which is helpful in an AIR environment.
 		
 		@author Aaron Clinger
-		@version 12/04/08
+		@version 01/19/09
 		@usageNote You must first initialize the class by setting a reference to Stage. See example below:
 		@example
 			<code>
@@ -74,7 +74,7 @@ package org.casalib.util {
 			@throws Error if you try to get a Stage that has not been defined.
 		*/
 		public static function getStage(id:String = StageReference.STAGE_DEFAULT):Stage {
-			if (StageReference._getMap()[id] == null)
+			if (!(id in StageReference._getMap()))
 				throw new Error('Cannot get Stage ("' + id + '") before it has been set.');
 			
 			return StageReference._getMap()[id];
@@ -94,10 +94,10 @@ package org.casalib.util {
 			Removes a stored reference to a Stage.
 			
 			@param id: The identifier for the Stage.
-			@return Returns {@code true} if the Stage reference was found and removed; otherwise {@code false}.
+			@return Returns <code>true</code> if the Stage reference was found and removed; otherwise <code>false</code>.
 		*/
 		public static function removeStage(id:String = StageReference.STAGE_DEFAULT):Boolean {
-			if (StageReference._getMap()[id] == null)
+			if (!(id in StageReference._getMap()))
 				return false;
 			
 			StageReference.setStage(null, id);
@@ -118,7 +118,7 @@ package org.casalib.util {
 			Finds the identifier for a stored Stage reference.
 			
 			@param stage: The Stage you wish to find the identifier of.
-			@return The id for the stored Stage reference or {@code null} if it doesn't exist.
+			@return The id for the stored Stage reference or <code>null</code> if it doesn't exist.
 		*/
 		public static function getStageId(stage:Stage):String {
 			var map:Dictionary = StageReference._getMap();

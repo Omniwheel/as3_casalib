@@ -1,6 +1,6 @@
 /*
 	CASA Lib for ActionScript 3.0
-	Copyright (c) 2008, Aaron Clinger & Contributors of CASA Lib
+	Copyright (c) 2009, Aaron Clinger & Contributors of CASA Lib
 	All rights reserved.
 	
 	Redistribution and use in source and binary forms, with or without
@@ -39,7 +39,7 @@ package org.casalib.util {
 		
 		@author Aaron Clinger
 		@author Mike Creighton
-		@version 08/29/08
+		@version 01/08/09
 	*/
 	public class LoadUtil {
 		
@@ -47,20 +47,20 @@ package org.casalib.util {
 		/**
 			Calculates the load speed in bytes per second (Bps).
 			
-			@param bytesLoaded: Number of bytes that have loaded between {@code startTime} and {@code elapsedTime}.
+			@param bytesLoaded: Number of bytes that have loaded between <code>startTime</code> and <code>elapsedTime</code>.
 			@param startTime: Time in milliseconds when the load started.
 			@param elapsedTime: Time in milliseconds since the load started or time when load completed.
 			@return Bytes per second.
 			@usageNote This method returns BYTES per second, not bits per second.
 		*/
-		public static function calculateBps(bytesLoaded:uint, startTime:uint, elapsedTime:uint):uint {
-			return uint(bytesLoaded / ConversionUtil.millisecondsToSeconds(elapsedTime - startTime));
+		public static function calculateBps(bytesLoaded:uint, startTime:uint, elapsedTime:uint):int {
+			return Math.max(0, (bytesLoaded / ConversionUtil.millisecondsToSeconds(elapsedTime - startTime)));
 		}
 		
 		/**
 			Calculates the load speed in kilobytes per second (kBps).
 			
-			@param bytesLoaded: Number of bytes that have loaded between {@code startTime} and {@code elapsedTime}.
+			@param bytesLoaded: Number of bytes that have loaded between <code>startTime</code> and <code>elapsedTime</code>.
 			@param startTime: Time in milliseconds when the load started.
 			@param elapsedTime: Time in milliseconds since the load started or time when load completed.
 			@return Kilobytes per second.
@@ -73,7 +73,7 @@ package org.casalib.util {
 		/**
 			Calculates the percent the video has buffered.
 			
-			@param bytesLoaded: Number of bytes that have loaded between {@code startTime} and {@code elapsedTime}.
+			@param bytesLoaded: Number of bytes that have loaded between <code>startTime</code> and <code>elapsedTime</code>.
 			@param bytesTotal: Number of bytes total to be loaded.
 			@param startTime: Time in milliseconds when the load started.
 			@param elapsedTime: The current time in milliseconds or time when load completed.
@@ -90,7 +90,7 @@ package org.casalib.util {
 		/**
 			Calculates the remaining time until the video is buffered.
 			
-			@param bytesLoaded: Number of bytes that have loaded between {@code startTime} and {@code elapsedTime}.
+			@param bytesLoaded: Number of bytes that have loaded between <code>startTime</code> and <code>elapsedTime</code>.
 			@param bytesTotal: Number of bytes total to be loaded.
 			@param startTime: Time in milliseconds when the load started.
 			@param elapsedTime: The current time in milliseconds or time when load completed.

@@ -1,6 +1,6 @@
 /*
-	CASA Lib for ActionScript 3.0
-	Copyright (c) 2008, Aaron Clinger & Contributors of CASA Lib
+	CASA Framework for ActionScript 3.0
+	Copyright (c) 2009, Contributors of CASA Framework
 	All rights reserved.
 	
 	Redistribution and use in source and binary forms, with or without
@@ -13,7 +13,7 @@
 	  this list of conditions and the following disclaimer in the documentation
 	  and/or other materials provided with the distribution.
 	
-	- Neither the name of the CASA Lib nor the names of its contributors
+	- Neither the name of the CASA Framework nor the names of its contributors
 	  may be used to endorse or promote products derived from this software
 	  without specific prior written permission.
 	
@@ -29,33 +29,36 @@
 	ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 	POSSIBILITY OF SUCH DAMAGE.
 */
-package org {
+package org.casalib.util {
+	import flash.utils.Dictionary;
+	
 	
 	/**
-		Creates an easy way to determine what version/release of CASA is being used.
+		Provides utility functions for creating and managing singletons.
 		
 		@author Aaron Clinger
-		@version 12/04/08
-		@example
-			<code>
-				package {
-					import flash.display.MovieClip;
-					import org.casalib;
-					
-					
-					public class MyExample extends MovieClip {
-						
-						
-						public function MyExample() {
-							super();
-							
-							trace(casalib.version);
-						}
-					}
-				}
-			</code>
+		@version 01/19/09
 	*/
-	public class casalib {
-		public static const version:String = '1.0.0';
+	public class SingletonUtil {
+		protected static var _singletonMap:Dictionary;
+		
+		
+		/**
+			Creates a singleton out of a class without adapting or extending the class itself.
+			
+			@param type: The class you want a to created a singleton from.
+			@return The singleton instance of the class.
+			@example
+				<code>
+					var stopwatch:Stopwatch = SingletonUtil.singleton(Stopwatch);
+					stopwatch.start();
+				</code>
+		*/
+		public static function singleton(type:Class):* {
+			if (SingletonUtil._singletonMap == null)
+				SingletonUtil._singletonMap = new Dictionary();
+			
+			return type in SingletonUtil._singletonMap ? SingletonUtil._singletonMap[type] : SingletonUtil._singletonMap[type] = new type();
+		}
 	}
 }

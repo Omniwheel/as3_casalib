@@ -1,6 +1,6 @@
 /*
 	CASA Lib for ActionScript 3.0
-	Copyright (c) 2008, Aaron Clinger & Contributors of CASA Lib
+	Copyright (c) 2009, Aaron Clinger & Contributors of CASA Lib
 	All rights reserved.
 	
 	Redistribution and use in source and binary forms, with or without
@@ -31,18 +31,24 @@
 */
 package org.casalib.display {
 	import flash.display.MovieClip;
+	import flash.display.Stage;
+	import flash.display.DisplayObject;
+	import flash.events.Event;
 	import org.casalib.events.IRemovableEventDispatcher;
 	import org.casalib.events.ListenerManager;
 	import org.casalib.core.IDestroyable;
+	import org.casalib.util.StageReference;
+	import org.casalib.util.DisplayObjectUtil;
 	
 	
 	/**
-		A base MovieClip that implements {@link IRemovableEventDispatcher} and {@link IDestroyable}.
+		A base MovieClip that implements {@link IRemovableEventDispatcher} and {@link ICasaDisplayObjectContainer}.
 		
 		@author Aaron Clinger
-		@version 10/27/08
+		@author Mike Creighton
+		@version 05/29/09
 	*/
-	public class CasaMovieClip extends MovieClip implements IRemovableEventDispatcher, IDestroyable {
+	dynamic public class CasaMovieClip extends MovieClip implements IRemovableEventDispatcher, IDestroyable {
 		protected var _listenerManager:ListenerManager;
 		protected var _isDestroyed:Boolean;
 		
@@ -54,6 +60,16 @@ package org.casalib.display {
 			super();
 			
 			this._listenerManager = ListenerManager.getManager(this);
+		}
+		
+		/**
+			@exclude
+		*/
+		override public function dispatchEvent(event:Event):Boolean {
+			if (this.willTrigger(event.type))
+				return super.dispatchEvent(event);
+			
+			return true;
 		}
 		
 		/**
@@ -84,6 +100,40 @@ package org.casalib.display {
 			this._listenerManager.removeEventListeners();
 		}
 		
+		/**
+			The Stage of the display object or if the display object is not added to the display list and {@link StageReference} is defined <code>stage</code> will return the {@link StageReference#STAGE_DEFAULT default stage}; otherwise <code>null</code>.
+		*/
+		override public function get stage():Stage {
+			if (super.stage == null) {
+				try {
+					return StageReference.getStage();
+				} catch (e:Error) {}
+			}
+			
+			return super.stage;
+		}
+		
+		/**
+			Removes and optionally destroys children of the CasaMovieClip.
+			
+			@param destroyChildren: If a child implements {@link IDestroyable} call its {@link IDestroyable#destroy destroy} method <code>true</code>, or don't destroy <code>false</code>; defaults to <code>false</code>.
+			@param recursive: Call this method with the same arguments on all of the children's children (all the way down the display list) <code>true</code>, or leave the children's children <code>false</code>; defaults to <code>false</code>.
+		*/
+		public function removeChildren(destroyChildren:Boolean = false, recursive:Boolean = false):void {
+			DisplayObjectUtil.removeChildren(this, destroyChildren, recursive);
+		}
+		
+		/**
+			Removes and optionally destroys children of the CasaMovieClip then destroys itself.
+			
+			@param destroyChildren: If a child implements {@link IDestroyable} call its {@link IDestroyable#destroy destroy} method <code>true</code>, or don't destroy <code>false</code>; defaults to <code>false</code>.
+			@param recursive: Call this method with the same arguments on all of the children's children (all the way down the display list) <code>true</code>, or leave the children's children <code>false</code>; defaults to <code>false</code>.
+		*/
+		public function removeChildrenAndDestroy(destroyChildren:Boolean = false, recursive:Boolean = false):void {
+			this.removeChildren(destroyChildren, recursive);
+			this.destroy();
+		}
+		
 		public function get destroyed():Boolean {
 			return this._isDestroyed;
 		}
@@ -91,7 +141,7 @@ package org.casalib.display {
 		/**
 			{@inheritDoc}
 			
-			Calling {@code destroy()} on a CASA display object also removes it from its current parent.
+			Calling <code>destroy()</code> on a CASA display object also removes it from its current parent.
 		*/
 		public function destroy():void {
 			this.removeEventListeners();

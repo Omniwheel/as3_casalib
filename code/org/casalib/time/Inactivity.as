@@ -1,6 +1,6 @@
 /*
 	CASA Lib for ActionScript 3.0
-	Copyright (c) 2008, Aaron Clinger & Contributors of CASA Lib
+	Copyright (c) 2009, Aaron Clinger & Contributors of CASA Lib
 	All rights reserved.
 	
 	Redistribution and use in source and binary forms, with or without
@@ -49,7 +49,7 @@ package org.casalib.time {
 		
 		@author Aaron Clinger
 		@author Mike Creighton
-		@version 10/26/08
+		@version 05/30/09
 		@usageNote You must first initialize {@link StageReference} before using this class.
 		@example
 			<code>
@@ -111,11 +111,11 @@ package org.casalib.time {
 			if (this._interval.running)
 				return;
 			
-			StageReference.getStage().addEventListener(Event.RESIZE, this._userInput);
-			StageReference.getStage().addEventListener(KeyboardEvent.KEY_DOWN, this._userInput);
-			StageReference.getStage().addEventListener(KeyboardEvent.KEY_UP, this._userInput);
-			StageReference.getStage().addEventListener(MouseEvent.MOUSE_DOWN, this._userInput);
-			StageReference.getStage().addEventListener(MouseEvent.MOUSE_MOVE, this._userInput);
+			StageReference.getStage().addEventListener(Event.RESIZE, this._userInput, false, 0, true);
+			StageReference.getStage().addEventListener(KeyboardEvent.KEY_DOWN, this._userInput, false, 0, true);
+			StageReference.getStage().addEventListener(KeyboardEvent.KEY_UP, this._userInput, false, 0, true);
+			StageReference.getStage().addEventListener(MouseEvent.MOUSE_DOWN, this._userInput, false, 0, true);
+			StageReference.getStage().addEventListener(MouseEvent.MOUSE_MOVE, this._userInput, false, 0, true);
 			
 			this._stopwatch.start();
 			this._interval.start();

@@ -1,6 +1,6 @@
 /*
 	CASA Lib for ActionScript 3.0
-	Copyright (c) 2008, Aaron Clinger & Contributors of CASA Lib
+	Copyright (c) 2009, Aaron Clinger & Contributors of CASA Lib
 	All rights reserved.
 	
 	Redistribution and use in source and binary forms, with or without
@@ -56,7 +56,7 @@ package org.casalib.collection {
 			{@inheritDoc}
 			
 			@param item: {@inheritDoc}
-			@return Returns {@code true} if the element was unique and added; otherwise {@code false}.
+			@return Returns <code>true</code> if the element was unique and added; otherwise <code>false</code>.
 		*/
 		override public function addItem(item:*):Boolean {
 			if (this.contains(item))
@@ -72,7 +72,7 @@ package org.casalib.collection {
 			
 			@param item: {@inheritDoc}
 			@param index: {@inheritDoc}
-			@return Returns {@code true} if the element was unique and added; otherwise {@code false}.
+			@return Returns <code>true</code> if the element was unique and added; otherwise <code>false</code>.
 		*/
 		override public function addItemAt(item:*, index:int):Boolean {
 			if (this.contains(item))
@@ -87,7 +87,7 @@ package org.casalib.collection {
 			Modifies original list by adding all the elements from another list that aren't already present.
 			
 			@param items: {@inheritDoc}
-			@return Returns {@code true} if any elements of the specified list were unique and added; otherwise {@code false}.
+			@return Returns <code>true</code> if any elements of the specified list were unique and added; otherwise <code>false</code>.
 		*/
 		override public function addItems(items:IList):Boolean {
 			var uniqueItems:Array = items.toArray();
@@ -107,7 +107,7 @@ package org.casalib.collection {
 			
 			@param items: {@inheritDoc}
 			@param index: {@inheritDoc}
-			@return Returns {@code true} if any elements of the specified list were unique and added; otherwise {@code false}.
+			@return Returns <code>true</code> if any elements of the specified list were unique and added; otherwise <code>false</code>.
 		*/
 		override public function addItemsAt(items:IList, index:int = 0x7fffffff):Boolean {
 			var uniqueItems:Array = items.toArray();

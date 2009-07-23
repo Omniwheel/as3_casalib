@@ -1,6 +1,6 @@
 /*
 	CASA Lib for ActionScript 3.0
-	Copyright (c) 2008, Aaron Clinger & Contributors of CASA Lib
+	Copyright (c) 2009, Aaron Clinger & Contributors of CASA Lib
 	All rights reserved.
 	
 	Redistribution and use in source and binary forms, with or without
@@ -42,10 +42,10 @@ package org.casalib.process {
 		Base process class. Process is not designed to be used on its own and needs to be extended to function.
 		
 		@author Aaron Clinger
-		@version 10/29/08
+		@version 12/23/08
 	*/
 	public class Process extends RemovableEventDispatcher implements IRunnable {
-		public static var NORM_PRIORITY:int = 0; /**< The default priority for all Process instances. */ 
+		public static var NORM_PRIORITY:int = 0; /**< The default priority for all Process instances. */
 		protected var _priority:uint;
 		protected var _isRunning:Boolean;
 		protected var _hasCompleted:Boolean;
@@ -80,14 +80,14 @@ package org.casalib.process {
 		}
 		
 		/**
-			Determines if the process is currently running {@code true}, or if it isn't {@code false}.
+			Determines if the process is currently running <code>true</code>, or if it isn't <code>false</code>.
 		*/
 		public function get running():Boolean {
 			return this._isRunning;
 		}
 		
 		/**
-			Determines if the process has completed {@code true}, or if it hasn't {@code false}.
+			Determines if the process has completed <code>true</code>, or if it hasn't <code>false</code>.
 		*/
 		public function get completed():Boolean {
 			return this._hasCompleted;

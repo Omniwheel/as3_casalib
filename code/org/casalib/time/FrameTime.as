@@ -1,6 +1,6 @@
 /*
 	CASA Lib for ActionScript 3.0
-	Copyright (c) 2008, Aaron Clinger & Contributors of CASA Lib
+	Copyright (c) 2009, Aaron Clinger & Contributors of CASA Lib
 	All rights reserved.
 	
 	Redistribution and use in source and binary forms, with or without
@@ -67,7 +67,7 @@ package org.casalib.time {
 		}
 		
 		/**
-			@return Returns the number of milliseconds from when the SWF started playing to the last {@code enterFrame} event.
+			@return Returns the number of milliseconds from when the SWF started playing to the last <code>enterFrame</code> event.
 		*/
 		public function get time():int {
 			return this._time;

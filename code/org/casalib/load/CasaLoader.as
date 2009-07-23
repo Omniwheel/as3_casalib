@@ -1,6 +1,6 @@
 /*
-	CASA Lib for ActionScript 3.0
-	Copyright (c) 2008, Aaron Clinger & Contributors of CASA Lib
+	CASA Framework for ActionScript 3.0
+	Copyright (c) 2009, Contributors of CASA Framework
 	All rights reserved.
 	
 	Redistribution and use in source and binary forms, with or without
@@ -13,7 +13,7 @@
 	  this list of conditions and the following disclaimer in the documentation
 	  and/or other materials provided with the distribution.
 	
-	- Neither the name of the CASA Lib nor the names of its contributors
+	- Neither the name of the CASA Framework nor the names of its contributors
 	  may be used to endorse or promote products derived from this software
 	  without specific prior written permission.
 	
@@ -30,73 +30,75 @@
 	POSSIBILITY OF SUCH DAMAGE.
 */
 package org.casalib.load {
-	import flash.display.Bitmap;
-	import flash.display.BitmapData;
 	import flash.display.DisplayObject;
 	import flash.display.Loader;
 	import flash.display.LoaderInfo;
-	import flash.display.MovieClip;
 	import flash.events.Event;
-	import flash.events.IEventDispatcher;
 	import flash.events.HTTPStatusEvent;
+	import flash.events.IEventDispatcher;
 	import flash.events.SecurityErrorEvent;
 	import flash.system.LoaderContext;
 	import org.casalib.load.LoadItem;
 	
 	[Event(name="init", type="flash.events.Event")]
-	[Event(name="open", type="flash.events.Event")]
 	[Event(name="unload", type="flash.events.Event")]
 	[Event(name="httpStatus", type="flash.events.HTTPStatusEvent")]
 	[Event(name="securityError", type="flash.events.SecurityErrorEvent")]
 	
 	/**
-		Provides an easy and standardized way to load images or SWF files.
+		Wraps <code>Loader</code> and extends from {@link LoadItem} and {@link Process}.
+		
+		In almost all cases you will want to use {@link ImageLoad} or {@link SwfLoad} instead of this class.
 		
 		@author Aaron Clinger
-		@version 11/02/08
+		@version 05/06/09
 		@example
 			<code>
 				package {
 					import flash.display.MovieClip;
 					import org.casalib.events.LoadEvent;
-					import org.casalib.load.GraphicLoad;
+					import org.casalib.load.CasaLoader;
 					
 					
 					public class MyExample extends MovieClip {
-						protected var _graphicLoad:GraphicLoad;
+						protected var _casaLoader:CasaLoader;
 						
 						
 						public function MyExample() {
 							super();
 							
-							this._graphicLoad = new GraphicLoad("test.jpg");
-							this._graphicLoad.addEventListener(LoadEvent.COMPLETE, this._onComplete);
-							this._graphicLoad.start();
+							this._casaLoader = new CasaLoader("test.jpg");
+							this._casaLoader.addEventListener(LoadEvent.COMPLETE, this._onComplete);
+							this._casaLoader.start();
 						}
 						
 						protected function _onComplete(e:LoadEvent):void {
-							this.addChild(this._graphicLoad.loader);
+							this.addChild(this._casaLoader.loader);
 						}
 					}
 				}
 			</code>
 	*/
-	public class GraphicLoad extends LoadItem {
+	public class CasaLoader extends LoadItem {
+		public static const FLASH_CONTENT_TYPE:String = 'application/x-shockwave-flash';
+		public static const JPEG_CONTENT_TYPE:String  = 'image/jpeg';
+		public static const GIF_CONTENT_TYPE:String   = 'image/gif';
+		public static const PNG_CONTENT_TYPE:String   = 'image/png';
 		protected var _context:LoaderContext;
 		
 		
 		/**
-			Creates and defines a GraphicLoad.
+			Creates and defines a CasaLoader.
 			
-			@param request: A {@code String} or an {@code URLRequest} reference to the file you wish to load.
+			@param request: A <code>String</code> or an <code>URLRequest</code> reference to the file you wish to load.
 			@param context: An optional LoaderContext object.
 		*/
-		public function GraphicLoad(request:*, context:LoaderContext = null) {
+		public function CasaLoader(request:*, context:LoaderContext = null) {
 			super(new Loader(), request);
 			
 			this._context = context;
 			
-			this._initListeners(this._loadItem.contentLoaderInfo);
+			this._initListeners(this.loaderInfo);
 		}
 		
 		/**
@@ -107,6 +109,18 @@ package org.casalib.load {
 		}
 		
 		/**
+			The content received from the CasaLoader. Available after load is complete.
+			
+			@throws Error if method is called before the SWF has loaded.
+		*/
+		public function get content():DisplayObject {
+			if (!this.loaded)
+				throw new Error('Cannot access an external asset until the SWF has loaded.');
+			
+			return this.loader.content;
+		}
+		
+		/**
 			The LoaderInfo corresponding to the object being loaded.
 		*/
 		public function get loaderInfo():LoaderInfo {
@@ -114,47 +128,10 @@ package org.casalib.load {
 		}
 		
 		/**
-			The content received from the GraphicLoad. Available after load is complete.
+			@exclude
 		*/
-		public function get content():DisplayObject {
-			return this._loadItem.content;
-		}
-		
-		/**
-			The data received from the DataLoad data typed as MovieClip. Available after load is complete.
-		*/
-		public function get contentAsMovieClip():MovieClip {
-			if (!this.loaded || this.loaderInfo.contentType != 'application/x-shockwave-flash')
-				return null;
-			
-			return this.content as MovieClip;
-		}
-		
-		/**
-			The data received from the DataLoad data typed as Bitmap. Available after load is complete.
-		*/
-		public function get contentAsBitmap():Bitmap {
-			if (!this.loaded || this.loaderInfo.contentType == 'application/x-shockwave-flash')
-				return null;
-			
-			return this.content as Bitmap;
-		}
-		
-		/**
-			The data received from the DataLoad data typed as BitmapData. Available after load is complete.
-		*/
-		public function get contentAsBitmapData():BitmapData {
-			if (!this.loaded || this.loaderInfo.contentType == 'application/x-shockwave-flash')
-				return null;
-			
-			return this.contentAsBitmap.bitmapData;
-		}
-		
-		/**
-			The total number of bytes of the requested file.
-		*/
-		override public function get bytesTotal():uint {
-			return this._loadItem.contentLoaderInfo.bytesTotal;
+		override public function get bytesTotal():Number {
+			return (this._loadItem.contentLoaderInfo.bytesTotal == 0 && this.bytesLoaded != 0) ? Number.POSITIVE_INFINITY : this._loadItem.contentLoaderInfo.bytesTotal;
 		}
 		
 		/**
@@ -165,11 +142,10 @@ package org.casalib.load {
 		}
 		
 		override public function destroy():void {
-			this._dispatcher.removeEventListener(Event.INIT, this.dispatchEvent, false);
-			this._dispatcher.removeEventListener(Event.OPEN, this.dispatchEvent, false);
-			this._dispatcher.removeEventListener(Event.UNLOAD, this.dispatchEvent, false);
-			this._dispatcher.removeEventListener(HTTPStatusEvent.HTTP_STATUS, this.dispatchEvent, false);
-			this._dispatcher.removeEventListener(SecurityErrorEvent.SECURITY_ERROR, this.dispatchEvent, false);
+			this._dispatcher.removeEventListener(Event.INIT, this.dispatchEvent);
+			this._dispatcher.removeEventListener(Event.UNLOAD, this.dispatchEvent);
+			this._dispatcher.removeEventListener(HTTPStatusEvent.HTTP_STATUS, this._onHttpStatus);
+			this._dispatcher.removeEventListener(SecurityErrorEvent.SECURITY_ERROR, this.dispatchEvent);
 			
 			super.destroy();
 		}
@@ -180,8 +156,7 @@ package org.casalib.load {
 		
 		/**
 			@sends Event#INIT - Dispatched when the properties and methods of a loaded SWF file are accessible.
-			@sends Event#OPEN - Dispatched when a load operation starts.
-			@sends Event#UNLOAD - Dispatched when {@code unload} is called.
+			@sends Event#UNLOAD - Dispatched when <code>unload</code> is called.
 			@sends HTTPStatusEvent#HTTP_STATUS - Dispatched if class is able to detect and return the status code for the request.
 			@sends SecurityErrorEvent#SECURITY_ERROR - Dispatched if load is outside the security sandbox.
 		*/
@@ -189,9 +164,8 @@ package org.casalib.load {
 			super._initListeners(dispatcher);
 			
 			this._dispatcher.addEventListener(Event.INIT, this.dispatchEvent, false, 0, true);
-			this._dispatcher.addEventListener(Event.OPEN, this.dispatchEvent, false, 0, true);
 			this._dispatcher.addEventListener(Event.UNLOAD, this.dispatchEvent, false, 0, true);
-			this._dispatcher.addEventListener(HTTPStatusEvent.HTTP_STATUS, this.dispatchEvent, false, 0, true);
+			this._dispatcher.addEventListener(HTTPStatusEvent.HTTP_STATUS, this._onHttpStatus, false, 0, true);
 			this._dispatcher.addEventListener(SecurityErrorEvent.SECURITY_ERROR, this.dispatchEvent, false, 0, true);
 		}
 	}

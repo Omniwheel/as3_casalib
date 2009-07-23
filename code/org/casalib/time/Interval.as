@@ -1,6 +1,6 @@
 /*
 	CASA Lib for ActionScript 3.0
-	Copyright (c) 2008, Aaron Clinger & Contributors of CASA Lib
+	Copyright (c) 2009, Aaron Clinger & Contributors of CASA Lib
 	All rights reserved.
 	
 	Redistribution and use in source and binary forms, with or without
@@ -30,6 +30,7 @@
 	POSSIBILITY OF SUCH DAMAGE.
 */
 package org.casalib.time {
+	import flash.events.Event;
 	import flash.events.TimerEvent;
 	import flash.utils.Timer;
 	import org.casalib.control.IRunnable;
@@ -38,20 +39,20 @@ package org.casalib.time {
 	import org.casalib.events.ListenerManager;
 	
 	/**
-		To be used instead of {@code flash.utils.setInterval} and {@code flash.utils.setTimeout} functions.
+		To be used instead of <code>flash.utils.setInterval</code> and <code>flash.utils.setTimeout</code> functions.
 		
-		Advantages over {@code setInterval}/{@code setTimeout}:
+		Advantages over <code>setInterval</code>/<code>setTimeout</code>:
 		<ul>
 			<li>Ability to stop and start intervals without redefining.</li>
-			<li>Change the time ({@code delay}), {@link Interval#callBack call back} and {@link Interval#arguments arguments} without redefining.</li>
-			<li>Included {@code repeatCount} for intervals that only need to fire finitely.</li>
+			<li>Change the time (<code>delay</code>), {@link Interval#callBack call back} and {@link Interval#arguments arguments} without redefining.</li>
+			<li>Included <code>repeatCount</code> for intervals that only need to fire finitely.</li>
 			<li>{@link Interval#setInterval} and {@link Interval#setTimeout} return an object instead of interval id for better OOP structure.</li>
 			<li>Built in events/event dispatcher.</li>
 		</ul>
 		
 		@author Aaron Clinger
 		@author Mike Creighton
-		@version 10/26/08
+		@version 12/11/08
 		@example
 			<code>
 				package {
@@ -98,7 +99,7 @@ package org.casalib.time {
 		}
 		
 		/**
-			Runs a function at a specified periodic interval. Acts identically like {@link Interval#setInterval} except {@code setTimeout} defaults {@code repeatCount} to {@code 1}.
+			Runs a function at a specified periodic interval. Acts identically like {@link Interval#setInterval} except <code>setTimeout</code> defaults <code>repeatCount</code> to <code>1</code>.
 			
 			@param callBack: The function to execute after specified delay.
 			@param delay: The time in milliseconds between calls.
@@ -144,11 +145,27 @@ package org.casalib.time {
 			this._arguments = args;
 		}
 		
+		/**
+			@exclude
+		*/
+		override public function dispatchEvent(event:Event):Boolean {
+			if (this.willTrigger(event.type))
+				return super.dispatchEvent(event);
+			
+			return true;
+		}
+		
+		/**
+			@exclude
+		*/
 		override public function addEventListener(type:String, listener:Function, useCapture:Boolean = false, priority:int = 0, useWeakReference:Boolean = false):void {
 			super.addEventListener(type, listener, useCapture, priority, useWeakReference);
 			this._listenerManager.addEventListener(type, listener, useCapture, priority, useWeakReference);
 		}
 		
+		/**
+			@exclude
+		*/
 		override public function removeEventListener(type:String, listener:Function, useCapture:Boolean = false):void {
 			super.removeEventListener(type, listener, useCapture);
 			this._listenerManager.removeEventListener(type, listener, useCapture);

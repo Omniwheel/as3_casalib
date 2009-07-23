@@ -1,6 +1,6 @@
 /*
 	CASA Lib for ActionScript 3.0
-	Copyright (c) 2008, Aaron Clinger & Contributors of CASA Lib
+	Copyright (c) 2009, Aaron Clinger & Contributors of CASA Lib
 	All rights reserved.
 	
 	Redistribution and use in source and binary forms, with or without
@@ -33,20 +33,22 @@ package org.casalib.core {
 	
 	
 	/**
+		Interface for objects that are destroyable.
+		
 		@author Aaron Clinger
-		@version 10/27/08
+		@version 03/16/09
 	*/
 	public interface IDestroyable {
 		
 		/**
 			Removes any event listeners and stops all internal processes to help allow for prompt garbage collection.
 			
-			<strong>Always call {@code destroy()} before deleting last object pointer.</strong>
+			<strong>Always call <code>destroy()</code> before deleting last object pointer.</strong>
 		*/
 		function destroy():void;
 		
 		/**
-			Determines if the object has been destroyed {@code true}, or is still available for use {@code false}.
+			Determines if the object has been destroyed <code>true</code>, or is still available for use <code>false</code>.
 		*/
 		function get destroyed():Boolean;
 	}

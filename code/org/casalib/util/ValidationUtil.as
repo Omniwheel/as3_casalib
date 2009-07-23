@@ -1,6 +1,6 @@
 /*
 	CASA Lib for ActionScript 3.0
-	Copyright (c) 2008, Aaron Clinger & Contributors of CASA Lib
+	Copyright (c) 2009, Aaron Clinger & Contributors of CASA Lib
 	All rights reserved.
 	
 	Redistribution and use in source and binary forms, with or without
@@ -30,8 +30,9 @@
 	POSSIBILITY OF SUCH DAMAGE.
 */
 package org.casalib.util {
-	import org.casalib.util.ArrayUtil;	
-	/**
+	import org.casalib.util.ArrayUtil;
+	
+	/**
 		Utilities for validating common string formats.
 		
 		@author Aaron Clinger
@@ -44,7 +45,7 @@ package org.casalib.util {
 			Determines if String is a valid email address.
 			
 			@param email: String to verify as email.
-			@return Returns {@code true} if String is a valid email; otherwise {@code false}.
+			@return Returns <code>true</code> if String is a valid email; otherwise <code>false</code>.
 			@see <a href="http://www.regular-expressions.info/email.html">Read more about the regular expression used by this method.</a>
 		*/
 		public static function isEmail(email:String):Boolean {
@@ -56,7 +57,7 @@ package org.casalib.util {
 			Determines if String is a valid USA state abbreviation.
 			
 			@param state: String to verify as two letter state abbreviation (includes DC).
-			@return Returns {@code true} if String is a state abbreviation; otherwise {@code false}.
+			@return Returns <code>true</code> if String is a state abbreviation; otherwise <code>false</code>.
 		*/
 		public static function isUsaStateAbbreviation(state:String):Boolean {
 			var states:Array = new Array('ak', 'al', 'ar', 'az', 'ca', 'co', 'ct', 'dc', 'de', 'fl', 'ga', 'hi', 'ia', 'id', 'il', 'in', 'ks', 'ky', 'la', 'ma', 'md', 'me', 'mi', 'mn', 'mo', 'ms', 'mt', 'nb', 'nc', 'nd', 'nh', 'nj', 'nm', 'nv', 'ny', 'oh', 'ok', 'or', 'pa', 'ri', 'sc', 'sd', 'tn', 'tx', 'ut', 'va', 'vt', 'wa', 'wi', 'wv', 'wy');
@@ -67,7 +68,7 @@ package org.casalib.util {
 			Determines if credit card is valid using the Luhn formula.
 			
 			@param cardNumber: The credit card number.
-			@return Returns {@code true} if String is a valid credit card number; otherwise {@code false}.
+			@return Returns <code>true</code> if String is a valid credit card number; otherwise <code>false</code>.
 		*/
 		public static function isCreditCard(cardNumber:String):Boolean {
 			if (cardNumber.length < 7 || cardNumber.length > 19 || Number(cardNumber) < 1000000)
@@ -96,7 +97,7 @@ package org.casalib.util {
 			Determines credit card provider by card number.
 			
 			@param cardNumber: The credit card number.
-			@return Returns name of the provider; values can be {@code "visa"}, {@code "mastercard"}, {@code "discover"}, {@code "amex"}, {@code "diners"}, {@code "other"} or {@code "invalid"}.
+			@return Returns name of the provider; values can be <code>"visa"</code>, <code>"mastercard"</code>, <code>"discover"</code>, <code>"amex"</code>, <code>"diners"</code>, <code>"other"</code> or <code>"invalid"</code>.
 		*/
 		public static function getCreditCardProvider(cardNumber:String):String {
 			if (!ValidationUtil.isCreditCard(cardNumber))
@@ -107,7 +108,7 @@ package org.casalib.util {
 				cardNumber.indexOf('4') == 0)
 			{
 				return 'visa';
-			} 
+			}
 			else if (cardNumber.indexOf('51') == 0 ||
 					 cardNumber.indexOf('52') == 0 ||
 					 cardNumber.indexOf('53') == 0 ||
@@ -121,7 +122,7 @@ package org.casalib.util {
 				     cardNumber.indexOf('6011') == 0)
 			{
 				 return 'discover';
-			} 
+			}
 			else if (cardNumber.indexOf('34') == 0 ||
 					 cardNumber.indexOf('37') == 0 &&
 					 cardNumber.length == 15)
