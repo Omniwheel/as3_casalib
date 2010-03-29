@@ -1,6 +1,6 @@
 /*
 	CASA Lib for ActionScript 3.0
-	Copyright (c) 2009, Aaron Clinger & Contributors of CASA Lib
+	Copyright (c) 2010, Aaron Clinger & Contributors of CASA Lib
 	All rights reserved.
 	
 	Redistribution and use in source and binary forms, with or without
@@ -52,15 +52,15 @@ package org.casalib.time {
 		
 		@author Aaron Clinger
 		@author Mike Creighton
-		@version 12/11/08
+		@version 02/11/10
 		@example
 			<code>
 				package {
-					import flash.display.MovieClip;
+					import org.casalib.display.CasaMovieClip;
 					import org.casalib.time.Interval;
 					
 					
-					public class MyExample extends MovieClip {
+					public class MyExample extends CasaMovieClip {
 						protected var _interval:Interval;
 						
 						
@@ -120,7 +120,7 @@ package org.casalib.time {
 			this.arguments        = args;
 			this._listenerManager = ListenerManager.getManager(this);
 			
-			this.addEventListener(TimerEvent.TIMER, this._timerHandler, false, 0, true);
+			super.addEventListener(TimerEvent.TIMER, this._timerHandler, false, 0, true);
 		}
 		
 		/**
@@ -183,6 +183,10 @@ package org.casalib.time {
 			this._listenerManager.removeEventListeners();
 		}
 		
+		public function getTotalEventListeners(type:String = null):uint {
+			return this._listenerManager.getTotalEventListeners(type);
+		}
+		
 		public function get destroyed():Boolean {
 			return this._isDestroyed;
 		}
@@ -190,8 +194,9 @@ package org.casalib.time {
 		public function destroy():void {
 			this.reset();
 			
-			this.removeEventListeners();
 			this._listenerManager.destroy();
+			
+			super.removeEventListener(TimerEvent.TIMER, this._timerHandler);
 			
 			this._isDestroyed = true;
 		}

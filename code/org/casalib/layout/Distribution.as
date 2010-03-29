@@ -1,6 +1,6 @@
 /*
 	CASA Lib for ActionScript 3.0
-	Copyright (c) 2009, Aaron Clinger & Contributors of CASA Lib
+	Copyright (c) 2010, Aaron Clinger & Contributors of CASA Lib
 	All rights reserved.
 	
 	Redistribution and use in source and binary forms, with or without
@@ -31,23 +31,28 @@
 */
 package org.casalib.layout {
 	import flash.display.DisplayObject;
+	import flash.geom.Point;
+	import flash.utils.Dictionary;
 	import org.casalib.display.CasaSprite;
+	import org.casalib.util.DisplayObjectUtil;
+	
 	
 	/**
 		Creates the mechanism to distribute DisplayObjects to a vertical or horzontal grid of columns and rows.
 		
 		@author Aaron Clinger
 		@author Jon Adams
-		@version 03/07/09
+		@version 03/28/10
 		@example
 			<code>
 				package {
-					import flash.display.MovieClip;
-					import flash.display.Sprite;
+					import org.casalib.display.CasaMovieClip;
+					import org.casalib.display.CasaSprite;
 					import org.casalib.layout.Distribution;
+					import code.org.casalib.util.DisplayObjectUtil;
 					
 					
-					public class MyExample extends MovieClip {
+					public class MyExample extends CasaMovieClip {
 						public var dist:Distribution;
 						
 						public function MyExample() {
@@ -59,10 +64,10 @@ package org.casalib.layout {
 							this.addChild(this.dist);
 							
 							var l:uint = 10;
-							var s:Sprite;
+							var s:CasaSprite;
 							
 							while (l--) {
-								s = new Sprite();
+								s = new CasaSprite();
 								s.graphics.beginFill(0xFF00FF);
 								s.graphics.drawRect(0, 0, 100, 100);
 								s.graphics.endFill();
@@ -77,6 +82,7 @@ package org.casalib.layout {
 			</code>
 	*/
 	public class Distribution extends CasaSprite {
+		protected var _dimensions:Dictionary;
 		protected var _marginTop:Number;
 		protected var _marginRight:Number;
 		protected var _marginBottom:Number;
@@ -89,7 +95,7 @@ package org.casalib.layout {
 		/**
 			Creates a Distribution.
 			
-			@param size: The maximum width or height of the distrubution. If <code>isVertical</code> argument is <code>false</code> you are setting the width of the distrubution before wrapping, if <code>true</code> you're setting the height before wrapping.
+			@param size: The maximum width or height of the distribution. If <code>isVertical</code> argument is <code>false</code> you are setting the width of the distribution before wrapping, if <code>true</code> you're setting the height before wrapping.
 			@param isVertical: Indicates to position children left-to-right top-to-bottom <code>false</code>, or to position children top-to-bottom left-to-right <code>true</code>.
 			@param snapToPixel: Force the position of all children to whole pixels <code>true</code>, or to let items be positioned on sub-pixels <code>false</code>.
 		*/
@@ -98,11 +104,27 @@ package org.casalib.layout {
 			
 			this.size          = size;
 			this.vertical      = isVertical;
+			this._dimensions   = new Dictionary();
 			this._isSnap       = snapToPixel;
 			this._marginTop    = 0;
 			this._marginRight  = 0;
 			this._marginBottom = 0;
 			this._marginLeft   = 0;
+		}
+		
+		/**
+			Allows the child's dimensions for positioning to be defined instead of using the child's native width and height.
+			
+			@param child: The DisplayObject instance to add as a child of this Distribution container.
+			@param width: Specifies the width Distribution should use when positioning the <code>child</code>, or <code>NaN</code> if you want to use the childs native width.
+			@param height: Specifies the height Distribution should use when positioning the <code>child</code>, or <code>NaN</code> if you want to use the childs native height.
+			@return The DisplayObject instance that you pass in the <code>child</code> parameter.
+			@usageNote If you do not wish to define custom dimensions for the child, you can use <code>addChild</code> instead.
+		*/
+		public function addChildWithDimensions(child:DisplayObject, width:Number = NaN, height:Number = NaN):DisplayObject {
+			this._dimensions[child] = new Point(width, height);
+			
+			return this.addChild(child);
 		}
 		
 		/**
@@ -165,7 +187,7 @@ package org.casalib.layout {
 		}
 		
 		/**
-			The maximum width or height of the distrubution. If {@link #vertical} is <code>false</code> you are setting the width of the distrubution before wrapping, if <code>true</code> you're setting the height before wrapping.
+			The maximum width or height of the distribution. If {@link #vertical} is <code>false</code> you are setting the width of the distribution before wrapping, if <code>true</code> you're setting the height before wrapping.
 		*/
 		public function set size(s:Number):void {
 			this._size = s;
@@ -195,6 +217,7 @@ package org.casalib.layout {
 			var row:Number     = 0;
 			var largest:Number = 0;
 			var item:DisplayObject;
+			var size:Point;
 			var xPo:Number;
 			var yPo:Number;
 			var w:Number;
@@ -202,9 +225,10 @@ package org.casalib.layout {
 			
 			while (++i < this.numChildren) {
 				item = this.getChildAt(i);
+				size = (this._dimensions[item] == null) ? new Point(item.width, item.height) : new Point(isNaN(this._dimensions[item].x) ? item.width : this._dimensions[item].x, isNaN(this._dimensions[item].y) ? item.height : this._dimensions[item].y);
 				
-				w = item.width  + this._marginLeft + this._marginRight;
-				h = item.height + this._marginTop + this._marginBottom;
+				w = size.x + this._marginLeft + this._marginRight;
+				h = size.y + this._marginTop + this._marginBottom;
 				
 				if (!this.vertical) {
 					column += w;
@@ -219,7 +243,7 @@ package org.casalib.layout {
 					if (h > largest)
 						largest = h;
 					
-					xPo = column - item.width - this._marginRight;
+					xPo = column - size.x - this._marginRight;
 					yPo = row + this._marginTop;
 				} else {
 					row += h;
@@ -235,16 +259,24 @@ package org.casalib.layout {
 						largest = w;
 					
 					xPo = column + this._marginLeft;
-					yPo = row - item.height - this._marginBottom;
+					yPo = row - size.y - this._marginBottom;
 				}
 				
 				this._positionItem(item, this._isSnap ? Math.round(xPo) : xPo, this._isSnap ? Math.round(yPo) : yPo);
 			}
 		}
 		
+		override public function destroy():void {
+			this._dimensions = null;
+			
+			super.destroy();
+		}
+		
 		protected function _positionItem(target:DisplayObject, xPo:Number, yPo:Number):void {
-			target.x = xPo;
-			target.y = yPo;
+			const offset:Point = DisplayObjectUtil.getOffsetPosition(target);
+			
+			target.x = xPo + offset.x;
+			target.y = yPo + offset.y;
 		}
 	}
 }

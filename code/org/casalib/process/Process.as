@@ -1,6 +1,6 @@
 /*
 	CASA Lib for ActionScript 3.0
-	Copyright (c) 2009, Aaron Clinger & Contributors of CASA Lib
+	Copyright (c) 2010, Aaron Clinger & Contributors of CASA Lib
 	All rights reserved.
 	
 	Redistribution and use in source and binary forms, with or without
@@ -42,7 +42,7 @@ package org.casalib.process {
 		Base process class. Process is not designed to be used on its own and needs to be extended to function.
 		
 		@author Aaron Clinger
-		@version 12/23/08
+		@version 02/11/10
 	*/
 	public class Process extends RemovableEventDispatcher implements IRunnable {
 		public static var NORM_PRIORITY:int = 0; /**< The default priority for all Process instances. */
@@ -105,7 +105,8 @@ package org.casalib.process {
 		}
 		
 		override public function destroy():void {
-			this.stop();
+			if (this.running)
+				this.stop();
 			
 			super.destroy();
 		}

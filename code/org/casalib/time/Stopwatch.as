@@ -1,6 +1,6 @@
 /*
 	CASA Lib for ActionScript 3.0
-	Copyright (c) 2009, Aaron Clinger & Contributors of CASA Lib
+	Copyright (c) 2010, Aaron Clinger & Contributors of CASA Lib
 	All rights reserved.
 	
 	Redistribution and use in source and binary forms, with or without
@@ -38,15 +38,15 @@ package org.casalib.time {
 		
 		@author Aaron Clinger
 		@author Mike Creighton
-		@version 01/08/09
+		@version 09/06/09
 		@example
 			<code>
 				package {
-					import flash.display.MovieClip;
+					import org.casalib.display.CasaMovieClip;
 					import org.casalib.time.Stopwatch;
 					
 					
-					public class MyExample extends MovieClip {
+					public class MyExample extends CasaMovieClip {
 						
 						public function MyExample() {
 							super();

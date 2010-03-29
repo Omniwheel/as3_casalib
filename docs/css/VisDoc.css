@@ -184,7 +184,6 @@ html>body .VisDoc pre { /* hide from IE */
 .VisDoc div.memberSection div.fullMemberString .methodName {/*C2*/color:#800;}
 .VisDoc div.memberSection div.fullMemberString b {font-weight:normal; /*C2*/color:#800;}
 .VisDoc div.memberSection .access {font-size:95%; /*C3*/ color:#999; margin-left:0.25em;}
-.VisDoc div.memberSection div.description {padding-top:1em;}
 /* fields before description (@deprecated): */
 .VisDoc div.memberSection div.fullMemberString a:link,
 .VisDoc div.memberSection div.fullMemberString a:visited {color:black;}

@@ -1,6 +1,6 @@
 /*
 	CASA Lib for ActionScript 3.0
-	Copyright (c) 2009, Aaron Clinger & Contributors of CASA Lib
+	Copyright (c) 2010, Aaron Clinger & Contributors of CASA Lib
 	All rights reserved.
 	
 	Redistribution and use in source and binary forms, with or without
@@ -39,7 +39,7 @@ package org.casalib.util {
 		
 		@author Aaron Clinger
 		@author Mike Creighton
-		@version 02/23/09
+		@version 09/06/09
 	*/
 	public class TextFieldUtil {
 		
@@ -51,7 +51,7 @@ package org.casalib.util {
 			@return Returns <code>true</code> if textfield has text overflow; otherwise <code>false</code>.
 		*/
 		public static function hasOverFlow(field:TextField):Boolean {
-			return field.maxScrollV > 1;
+			return field.maxScrollV > 1 || field.maxScrollH > 1;
 		}
 		
 		/**

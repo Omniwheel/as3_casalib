@@ -1,6 +1,6 @@
 /*
 	CASA Lib for ActionScript 3.0
-	Copyright (c) 2009, Aaron Clinger & Contributors of CASA Lib
+	Copyright (c) 2010, Aaron Clinger & Contributors of CASA Lib
 	All rights reserved.
 	
 	Redistribution and use in source and binary forms, with or without
@@ -39,19 +39,19 @@ package org.casalib.process {
 		Manages and threads {@link Process processes}.
 		
 		@author Aaron Clinger
-		@version 07/15/09
+		@version 02/09/10
 		@example
 			<code>
 				package {
 					import fl.motion.easing.Linear;
-					import flash.display.MovieClip;
-					import flash.display.Sprite;
+					import org.casalib.display.CasaMovieClip;
+					import org.casalib.display.CasaSprite;
 					import org.casalib.events.ProcessEvent;
 					import org.casalib.process.ProcessGroup;
 					import org.casalib.transitions.PropertyTween;
 					
 					
-					public class MyExample extends MovieClip {
+					public class MyExample extends CasaMovieClip {
 						protected var _processGroup:ProcessGroup;
 						
 						
@@ -62,9 +62,9 @@ package org.casalib.process {
 							this._processGroup.addEventListener(ProcessEvent.COMPLETE, this._onProcessComplete);
 							
 							var i:int = -1;
-							var box:Sprite;
+							var box:CasaSprite;
 							while (++i < 10) {
-								box   = new Sprite();
+								box   = new CasaSprite();
 								box.y = 30 * i;
 								box.graphics.beginFill(0xFF00FF);
 								box.graphics.drawRect(0, 0, 25, 25);
@@ -113,6 +113,8 @@ package org.casalib.process {
 		}
 		
 		override public function stop():void {
+			this._isRunning = false;
+			
 			var l:uint = this._processes.length;
 			while (l--) {
 				if (this._processes[l].running) {
@@ -219,10 +221,34 @@ package org.casalib.process {
 			Determines if this ProcessGroup contains a specific process.
 			
 			@param process: The process to search for.
+			@param recursive: If any child of this ProcessGroup is also a ProcessGroup search its children <code>true</code>, or only search this ProcessGroup's children <code>false</code>.
 			@return Returns <code>true</code> if the ProcessGroup contains the process; otherwise <code>false</code>.
 		*/
-		public function hasProcess(process:Process):Boolean {
-			return this._processes.indexOf(process) > -1;
+		public function hasProcess(process:Process, recursive:Boolean = true):Boolean {
+			const processFound:Boolean = this._processes.indexOf(process) > -1;
+			
+			if (!recursive)
+				return processFound;
+			
+			if (processFound)
+				return true;
+			
+			var l:uint = this._processes.length;
+			var p:Process;
+			var g:ProcessGroup;
+			
+			while (l--) {
+				p = this._processes[l];
+				
+				if (p is ProcessGroup) {
+					g = p as ProcessGroup;
+					
+					if (g.hasProcess(process, true))
+						return true;
+				}
+			}
+			
+			return false;
 		}
 		
 		/**
@@ -273,11 +299,30 @@ package org.casalib.process {
 		
 		/**
 			Calls {@link Process#destroy destroy} on all processes in the group and removes them from the ProcessGroup.
+			
+			@param recursive: If any child of this ProcessGroup is also a ProcessGroup destroy its children <code>true</code>, or only destroy this ProcessGroup's children <code>false</code>.
 		*/
-		public function destroyProcesses():void {
+		public function destroyProcesses(recursive:Boolean = true):void {
+			this.stop();
+			
 			var l:uint = this._processes.length;
-			while (l--)
-				this._processes[l].destroy();
+			
+			if (recursive) {
+				var p:Process;
+				var g:ProcessGroup;
+				
+				while (l--) {
+					p = this._processes[l];
+					
+					if (p is ProcessGroup) {
+						g = p as ProcessGroup;
+						g.destroyProcesses(true);
+					} else
+						p.destroy();
+				}
+			} else
+				while (l--)
+					this._processes[l].destroy();
 			
 			this._processes = new Array();
 		}
@@ -305,13 +350,13 @@ package org.casalib.process {
 				
 				if (p.running)
 					t--;
-				else if (!p.completed) {
+				else if (!p.completed && this.running) {
 					p.start();
 					t--;
 				}
 			}
 			
-			if (t == this.threads)
+			if (t == this.threads && this.running)
 				this._complete();
 		}
 		

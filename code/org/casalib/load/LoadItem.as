@@ -1,6 +1,6 @@
 /*
 	CASA Lib for ActionScript 3.0
-	Copyright (c) 2009, Aaron Clinger & Contributors of CASA Lib
+	Copyright (c) 2010, Aaron Clinger & Contributors of CASA Lib
 	All rights reserved.
 	
 	Redistribution and use in source and binary forms, with or without
@@ -30,7 +30,9 @@
 	POSSIBILITY OF SUCH DAMAGE.
 */
 package org.casalib.load {
+	import flash.errors.IOError;
 	import flash.events.Event;
+	import flash.events.HTTPStatusEvent;
 	import flash.events.IEventDispatcher;
 	import flash.events.IOErrorEvent;
 	import flash.events.ProgressEvent;
@@ -40,9 +42,10 @@ package org.casalib.load {
 	import org.casalib.events.LoadEvent;
 	import org.casalib.events.RetryEvent;
 	import org.casalib.math.Percent;
-	import org.casalib.util.LoadUtil;
 	import org.casalib.process.Process;
-	import flash.events.HTTPStatusEvent;
+	import org.casalib.util.LoadUtil;
+	import org.casalib.util.StringUtil;
+	
 	
 	[Event(name="complete", type="org.casalib.events.LoadEvent")]
 	[Event(name="ioError", type="flash.events.IOErrorEvent")]
@@ -56,30 +59,33 @@ package org.casalib.load {
 		Base class used by load classes. LoadItem is not designed to be used on its own and needs to be extended to function.
 		
 		@author Aaron Clinger
-		@version 05/30/09
+		@version 02/13/10
 	*/
 	public class LoadItem extends Process {
 		protected var _attempts:uint;
-		protected var _loaded:Boolean;
-		protected var _preventCache:Boolean;
-		protected var _retries:uint;
-		protected var _dispatcher:IEventDispatcher;
 		protected var _Bps:int;
-		protected var _time:uint;
-		protected var _latency:uint;
+		protected var _dispatcher:IEventDispatcher;
+		protected var _errrored:Boolean;
 		protected var _httpStatus:uint;
+		protected var _latency:uint;
+		protected var _loaded:Boolean;
 		protected var _loadItem:*;
+		protected var _preventCache:Boolean;
 		protected var _progress:Percent;
 		protected var _request:URLRequest;
+		protected var _retries:uint;
 		protected var _startTime:uint;
+		protected var _time:uint;
+		protected var _url:String;
 		
 		
 		/**
 			Defines the load object and file location.
 			
 			@param load: The load object.
-			@param request: A String or an URLRequest reference to the file you wish to load.
-			@throws ArguementTypeError if you pass a value type other than a String or URLRequest to parameter <code>request</code>.
+			@param request: A <code>String</code> or an <code>URLRequest</code> reference to the file you wish to load.
+			@throws ArguementTypeError if you pass a type other than a <code>String</code> or an <code>URLRequest</code> to parameter <code>request</code>.
+			@throws Error if you try to load an empty <code>String</code> or <code>URLRequest</code>.
 		*/
 		public function LoadItem(load:*, request:*) {
 			super();
@@ -104,6 +110,7 @@ package org.casalib.load {
 			super.start();
 			
 			this._loaded    = false;
+			this._errrored  = false;
 			this._startTime = getTimer();
 			this._attempts  = 0;
 			this._progress  = new Percent();
@@ -135,7 +142,10 @@ package org.casalib.load {
 			
 			super.stop();
 			
-			this._loadItem.close();
+			try {
+				this._loadItem.close();
+			} catch (error:IOError) {}
+			
 			this.dispatchEvent(this._createDefinedLoadEvent(LoadEvent.STOP));
 		}
 		
@@ -200,7 +210,7 @@ package org.casalib.load {
 			The URL of the requested file.
 		*/
 		public function get url():String {
-			return this.urlRequest.url;
+			return this._url;
 		}
 		
 		/**
@@ -215,6 +225,13 @@ package org.casalib.load {
 		*/
 		public function get loaded():Boolean {
 			return this._loaded;
+		}
+		
+		/**
+			Determines if the requested file could not complete because of an error <code>true</code>, or hasn't encountered an error <code>false</code>.
+		*/
+		public function get errored():Boolean {
+			return this._errrored;
 		}
 		
 		/**
@@ -268,12 +285,18 @@ package org.casalib.load {
 		}
 		
 		protected function _createRequest(request:*):void {
-			if (request is String)
+			if (request is String) {
+				request = StringUtil.trim(request);
+				
+				if (request == '')
+					throw new Error('Cannot load an empty reference/String');
+				
 				request = new URLRequest(request);
-			else if (!(request is URLRequest))
+			} else if (!(request is URLRequest))
 				throw new ArguementTypeError('request');
 			
 			this._request = request;
+			this._url     = this._request.url;
 		}
 		
 		/**
@@ -289,6 +312,8 @@ package org.casalib.load {
 				
 				this._load();
 			} else {
+				this._errrored = true;
+				
 				super._complete();
 				
 				this.dispatchEvent(error);
@@ -323,7 +348,7 @@ package org.casalib.load {
 			this._Bps  = LoadUtil.calculateBps(this.bytesLoaded, this._startTime, currentTime);
 			this._time = currentTime - this._startTime;
 			
-			this._progress.decimalPercentage = this.bytesLoaded / this.bytesTotal;
+			this._progress.decimalPercentage = Math.min(this.bytesLoaded / this.bytesTotal, 1);
 			
 			this.dispatchEvent(this._createDefinedLoadEvent(LoadEvent.PROGRESS));
 		}

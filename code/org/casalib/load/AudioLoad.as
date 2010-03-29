@@ -1,6 +1,6 @@
 /*
 	CASA Lib for ActionScript 3.0
-	Copyright (c) 2009, Aaron Clinger & Contributors of CASA Lib
+	Copyright (c) 2010, Aaron Clinger & Contributors of CASA Lib
 	All rights reserved.
 	
 	Redistribution and use in source and binary forms, with or without
@@ -32,6 +32,8 @@
 package org.casalib.load {
 	import flash.events.Event;
 	import flash.events.IEventDispatcher;
+	import flash.events.IOErrorEvent;
+	import flash.events.ProgressEvent;
 	import flash.media.Sound;
 	import flash.media.SoundLoaderContext;
 	import org.casalib.load.LoadItem;
@@ -42,23 +44,23 @@ package org.casalib.load {
 		Provides an easy and standardized way to load audio files.
 		
 		@author Aaron Clinger
-		@version 04/19/09
+		@version 02/13/10
 		@example
 			<code>
 				package {
-					import flash.display.MovieClip;
-					import org.casalib.load.AudioLoad;
+					import org.casalib.display.CasaMovieClip;
 					import org.casalib.events.LoadEvent;
+					import org.casalib.load.AudioLoad;
 					
 					
-					public class MyExample extends MovieClip {
+					public class MyExample extends CasaMovieClip {
 						protected var _audioLoad:AudioLoad;
 						
 						
 						public function MyExample() {
 							super();
 							
-							this._audioLoad = new AudioLoad('test.mp3');
+							this._audioLoad = new AudioLoad("test.mp3");
 							this._audioLoad.addEventListener(LoadEvent.COMPLETE, this._onComplete);
 							this._audioLoad.start();
 						}
@@ -72,6 +74,7 @@ package org.casalib.load {
 	*/
 	public class AudioLoad extends LoadItem {
 		protected var _context:SoundLoaderContext;
+		protected var _isFirstLoad:Boolean;
 		
 		
 		/**
@@ -79,11 +82,14 @@ package org.casalib.load {
 			
 			@param request: A <code>String</code> or an <code>URLRequest</code> reference to the file you wish to load.
 			@param context: An optional SoundLoaderContext object.
+			@throws ArguementTypeError if you pass a type other than a <code>String</code> or an <code>URLRequest</code> to parameter <code>request</code>.
+			@throws Error if you try to load an empty <code>String</code> or <code>URLRequest</code>.
 		*/
 		public function AudioLoad(request:*, context:SoundLoaderContext = null) {
 			super(new Sound(), request);
 			
-			this._context = context;
+			this._context     = context;
+			this._isFirstLoad = true;
 			
 			this._initListeners(this._loadItem);
 		}
@@ -102,6 +108,19 @@ package org.casalib.load {
 		}
 		
 		override protected function _load():void {
+			if (!this._isFirstLoad) {
+				this._dispatcher.removeEventListener(Event.COMPLETE, this._onComplete);
+				this._dispatcher.removeEventListener(Event.OPEN, this._onOpen);
+				this._dispatcher.removeEventListener(IOErrorEvent.IO_ERROR, this._onLoadError);
+				this._dispatcher.removeEventListener(ProgressEvent.PROGRESS, this._onProgress);
+				this._dispatcher.removeEventListener(Event.ID3, this.dispatchEvent);
+				
+				this._loadItem = new Sound();
+				this._initListeners(this._loadItem);
+			}
+			
+			this._isFirstLoad = false;
+			
 			this._loadItem.load(this._request, this._context);
 		}
 		

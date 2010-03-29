@@ -1,6 +1,6 @@
 /*
 	CASA Lib for ActionScript 3.0
-	Copyright (c) 2009, Aaron Clinger & Contributors of CASA Lib
+	Copyright (c) 2010, Aaron Clinger & Contributors of CASA Lib
 	All rights reserved.
 	
 	Redistribution and use in source and binary forms, with or without
@@ -50,20 +50,20 @@ package org.casalib.ui {
 		Key class that simplifies listening to global key strokes and adds additional keyboard events. Key enables you to receive events when multiple keys are {@link KeyComboEvent held/released} and when a {@link KeyComboEvent#SEQUENCE sequence of keys are pressed}.
 		
 		@author Aaron Clinger
-		@version 04/27/09
+		@version 09/06/09
 		@usageNote You must first initialize {@link StageReference} before using this class.
 		@example
 			<code>
 				package {
 					import flash.events.KeyboardEvent;
-					import flash.display.MovieClip;
+					import org.casalib.display.CasaMovieClip;
+					import org.casalib.events.KeyComboEvent;
 					import org.casalib.ui.Key;
 					import org.casalib.ui.KeyCombo;
-					import org.casalib.events.KeyComboEvent;
 					import org.casalib.util.StageReference;
 					
 					
-					public class MyExample extends MovieClip {
+					public class MyExample extends CasaMovieClip {
 						protected var _asdfCombo:KeyCombo;
 						protected var _casaCombo:KeyCombo;
 						protected var _key:Key;

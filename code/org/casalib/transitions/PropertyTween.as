@@ -1,6 +1,6 @@
 /*
 	CASA Lib for ActionScript 3.0
-	Copyright (c) 2009, Aaron Clinger & Contributors of CASA Lib
+	Copyright (c) 2010, Aaron Clinger & Contributors of CASA Lib
 	All rights reserved.
 	
 	Redistribution and use in source and binary forms, with or without
@@ -37,25 +37,25 @@ package org.casalib.transitions {
 		@author Aaron Clinger
 		@author Mike Creighton
 		@author Jon Adams
-		@version 06/04/09
+		@version 09/06/09
 		@example
 			<code>
 				package {
 					import fl.motion.easing.Bounce;
-					import flash.display.MovieClip;
-					import flash.display.Sprite;
+					import org.casalib.display.CasaMovieClip;
+					import org.casalib.display.CasaSprite;
 					import org.casalib.transitions.PropertyTween;
 					
 					
-					public class MyExample extends MovieClip {
-						protected var _box:Sprite;
+					public class MyExample extends CasaMovieClip {
+						protected var _box:CasaSprite;
 						protected var _tween:PropertyTween;
 						
 						
 						public function MyExample() {
 							super();
 							
-							this._box = new Sprite();
+							this._box = new CasaSprite();
 							this._box.graphics.beginFill(0xFF00FF);
 							this._box.graphics.drawRect(0, 0, 25, 25);
 							this._box.graphics.endFill();

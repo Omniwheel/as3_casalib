@@ -1,6 +1,6 @@
 /*
 	CASA Lib for ActionScript 3.0
-	Copyright (c) 2009, Aaron Clinger & Contributors of CASA Lib
+	Copyright (c) 2010, Aaron Clinger & Contributors of CASA Lib
 	All rights reserved.
 	
 	Redistribution and use in source and binary forms, with or without
@@ -31,22 +31,22 @@
 */
 package org.casalib.time {
 	import flash.events.Event;
+	import org.casalib.process.Process;
 	import org.casalib.time.EnterFrame;
-	import org.casalib.control.IRunnable;
 	
 	/**
 		Creates a callback after one or more frames. The class helps prevent race conditions by allowing recently created MovieClips, Classes, etc. a frame to initialize before proceeding.
 		
 		@author Aaron Clinger
-		@version 03/19/08
+		@version 02/11/10
 		@example
 			<code>
 				package {
-					import flash.display.MovieClip;
+					import org.casalib.display.CasaMovieClip;
 					import org.casalib.time.FrameDelay;
 					
 					
-					public class MyExample extends MovieClip {
+					public class MyExample extends CasaMovieClip {
 						protected var _frameDelay:FrameDelay;
 						
 						
@@ -58,13 +58,16 @@ package org.casalib.time {
 						}
 						
 						protected function _onInitComplete():void{
+							this._frameDelay.destroy();
+							this._frameDelay = null;
+							
 							trace("Ready!");
 						}
 					}
 				}
 			</code>
 	*/
-	public class FrameDelay implements IRunnable {
+	public class FrameDelay extends Process {
 		protected var _arguments:Array;
 		protected var _callBack:Function;
 		protected var _count:uint;
@@ -91,7 +94,9 @@ package org.casalib.time {
 		/**
 			Starts or restarts the delay.
 		*/
-		public function start():void {
+		override public function start():void {
+			super.start();
+			
 			this._count = 0;
 			this._enterFrameInstance.addEventListener(Event.ENTER_FRAME, this._onEnterFrame, false, 0, true);
 		}
@@ -99,14 +104,28 @@ package org.casalib.time {
 		/**
 			Stops the delay from completing.
 		*/
-		public function stop():void {
+		override public function stop():void {
+			super.stop();
+			
 			this._enterFrameInstance.removeEventListener(Event.ENTER_FRAME, this._onEnterFrame);
+		}
+		
+		override public function destroy():void {
+			this._enterFrameInstance.removeEventListener(Event.ENTER_FRAME, this._onEnterFrame);
+			
+			this._arguments = null;
+			this._callBack  = null;
+			
+			super.destroy();
 		}
 		
 		protected function _onEnterFrame(e:Event):void {
 			if (++this._count >= this._frames) {
-				this.stop();
+				this._enterFrameInstance.removeEventListener(Event.ENTER_FRAME, this._onEnterFrame);
+				
 				this._callBack.apply(null, this._arguments);
+				
+				this._complete();
 			}
 		}
 	}

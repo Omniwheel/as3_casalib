@@ -1,6 +1,6 @@
 /*
 	CASA Lib for ActionScript 3.0
-	Copyright (c) 2009, Aaron Clinger & Contributors of CASA Lib
+	Copyright (c) 2010, Aaron Clinger & Contributors of CASA Lib
 	All rights reserved.
 	
 	Redistribution and use in source and binary forms, with or without
@@ -45,7 +45,7 @@ package org.casalib.display {
 		A base SimpleButton that implements {@link IRemovableEventDispatcher} and {@link IDestroyable}.
 		
 		@author Aaron Clinger
-		@version 05/29/09
+		@version 02/11/10
 	*/
 	public class CasaSimpleButton extends SimpleButton implements IRemovableEventDispatcher, IDestroyable {
 		protected var _listenerManager:ListenerManager;
@@ -104,6 +104,10 @@ package org.casalib.display {
 			this._listenerManager.removeEventListeners();
 		}
 		
+		public function getTotalEventListeners(type:String = null):uint {
+			return this._listenerManager.getTotalEventListeners(type);
+		}
+		
 		/**
 			The Stage of the display object or if the display object is not added to the display list and {@link StageReference} is defined <code>stage</code> will return the {@link StageReference#STAGE_DEFAULT default stage}; otherwise <code>null</code>.
 		*/
@@ -148,7 +152,6 @@ package org.casalib.display {
 			Calling <code>destroy()</code> on a CASA display object also removes it from its current parent.
 		*/
 		public function destroy():void {
-			this.removeEventListeners();
 			this._listenerManager.destroy();
 			
 			this._isDestroyed = true;

@@ -1,6 +1,6 @@
 /*
 	CASA Lib for ActionScript 3.0
-	Copyright (c) 2009, Aaron Clinger & Contributors of CASA Lib
+	Copyright (c) 2010, Aaron Clinger & Contributors of CASA Lib
 	All rights reserved.
 	
 	Redistribution and use in source and binary forms, with or without
@@ -33,16 +33,18 @@ package org.casalib.util {
 	import flash.external.ExternalInterface;
 	import flash.utils.Dictionary;
 	
+	
 	/**
 		Utility for providing easy access to the browser query string.
 		
 		@author Aaron Clinger
-		@version 09/02/08
+		@version 03/28/10
 	*/
 	public class QueryStringUtil {
 		protected static var _query:String;
 		protected static var _hasRequested:Boolean;
 		protected static var _pairMap:Dictionary;
+		
 		
 		/**
 			The field/value pairs of the browser URL.
@@ -51,22 +53,26 @@ package org.casalib.util {
 			if (!QueryStringUtil._hasRequested) {
 				QueryStringUtil._hasRequested = true;
 				
-				var query:String = ExternalInterface.call('document.location.search.toString');
-				
-				if (query != '' && query != null) {
-					QueryStringUtil._query = query.substring(1);
-					
-					var pairs:Array = QueryStringUtil._query.split('&');
-					var i:int       = -1;
-					var pair:Array;
-					
-					QueryStringUtil._pairMap = new Dictionary();
-					
-					while (++i < pairs.length) {
-						pair = pairs[i].split('=');
+				if (ExternalInterface.available) {
+					try {
+						const query:String = ExternalInterface.call('document.location.search.toString');
 						
-						QueryStringUtil._pairMap[pair[0]] = pair[1];
-					}
+						if (query != '' && query != null) {
+							QueryStringUtil._query = query.substring(1);
+							
+							const pairs:Array = QueryStringUtil._query.split('&');
+							var i:int         = -1;
+							var pair:Array;
+							
+							QueryStringUtil._pairMap = new Dictionary();
+							
+							while (++i < pairs.length) {
+								pair = pairs[i].split('=');
+								
+								QueryStringUtil._pairMap[pair[0]] = pair[1];
+							}
+						}
+					} catch (e:Error) {}
 				}
 			}
 			

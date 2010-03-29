@@ -1,6 +1,6 @@
 /*
 	CASA Lib for ActionScript 3.0
-	Copyright (c) 2009, Aaron Clinger & Contributors of CASA Lib
+	Copyright (c) 2010, Aaron Clinger & Contributors of CASA Lib
 	All rights reserved.
 	
 	Redistribution and use in source and binary forms, with or without
@@ -34,7 +34,7 @@ package org.casalib.events {
 	
 	/**
 		@author Aaron Clinger
-		@version 10/27/08
+		@version 02/11/10
 	*/
 	public interface IRemovableEventDispatcher extends IEventDispatcher {
 		
@@ -56,5 +56,13 @@ package org.casalib.events {
 			Removes all event listeners.
 		*/
 		function removeEventListeners():void;
+		
+		/**
+			Reports the number of listeners for a specific event or the total listeners for all events.
+			
+			@param type: The name of event or <code>null</code> for all events.
+			@return The number of listeners.
+		*/
+		function getTotalEventListeners(type:String = null):uint;
 	}
 }

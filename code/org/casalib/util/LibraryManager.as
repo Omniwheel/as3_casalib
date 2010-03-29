@@ -1,6 +1,6 @@
 /*
 	CASA Framework for ActionScript 3.0
-	Copyright (c) 2009, Contributors of CASA Framework
+	Copyright (c) 2010, Contributors of CASA Framework
 	All rights reserved.
 	
 	Redistribution and use in source and binary forms, with or without
@@ -39,19 +39,19 @@ package org.casalib.util {
 		Creates an easy way to store multiple {@link SwfLoad libraries} in groups and perform centralized retrieval of assets.
 		
 		@author Aaron Clinger
-		@version 06/04/09
+		@version 12/04/09
 		@example
 			<code>
 				package {
-					import flash.display.MovieClip;
 					import flash.display.DisplayObject;
-					import org.casalib.load.SwfLoad;
-					import org.casalib.load.GroupLoad;
+					import org.casalib.display.CasaMovieClip;
 					import org.casalib.events.LoadEvent;
+					import org.casalib.load.GroupLoad;
+					import org.casalib.load.SwfLoad;
 					import org.casalib.util.LibraryManager;
 					
 					
-					public class MyExample extends MovieClip {
+					public class MyExample extends CasaMovieClip {
 						protected var _redLibLoad:SwfLoad;
 						protected var _greenLibLoad:SwfLoad;
 						protected var _groupLoad:GroupLoad;
@@ -111,6 +111,25 @@ package org.casalib.util {
 			if (LibraryManager._hasGroup(groupId))
 				if (swfLoad in LibraryManager._groupMap[groupId])
 					delete LibraryManager._groupMap[groupId][swfLoad];
+		}
+		
+		/**
+			Determines if a LibraryManager group contains a specific SwfLoad.
+			
+			@param swfLoad: The SwfLoad you wish to search for.
+			@param groupId: The identifier of the group you wish to search for the SwfLoad in.
+			@return Returns <code>true</code> if the specified SwfLoad is contained in the LibraryManager group; otherwise <code>false</code>.
+		*/
+		public static function hasSwfLoad(swfLoad:SwfLoad, groupId:String = LibraryManager.GROUP_DEFAULT):Boolean {
+			if (LibraryManager._hasGroup(groupId)) {
+				var lib:Dictionary = LibraryManager._getGroup(groupId);
+				
+				for each (var s:SwfLoad in lib)
+					if (s == swfLoad)
+						return true;
+			}
+			
+			return false;
 		}
 		
 		/**

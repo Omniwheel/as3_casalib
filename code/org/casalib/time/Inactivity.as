@@ -1,6 +1,6 @@
 /*
 	CASA Lib for ActionScript 3.0
-	Copyright (c) 2009, Aaron Clinger & Contributors of CASA Lib
+	Copyright (c) 2010, Aaron Clinger & Contributors of CASA Lib
 	All rights reserved.
 	
 	Redistribution and use in source and binary forms, with or without
@@ -49,18 +49,18 @@ package org.casalib.time {
 		
 		@author Aaron Clinger
 		@author Mike Creighton
-		@version 05/30/09
+		@version 09/06/09
 		@usageNote You must first initialize {@link StageReference} before using this class.
 		@example
 			<code>
 				package {
-					import flash.display.MovieClip;
+					import org.casalib.display.CasaMovieClip;
+					import org.casalib.events.InactivityEvent;
 					import org.casalib.time.Inactivity;
 					import org.casalib.util.StageReference;
-					import org.casalib.events.InactivityEvent;
 					
 					
-					public class MyExample extends MovieClip {
+					public class MyExample extends CasaMovieClip {
 						protected var _inactivity:Inactivity;
 						
 						
