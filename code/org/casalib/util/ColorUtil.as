@@ -1,6 +1,6 @@
 /*
 	CASA Lib for ActionScript 3.0
-	Copyright (c) 2010, Aaron Clinger & Contributors of CASA Lib
+	Copyright (c) 2011, Aaron Clinger & Contributors of CASA Lib
 	All rights reserved.
 	
 	Redistribution and use in source and binary forms, with or without
@@ -38,7 +38,7 @@ package org.casalib.util {
 		Provides utility functions for dealing with color.
 		
 		@author Aaron Clinger
-		@version 09/23/08
+		@version 03/29/10
 	*/
 	public class ColorUtil {
 		
@@ -49,7 +49,7 @@ package org.casalib.util {
 			@param end: The finish color.
 			@param amount: The level of interpolation between the two colors.
 			@return The new interpolated color.
-			@usage
+			@example
 				<code>
 					var myColor:ColorTransform = new ColorTransform();
 					myColor.color              = 0xFF0000;

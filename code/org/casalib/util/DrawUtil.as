@@ -1,6 +1,6 @@
 /*
 	CASA Lib for ActionScript 3.0
-	Copyright (c) 2010, Aaron Clinger & Contributors of CASA Lib
+	Copyright (c) 2011, Aaron Clinger & Contributors of CASA Lib
 	All rights reserved.
 	
 	Redistribution and use in source and binary forms, with or without
@@ -32,14 +32,17 @@
 package org.casalib.util {
 	import flash.display.Graphics;
 	import flash.geom.Point;
+	import flash.geom.Rectangle;
 	import org.casalib.errors.ArrayContentsError;
 	import org.casalib.math.geom.Ellipse;
+	
 	
 	/**
 		Utilities for drawing shapes.
 		
 		@author Aaron Clinger
-		@version 03/26/10
+		@author Jon Adams
+		@version 09/22/10
 	*/
 	public class DrawUtil {
 		
@@ -49,7 +52,7 @@ package org.casalib.util {
 			@param graphics: The location where drawing should occur.
 			@param points: An Array comprised of at least two <code>Point</code>s to be use to draw a path.
 			@throws ArrayContentsError if the Array is comprised of elements other than <code>Point</code> objects.
-			@throws Error if the Array has less than two <code>Point</code>s.
+			@throws <code>Error</code> if the Array has less than two <code>Point</code>s.
 			@example
 				<code>
 					this.graphics.lineStyle(4, 0x00FF00);
@@ -64,7 +67,7 @@ package org.casalib.util {
 					throw new ArrayContentsError();
 			
 			if (points.length < 2)
-				throw new Error('At least three Points are needed to draw a shape.');
+				throw new Error('At least two Points are needed to draw a path.');
 			
 			graphics.moveTo(points[0].x, points[0].y);
 			
@@ -79,7 +82,7 @@ package org.casalib.util {
 			@param graphics: The location where drawing should occur.
 			@param points: An Array comprised of at least three <code>Point</code>s to be use to draw a shape.
 			@throws ArrayContentsError if the Array is comprised of elements other than <code>Point</code> objects.
-			@throws Error if the Array has less than three <code>Point</code>s.
+			@throws <code>Error</code> if the Array has less than three <code>Point</code>s.
 			@usageNote This method will automatically connect the last point to the starting point.
 			@example
 				<code>
@@ -104,7 +107,7 @@ package org.casalib.util {
 			@param ellipse: An Ellipse object that contains the size and position of the shape.
 			@param startAngle: The starting angle of wedge in degrees.
 			@param arc: The sweep of the wedge in degrees.
-			@usage
+			@example
 				<code>
 					this.graphics.beginFill(0xFF00FF);
 					DrawUtil.drawWedge(this.graphics, new Ellipse(0, 0, 300, 200), 0, 300);
@@ -160,7 +163,7 @@ package org.casalib.util {
 			@param topRight:Specifies if the top right corner of the rectangle should be rounded <code>true</code>, or should be square <code>false</code>. 
 			@param bottomRight: Specifies if the bottom right corner of the rectangle should be rounded <code>true</code>, or should be square <code>false</code>.
 			@param bottomLeft: Specifies if the bottom left corner of the rectangle should be rounded <code>true</code>, or should be square <code>false</code>.
-			@usage
+			@example
 				<code>
 					this.graphics.beginFill(0xFF00FF);
 					DrawUtil.drawRoundRect(this.graphics, 10, 10, 200, 200, 50, 50, true, false, true, false);
@@ -199,6 +202,22 @@ package org.casalib.util {
 				graphics.curveTo(x, y, x + radiusWidth, y);
 			} else
 				graphics.lineTo(x, y);
+		}
+
+		/**
+			Draws a rectangle using a <code>Rectangle</code> as a convenience.
+			
+			@param graphics: The location where drawing should occur.
+			@param rectangle: The <code>Rectangle</code> to draw.
+			@example
+				<code>
+					this.graphics.beginFill(0xFF00FF);
+					DrawUtil.drawRectangle(this.graphics, new Rectangle(10, 10, 20, 20));
+					this.graphics.endFill();
+				</code>
+		*/
+		public static function drawRectangle(graphics:Graphics, rectangle:Rectangle):void {
+			graphics.drawRect(rectangle.x, rectangle.y, rectangle.width, rectangle.height);
 		}
 	}
 }

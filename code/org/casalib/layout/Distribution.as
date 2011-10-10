@@ -1,6 +1,6 @@
 /*
 	CASA Lib for ActionScript 3.0
-	Copyright (c) 2010, Aaron Clinger & Contributors of CASA Lib
+	Copyright (c) 2011, Aaron Clinger & Contributors of CASA Lib
 	All rights reserved.
 	
 	Redistribution and use in source and binary forms, with or without
@@ -42,14 +42,13 @@ package org.casalib.layout {
 		
 		@author Aaron Clinger
 		@author Jon Adams
-		@version 03/28/10
+		@version 03/31/10
 		@example
 			<code>
 				package {
 					import org.casalib.display.CasaMovieClip;
 					import org.casalib.display.CasaSprite;
 					import org.casalib.layout.Distribution;
-					import code.org.casalib.util.DisplayObjectUtil;
 					
 					
 					public class MyExample extends CasaMovieClip {

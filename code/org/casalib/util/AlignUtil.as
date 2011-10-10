@@ -1,6 +1,6 @@
-/*
+﻿/*
 	CASA Lib for ActionScript 3.0
-	Copyright (c) 2010, Aaron Clinger & Contributors of CASA Lib
+	Copyright (c) 2011, Aaron Clinger & Contributors of CASA Lib
 	All rights reserved.
 	
 	Redistribution and use in source and binary forms, with or without
@@ -41,7 +41,7 @@ package org.casalib.util {
 		
 		@author Aaron Clinger
 		@author Jon Adams
-		@version 03/28/10
+		@version 05/19/11
 	*/
 	public class AlignUtil {
 		public static const BOTTOM:String        = 'bottom';
@@ -64,21 +64,60 @@ package org.casalib.util {
 		/**
 			Aligns a <code>DisplayObject</code> to the bounding <code>Rectangle</code> acording to the defined alignment.
 			
-			@param align: The alignment type/position.
+			@param alignment: The alignment type/position.
 			@param displayObject: The <code>DisplayObject</code> to align.
 			@param bounds: The area in which to align the <code>DisplayObject</code>.
 			@param snapToPixel: Force the position to whole pixels <code>true</code>, or to let the <code>DisplayObject</code> be positioned on sub-pixels <code>false</code>.
 			@param outside: Align the <code>DisplayObject</code> to the outside of the bounds <code>true</code>, or the inside <code>false</code>.
+			@param targetCoordinateSpace: The display object that defines the coordinate system to use. Specify if the <code>displayObject</code> is not in the same scope as the desired coordinate space, or <code>null</code> to use the <code>displayObject</code>'s coordinate space.
 		*/
-		public static function align(alignment:String, displayObject:DisplayObject, bounds:Rectangle, snapToPixel:Boolean = true, outside:Boolean = false):void {
-			const targetPosition:Point = AlignUtil._getPosition(alignment, displayObject.width, displayObject.height, bounds, outside);
+		public static function align(alignment:String, displayObject:DisplayObject, bounds:Rectangle, snapToPixel:Boolean = true, outside:Boolean = false, targetCoordinateSpace:DisplayObject = null):void {
 			const offsetPosition:Point = DisplayObjectUtil.getOffsetPosition(displayObject);
 			
-			displayObject.x = targetPosition.x + offsetPosition.x;
-			displayObject.y = targetPosition.y + offsetPosition.y;
+			switch (alignment) {
+				case AlignUtil.TOP :
+				case AlignUtil.MIDDLE :
+				case AlignUtil.BOTTOM :
+					break;
+				default :
+					displayObject.x = offsetPosition.x;
+			}
 			
-			if (snapToPixel)
-				AlignUtil.alignToPixel(displayObject);
+			switch (alignment) {
+				case AlignUtil.LEFT :
+				case AlignUtil.CENTER :
+				case AlignUtil.RIGHT :
+					break;
+				default :
+					displayObject.y = offsetPosition.y;
+			}
+			
+			const alignPosition:Point   = AlignUtil._getPosition(alignment, displayObject.width, displayObject.height, bounds, outside);
+			const relPosition:Rectangle = displayObject.getBounds((targetCoordinateSpace == null) ? displayObject : targetCoordinateSpace);
+			
+			switch (alignment) {
+				case AlignUtil.TOP :
+				case AlignUtil.MIDDLE :
+				case AlignUtil.BOTTOM :
+					break;
+				default :
+					displayObject.x += alignPosition.x - relPosition.x;
+					
+					if (snapToPixel)
+						displayObject.x = Math.round(displayObject.x);
+			}
+			
+			switch (alignment) {
+				case AlignUtil.LEFT :
+				case AlignUtil.CENTER :
+				case AlignUtil.RIGHT :
+					break;
+				default :
+					displayObject.y += alignPosition.y - relPosition.y;
+					
+					if (snapToPixel)
+						displayObject.y = Math.round(displayObject.y);
+			}
 		}
 		
 		/**
@@ -121,9 +160,10 @@ package org.casalib.util {
 			@param bounds: The area in which to align the <code>DisplayObject</code>.
 			@param snapToPixel: Force the position to whole pixels <code>true</code>, or to let the <code>DisplayObject</code> be positioned on sub-pixels <code>false</code>.
 			@param outside: Align the <code>DisplayObject</code> to the outside of the bounds <code>true</code>, or the inside <code>false</code>.
+			@param targetCoordinateSpace: The display object that defines the coordinate system to use. Specify if the <code>displayObject</code> is not in the same scope as the desired coordinate space, or <code>null</code> to use the <code>displayObject</code>'s coordinate space.
 		*/
-		public static function alignBottom(displayObject:DisplayObject, bounds:Rectangle, snapToPixel:Boolean = true, outside:Boolean = false):void {
-			AlignUtil.align(AlignUtil.BOTTOM, displayObject, bounds, snapToPixel, outside);
+		public static function alignBottom(displayObject:DisplayObject, bounds:Rectangle, snapToPixel:Boolean = true, outside:Boolean = false, targetCoordinateSpace:DisplayObject = null):void {
+			AlignUtil.align(AlignUtil.BOTTOM, displayObject, bounds, snapToPixel, outside, targetCoordinateSpace);
 		}
 		
 		/**
@@ -133,9 +173,10 @@ package org.casalib.util {
 			@param bounds: The area in which to align the <code>DisplayObject</code>.
 			@param snapToPixel: Force the position to whole pixels <code>true</code>, or to let the <code>DisplayObject</code> be positioned on sub-pixels <code>false</code>.
 			@param outside: Align the <code>DisplayObject</code> to the outside of the bounds <code>true</code>, or the inside <code>false</code>.
+			@param targetCoordinateSpace: The display object that defines the coordinate system to use. Specify if the <code>displayObject</code> is not in the same scope as the desired coordinate space, or <code>null</code> to use the <code>displayObject</code>'s coordinate space.
 		*/
-		public static function alignBottomLeft(displayObject:DisplayObject, bounds:Rectangle, snapToPixel:Boolean = true, outside:Boolean = false):void {
-			AlignUtil.align(AlignUtil.BOTTOM_LEFT, displayObject, bounds, snapToPixel, outside);
+		public static function alignBottomLeft(displayObject:DisplayObject, bounds:Rectangle, snapToPixel:Boolean = true, outside:Boolean = false, targetCoordinateSpace:DisplayObject = null):void {
+			AlignUtil.align(AlignUtil.BOTTOM_LEFT, displayObject, bounds, snapToPixel, outside, targetCoordinateSpace);
 		}
 		
 		/**
@@ -145,9 +186,10 @@ package org.casalib.util {
 			@param bounds: The area in which to align the <code>DisplayObject</code>.
 			@param snapToPixel: Force the position to whole pixels <code>true</code>, or to let the <code>DisplayObject</code> be positioned on sub-pixels <code>false</code>.
 			@param outside: Align the <code>DisplayObject</code> to the outside of the bounds <code>true</code>, or the inside <code>false</code>.
+			@param targetCoordinateSpace: The display object that defines the coordinate system to use. Specify if the <code>displayObject</code> is not in the same scope as the desired coordinate space, or <code>null</code> to use the <code>displayObject</code>'s coordinate space.
 		*/
-		public static function alignBottomCenter(displayObject:DisplayObject, bounds:Rectangle, snapToPixel:Boolean = true, outside:Boolean = false):void {
-			AlignUtil.align(AlignUtil.BOTTOM_CENTER, displayObject, bounds, snapToPixel, outside);
+		public static function alignBottomCenter(displayObject:DisplayObject, bounds:Rectangle, snapToPixel:Boolean = true, outside:Boolean = false, targetCoordinateSpace:DisplayObject = null):void {
+			AlignUtil.align(AlignUtil.BOTTOM_CENTER, displayObject, bounds, snapToPixel, outside, targetCoordinateSpace);
 		}
 		
 		/**
@@ -157,9 +199,10 @@ package org.casalib.util {
 			@param bounds: The area in which to align the <code>DisplayObject</code>.
 			@param snapToPixel: Force the position to whole pixels <code>true</code>, or to let the <code>DisplayObject</code> be positioned on sub-pixels <code>false</code>.
 			@param outside: Align the <code>DisplayObject</code> to the outside of the bounds <code>true</code>, or the inside <code>false</code>.
+			@param targetCoordinateSpace: The display object that defines the coordinate system to use. Specify if the <code>displayObject</code> is not in the same scope as the desired coordinate space, or <code>null</code> to use the <code>displayObject</code>'s coordinate space.
 		*/
-		public static function alignBottomRight(displayObject:DisplayObject, bounds:Rectangle, snapToPixel:Boolean = true, outside:Boolean = false):void {
-			AlignUtil.align(AlignUtil.BOTTOM_RIGHT, displayObject, bounds, snapToPixel, outside);
+		public static function alignBottomRight(displayObject:DisplayObject, bounds:Rectangle, snapToPixel:Boolean = true, outside:Boolean = false, targetCoordinateSpace:DisplayObject = null):void {
+			AlignUtil.align(AlignUtil.BOTTOM_RIGHT, displayObject, bounds, snapToPixel, outside, targetCoordinateSpace);
 		}
 		
 		/**
@@ -168,9 +211,10 @@ package org.casalib.util {
 			@param displayObject: The <code>DisplayObject</code> to align.
 			@param bounds: The area in which to align the <code>DisplayObject</code>.
 			@param snapToPixel: Force the position to whole pixels <code>true</code>, or to let the <code>DisplayObject</code> be positioned on sub-pixels <code>false</code>.
+			@param targetCoordinateSpace: The display object that defines the coordinate system to use. Specify if the <code>displayObject</code> is not in the same scope as the desired coordinate space, or <code>null</code> to use the <code>displayObject</code>'s coordinate space.
 		*/
-		public static function alignCenter(displayObject:DisplayObject, bounds:Rectangle, snapToPixel:Boolean = true):void {
-			AlignUtil.align(AlignUtil.CENTER, displayObject, bounds, snapToPixel);
+		public static function alignCenter(displayObject:DisplayObject, bounds:Rectangle, snapToPixel:Boolean = true, targetCoordinateSpace:DisplayObject = null):void {
+			AlignUtil.align(AlignUtil.CENTER, displayObject, bounds, snapToPixel, false, targetCoordinateSpace);
 		}
 		
 		/**
@@ -180,9 +224,10 @@ package org.casalib.util {
 			@param bounds: The area in which to align the <code>DisplayObject</code>.
 			@param snapToPixel: Force the position to whole pixels <code>true</code>, or to let the <code>DisplayObject</code> be positioned on sub-pixels <code>false</code>.
 			@param outside: Align the <code>DisplayObject</code> to the outside of the bounds <code>true</code>, or the inside <code>false</code>.
+			@param targetCoordinateSpace: The display object that defines the coordinate system to use. Specify if the <code>displayObject</code> is not in the same scope as the desired coordinate space, or <code>null</code> to use the <code>displayObject</code>'s coordinate space.
 		*/
-		public static function alignLeft(displayObject:DisplayObject, bounds:Rectangle, snapToPixel:Boolean = true, outside:Boolean = false):void {
-			AlignUtil.align(AlignUtil.LEFT, displayObject, bounds, snapToPixel, outside);
+		public static function alignLeft(displayObject:DisplayObject, bounds:Rectangle, snapToPixel:Boolean = true, outside:Boolean = false, targetCoordinateSpace:DisplayObject = null):void {
+			AlignUtil.align(AlignUtil.LEFT, displayObject, bounds, snapToPixel, outside, targetCoordinateSpace);
 		}
 		
 		/**
@@ -191,9 +236,10 @@ package org.casalib.util {
 			@param displayObject: The <code>DisplayObject</code> to align.
 			@param bounds: The area in which to align the <code>DisplayObject</code>.
 			@param snapToPixel: Force the position to whole pixels <code>true</code>, or to let the <code>DisplayObject</code> be positioned on sub-pixels <code>false</code>.
+			@param targetCoordinateSpace: The display object that defines the coordinate system to use. Specify if the <code>displayObject</code> is not in the same scope as the desired coordinate space, or <code>null</code> to use the <code>displayObject</code>'s coordinate space.
 		*/
-		public static function alignMiddle(displayObject:DisplayObject, bounds:Rectangle, snapToPixel:Boolean = true):void {
-			AlignUtil.align(AlignUtil.MIDDLE, displayObject, bounds, snapToPixel);
+		public static function alignMiddle(displayObject:DisplayObject, bounds:Rectangle, snapToPixel:Boolean = true, targetCoordinateSpace:DisplayObject = null):void {
+			AlignUtil.align(AlignUtil.MIDDLE, displayObject, bounds, snapToPixel, false, targetCoordinateSpace);
 		}
 		
 		/**
@@ -203,9 +249,10 @@ package org.casalib.util {
 			@param bounds: The area in which to align the <code>DisplayObject</code>.
 			@param snapToPixel: Force the position to whole pixels <code>true</code>, or to let the <code>DisplayObject</code> be positioned on sub-pixels <code>false</code>.
 			@param outside: Align the <code>DisplayObject</code> to the outside of the bounds <code>true</code>, or the inside <code>false</code>.
+			@param targetCoordinateSpace: The display object that defines the coordinate system to use. Specify if the <code>displayObject</code> is not in the same scope as the desired coordinate space, or <code>null</code> to use the <code>displayObject</code>'s coordinate space.
 		*/
-		public static function alignMiddleLeft(displayObject:DisplayObject, bounds:Rectangle, snapToPixel:Boolean = true, outside:Boolean = false):void {
-			AlignUtil.align(AlignUtil.MIDDLE_LEFT, displayObject, bounds, snapToPixel, outside);
+		public static function alignMiddleLeft(displayObject:DisplayObject, bounds:Rectangle, snapToPixel:Boolean = true, outside:Boolean = false, targetCoordinateSpace:DisplayObject = null):void {
+			AlignUtil.align(AlignUtil.MIDDLE_LEFT, displayObject, bounds, snapToPixel, outside, targetCoordinateSpace);
 		}
 		
 		/**
@@ -214,9 +261,10 @@ package org.casalib.util {
 			@param displayObject: The <code>DisplayObject</code> to align.
 			@param bounds: The area in which to align the <code>DisplayObject</code>.
 			@param snapToPixel: Force the position to whole pixels <code>true</code>, or to let the <code>DisplayObject</code> be positioned on sub-pixels <code>false</code>.
+			@param targetCoordinateSpace: The display object that defines the coordinate system to use. Specify if the <code>displayObject</code> is not in the same scope as the desired coordinate space, or <code>null</code> to use the <code>displayObject</code>'s coordinate space.
 		*/
-		public static function alignMiddleCenter(displayObject:DisplayObject, bounds:Rectangle, snapToPixel:Boolean = true):void {
-			AlignUtil.align(AlignUtil.MIDDLE_CENTER, displayObject, bounds, snapToPixel);
+		public static function alignMiddleCenter(displayObject:DisplayObject, bounds:Rectangle, snapToPixel:Boolean = true, targetCoordinateSpace:DisplayObject = null):void {
+			AlignUtil.align(AlignUtil.MIDDLE_CENTER, displayObject, bounds, snapToPixel, false, targetCoordinateSpace);
 		}
 		
 		/**
@@ -226,9 +274,10 @@ package org.casalib.util {
 			@param bounds: The area in which to align the <code>DisplayObject</code>.
 			@param snapToPixel: Force the position to whole pixels <code>true</code>, or to let the <code>DisplayObject</code> be positioned on sub-pixels <code>false</code>.
 			@param outside: Align the <code>DisplayObject</code> to the outside of the bounds <code>true</code>, or the inside <code>false</code>.
+			@param targetCoordinateSpace: The display object that defines the coordinate system to use. Specify if the <code>displayObject</code> is not in the same scope as the desired coordinate space, or <code>null</code> to use the <code>displayObject</code>'s coordinate space.
 		*/
-		public static function alignMiddleRight(displayObject:DisplayObject, bounds:Rectangle, snapToPixel:Boolean = true, outside:Boolean = false):void {
-			AlignUtil.align(AlignUtil.MIDDLE_RIGHT, displayObject, bounds, snapToPixel, outside);
+		public static function alignMiddleRight(displayObject:DisplayObject, bounds:Rectangle, snapToPixel:Boolean = true, outside:Boolean = false, targetCoordinateSpace:DisplayObject = null):void {
+			AlignUtil.align(AlignUtil.MIDDLE_RIGHT, displayObject, bounds, snapToPixel, outside, targetCoordinateSpace);
 		}
 		
 		/**
@@ -238,9 +287,10 @@ package org.casalib.util {
 			@param bounds: The area in which to align the <code>DisplayObject</code>.
 			@param snapToPixel: Force the position to whole pixels <code>true</code>, or to let the <code>DisplayObject</code> be positioned on sub-pixels <code>false</code>.
 			@param outside: Align the <code>DisplayObject</code> to the outside of the bounds <code>true</code>, or the inside <code>false</code>.
+			@param targetCoordinateSpace: The display object that defines the coordinate system to use. Specify if the <code>displayObject</code> is not in the same scope as the desired coordinate space, or <code>null</code> to use the <code>displayObject</code>'s coordinate space.
 		*/
-		public static function alignRight(displayObject:DisplayObject, bounds:Rectangle, snapToPixel:Boolean = true, outside:Boolean = false):void {
-			AlignUtil.align(AlignUtil.RIGHT, displayObject, bounds, snapToPixel, outside);
+		public static function alignRight(displayObject:DisplayObject, bounds:Rectangle, snapToPixel:Boolean = true, outside:Boolean = false, targetCoordinateSpace:DisplayObject = null):void {
+			AlignUtil.align(AlignUtil.RIGHT, displayObject, bounds, snapToPixel, outside, targetCoordinateSpace);
 		}
 		
 		/**
@@ -250,9 +300,10 @@ package org.casalib.util {
 			@param bounds: The area in which to align the <code>DisplayObject</code>.
 			@param snapToPixel: Force the position to whole pixels <code>true</code>, or to let the <code>DisplayObject</code> be positioned on sub-pixels <code>false</code>.
 			@param outside: Align the <code>DisplayObject</code> to the outside of the bounds <code>true</code>, or the inside <code>false</code>.
+			@param targetCoordinateSpace: The display object that defines the coordinate system to use. Specify if the <code>displayObject</code> is not in the same scope as the desired coordinate space, or <code>null</code> to use the <code>displayObject</code>'s coordinate space.
 		*/
-		public static function alignTop(displayObject:DisplayObject, bounds:Rectangle, snapToPixel:Boolean = true, outside:Boolean = false):void {
-			AlignUtil.align(AlignUtil.TOP, displayObject, bounds, snapToPixel, outside);
+		public static function alignTop(displayObject:DisplayObject, bounds:Rectangle, snapToPixel:Boolean = true, outside:Boolean = false, targetCoordinateSpace:DisplayObject = null):void {
+			AlignUtil.align(AlignUtil.TOP, displayObject, bounds, snapToPixel, outside, targetCoordinateSpace);
 		}
 		
 		/**
@@ -262,9 +313,10 @@ package org.casalib.util {
 			@param bounds: The area in which to align the <code>DisplayObject</code>.
 			@param snapToPixel: Force the position to whole pixels <code>true</code>, or to let the <code>DisplayObject</code> be positioned on sub-pixels <code>false</code>.
 			@param outside: Align the <code>DisplayObject</code> to the outside of the bounds <code>true</code>, or the inside <code>false</code>.
+			@param targetCoordinateSpace: The display object that defines the coordinate system to use. Specify if the <code>displayObject</code> is not in the same scope as the desired coordinate space, or <code>null</code> to use the <code>displayObject</code>'s coordinate space.
 		*/
-		public static function alignTopLeft(displayObject:DisplayObject, bounds:Rectangle, snapToPixel:Boolean = true, outside:Boolean = false):void {
-			AlignUtil.align(AlignUtil.TOP_LEFT, displayObject, bounds, snapToPixel, outside);
+		public static function alignTopLeft(displayObject:DisplayObject, bounds:Rectangle, snapToPixel:Boolean = true, outside:Boolean = false, targetCoordinateSpace:DisplayObject = null):void {
+			AlignUtil.align(AlignUtil.TOP_LEFT, displayObject, bounds, snapToPixel, outside, targetCoordinateSpace);
 		}
 		
 		/**
@@ -274,9 +326,10 @@ package org.casalib.util {
 			@param bounds: The area in which to align the <code>DisplayObject</code>.
 			@param snapToPixel: Force the position to whole pixels <code>true</code>, or to let the <code>DisplayObject</code> be positioned on sub-pixels <code>false</code>.
 			@param outside: Align the <code>DisplayObject</code> to the outside of the bounds <code>true</code>, or the inside <code>false</code>.
+			@param targetCoordinateSpace: The display object that defines the coordinate system to use. Specify if the <code>displayObject</code> is not in the same scope as the desired coordinate space, or <code>null</code> to use the <code>displayObject</code>'s coordinate space.
 		*/
-		public static function alignTopCenter(displayObject:DisplayObject, bounds:Rectangle, snapToPixel:Boolean = true, outside:Boolean = false):void {
-			AlignUtil.align(AlignUtil.TOP_CENTER, displayObject, bounds, snapToPixel, outside);
+		public static function alignTopCenter(displayObject:DisplayObject, bounds:Rectangle, snapToPixel:Boolean = true, outside:Boolean = false, targetCoordinateSpace:DisplayObject = null):void {
+			AlignUtil.align(AlignUtil.TOP_CENTER, displayObject, bounds, snapToPixel, outside, targetCoordinateSpace);
 		}
 		
 		/**
@@ -286,9 +339,10 @@ package org.casalib.util {
 			@param bounds: The area in which to align the <code>DisplayObject</code>.
 			@param snapToPixel: Force the position to whole pixels <code>true</code>, or to let the <code>DisplayObject</code> be positioned on sub-pixels <code>false</code>.
 			@param outside: Align the <code>DisplayObject</code> to the outside of the bounds <code>true</code>, or the inside <code>false</code>.
+			@param targetCoordinateSpace: The display object that defines the coordinate system to use. Specify if the <code>displayObject</code> is not in the same scope as the desired coordinate space, or <code>null</code> to use the <code>displayObject</code>'s coordinate space.
 		*/
-		public static function alignTopRight(displayObject:DisplayObject, bounds:Rectangle, snapToPixel:Boolean = true, outside:Boolean = false):void {
-			AlignUtil.align(AlignUtil.TOP_RIGHT, displayObject, bounds, snapToPixel, outside);
+		public static function alignTopRight(displayObject:DisplayObject, bounds:Rectangle, snapToPixel:Boolean = true, outside:Boolean = false, targetCoordinateSpace:DisplayObject = null):void {
+			AlignUtil.align(AlignUtil.TOP_RIGHT, displayObject, bounds, snapToPixel, outside, targetCoordinateSpace);
 		}
 		
 		protected static function _getPosition(alignment:String, targetWidth:uint, targetHeight:uint, bounds:Rectangle, outside:Boolean):Point {

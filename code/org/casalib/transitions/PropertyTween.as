@@ -1,6 +1,6 @@
 /*
 	CASA Lib for ActionScript 3.0
-	Copyright (c) 2010, Aaron Clinger & Contributors of CASA Lib
+	Copyright (c) 2011, Aaron Clinger & Contributors of CASA Lib
 	All rights reserved.
 	
 	Redistribution and use in source and binary forms, with or without
@@ -37,7 +37,7 @@ package org.casalib.transitions {
 		@author Aaron Clinger
 		@author Mike Creighton
 		@author Jon Adams
-		@version 09/06/09
+		@version 05/04/11
 		@example
 			<code>
 				package {
@@ -78,16 +78,16 @@ package org.casalib.transitions {
 		/**
 			A convenience method that creates and starts a new PropertyTween and {@link Tween#start starts} it automatically.
 			
-			@param scope: An object that contains the property specified by {@code property}.
+			@param scope: An object that contains the property specified by <code>property</code>.
 			@param property: Name of the property you want to tween.
 			@param equation: The tween equation.
 			@param endPos: The ending value of the transition.
 			@param duration: Length of time of the transition.
-			@param useFrames: Indicates to use frames {@code true}, or seconds {@code false} in relation to the value specified in the {@code duration} parameter.
+			@param useFrames: Indicates to use frames <code>true</code>, or seconds <code>false</code> in relation to the value specified in the <code>duration</code> parameter.
 			@return: A {@PropertyTween property}.
 		 */
 		public static function to(scope:Object, property:String, equation:Function, endPos:Number, duration:Number, useFrames:Boolean = false):PropertyTween {
-			var pt:PropertyTween = new PropertyTween(scope, property, equation, endPos, duration, useFrames);
+			const pt:PropertyTween = new PropertyTween(scope, property, equation, endPos, duration, useFrames);
 			pt.start();
 			
 			return pt;
@@ -96,19 +96,19 @@ package org.casalib.transitions {
 		/**
 			A convenience method that creates and starts a new PropertyTween and {@link Tween#start starts} it automatically.
 			
-			@param scope: An object that contains the property specified by {@code property}.
+			@param scope: An object that contains the property specified by <code>property</code>.
 			@param property: Name of the property you want to tween.
 			@param equation: The tween equation.
 			@param startPos: The beginning value of the transition.
 			@param duration: Length of time of the transition.
-			@param useFrames: Indicates to use frames {@code true}, or seconds {@code false} in relation to the value specified in the {@code duration} parameter.
+			@param useFrames: Indicates to use frames <code>true</code>, or seconds <code>false</code> in relation to the value specified in the <code>duration</code> parameter.
 			@return: A {@PropertyTween property}.
 		 */
 		public static function from(scope:Object, property:String, equation:Function, startPos:Number, duration:Number, useFrames:Boolean = false):PropertyTween {
-			var endPos:Number = scope[property];
-			scope[property]   = startPos;
+			const endPos:Number = scope[property];
+			scope[property]     = startPos;
 			
-			var pt:PropertyTween = new PropertyTween(scope, property, equation, endPos, duration, useFrames);
+			const pt:PropertyTween = new PropertyTween(scope, property, equation, endPos, duration, useFrames);
 			pt.start();
 			
 			return pt;

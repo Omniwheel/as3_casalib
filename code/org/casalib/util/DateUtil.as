@@ -1,6 +1,6 @@
 /*
 	CASA Lib for ActionScript 3.0
-	Copyright (c) 2010, Aaron Clinger & Contributors of CASA Lib
+	Copyright (c) 2011, Aaron Clinger & Contributors of CASA Lib
 	All rights reserved.
 	
 	Redistribution and use in source and binary forms, with or without
@@ -40,7 +40,7 @@ package org.casalib.util {
 		@author Aaron Clinger
 		@author Shane McCartney
 		@author David Nelson
-		@version 06/18/09
+		@version 05/05/11
 	*/
 	public class DateUtil {
 		
@@ -330,7 +330,7 @@ package org.casalib.util {
 							break;
 						// Swatch Internet time
 						case 'B' :
-							returnString += NumberUtil.format(DateUtil.getInternetTime(dateToFormat), 3, null, '0');
+							returnString += NumberUtil.format(DateUtil.getInternetTime(dateToFormat), null, 3)
 							break;
 						// 12-hour format of an hour without leading zeros
 						case 'g' :
@@ -349,7 +349,7 @@ package org.casalib.util {
 							break;
 						// 12-hour format of an hour with leading zeros
 						case 'h' :
-							t = dateToFormat.getHours() + 1;
+							t = dateToFormat.getHours();
 							
 							if (t == 0)
 								t = 12;

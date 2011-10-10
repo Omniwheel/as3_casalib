@@ -1,6 +1,6 @@
 /*
 	CASA Lib for ActionScript 3.0
-	Copyright (c) 2010, Aaron Clinger & Contributors of CASA Lib
+	Copyright (c) 2011, Aaron Clinger & Contributors of CASA Lib
 	All rights reserved.
 	
 	Redistribution and use in source and binary forms, with or without
@@ -85,7 +85,7 @@ package org.casalib.load {
 			@param load: The load object.
 			@param request: A <code>String</code> or an <code>URLRequest</code> reference to the file you wish to load.
 			@throws ArguementTypeError if you pass a type other than a <code>String</code> or an <code>URLRequest</code> to parameter <code>request</code>.
-			@throws Error if you try to load an empty <code>String</code> or <code>URLRequest</code>.
+			@throws <code>Error</code> if you try to load an empty <code>String</code> or <code>URLRequest</code>.
 		*/
 		public function LoadItem(load:*, request:*) {
 			super();
@@ -118,7 +118,7 @@ package org.casalib.load {
 			this._time      = 0;
 			
 			if (this._preventCache) {
-				var cache:String = 'casaCache=' + int(1000 * Math.random());
+				const cache:String = 'casaCache=' + (new Date()).time;
 				
 				this._request.url = (this._request.url.indexOf('?') == -1) ? this._request.url + '?' + cache : this._request.url + '&' + cache;
 			}
@@ -256,7 +256,7 @@ package org.casalib.load {
 		}
 		
 		/**
-			The HTTP status code returned by the server; or <code>0</code> if no status has/can been received or the load is a stream.
+			The HTTP status code returned by the server; or <code>0 </code> if no status has/can been received or the load is a stream.
 		*/
 		public function get httpStatus():uint {
 			return this._httpStatus;

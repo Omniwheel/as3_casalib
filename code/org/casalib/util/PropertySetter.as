@@ -1,6 +1,6 @@
 /*
 	CASA Lib for ActionScript 3.0
-	Copyright (c) 2010, Aaron Clinger & Contributors of CASA Lib
+	Copyright (c) 2011, Aaron Clinger & Contributors of CASA Lib
 	All rights reserved.
 	
 	Redistribution and use in source and binary forms, with or without
@@ -52,7 +52,7 @@ package org.casalib.util {
 			@param scope: An object that contains the property specified by <code>property</code>.
 			@param property: Name of the property you want to assign the value of.
 			@param argument: The position the value to assign falls in the argument order.
-			@throws Error if the property does not exist or is not available in defined scope.
+			@throws <code>Error</code> if the property does not exist or is not available in defined scope.
 		*/
 		public function PropertySetter(scope:Object, property:String, argument:uint = 0) {
 			if (scope[property] == undefined)

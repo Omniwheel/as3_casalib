@@ -1,8 +1,76 @@
-<?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"><head><title>VideoLoad</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><link rel="stylesheet" type="text/css" href="../css/VisDoc.css" /><script src="../js/jquery.js" type="text/javascript">//</script><script src="../js/common.js" type="text/javascript">//</script><script src="../js/doc.js" type="text/javascript">//</script></head><body id="page_org_casalib_load_VideoLoad"><script type="text/javascript">VisDoc.initBody();</script><div id="PageTop"><!----></div><div class="VisDoc"><div class="content"><div class="docNav"><ul><li><div id="twistyTOC_show" class="twistyTrigger twikiUnvisited twikiMakeVisible twistyInited activeWhenNotFramed"><a href="#"><span class="icon">+</span>Show TOC</a></div><script type="text/javascript">twiki.JQueryTwistyPlugin.initId("twistyTOC_show");</script><div id="twistyTOC_hide" class="twistyTrigger twikiUnvisited twikiMakeVisible twistyInited activeWhenFramed"><a href="#"><span class="icon">&times;</span>Hide TOC</a></div><span id="twistyTOC_toggle" class="twistyContent"><!----></span><script type="text/javascript">twiki.JQueryTwistyPlugin.initId("twistyTOC_hide");</script></li></ul><ul class="accessKeyLinks"><li><a href="#PageTop" accesskey="t"><span class="accessKey">T</span>op</a></li><li><a href="#Summary" accesskey="s"><span class="accessKey">S</span>ummary</a></li><li><a href="#Constructor" accesskey="c"><span class="accessKey">C</span>onstructors</a></li><li><a href="#Instanceproperties" accesskey="l">Instance <span class="accessKey">p</span>roperties</a></li><li><a href="#Instancemethods" accesskey="m">Instance <span class="accessKey">m</span>ethods</a></li></ul><br class="clear" /></div><h1>VideoLoad</h1><div class="classProperties"><table cellspacing="0"><tr><th align="left">Kind of class:</th><td>public class</td></tr><tr><th align="left">Package:</th><td><a class="className" href="package-org_casalib_load.html">org.casalib.load</a></td></tr><tr><th align="left">Inherits from:</th><td><a class="className" href="org_casalib_load_LoadItem.html">LoadItem</a> &lt; <a class="className" href="org_casalib_process_Process.html">Process</a> &lt; <a class="className" href="org_casalib_events_RemovableEventDispatcher.html">RemovableEventDispatcher</a> &lt; EventDispatcher</td></tr><tr><th class="classDetails" align="left">Version:</th><td class="classDetails">02/13/10</td></tr><tr><th class="classDetails" align="left">Author:</th><td class="classDetails">Aaron Clinger</td></tr><tr><th class="classDetails" align="left">Classpath:</th><td class="classDetails">org.casalib.load.VideoLoad</td></tr><tr><th class="classDetails" align="left">File last modified:</th><td class="classDetails">Sunday, 28 March 2010, 11:55:55</td></tr></table></div><div id="sourceCodeTop" class="sourceCodeView"><div id="twistyViewSourceshow" class="twistyTrigger twikiUnvisited twikiMakeVisible twistyInited twistyRememberSetting twistyAnimate"><a href="#"><span class="icon">►&nbsp;</span><span class="linkLabel">View source</span></a></div><script type="text/javascript">twiki.JQueryTwistyPlugin.initId("twistyViewSourceshow");</script><div id="twistyViewSourcehide" class="twistyTrigger twikiUnvisited twikiMakeVisible twistyInited twistyRememberSetting twistyAnimate"><a href="#"><span class="icon">▼&nbsp;</span><span class="linkLabel">Hide source</span></a></div><script type="text/javascript">twiki.JQueryTwistyPlugin.initId("twistyViewSourcehide");</script><div id="twistyViewSourcetoggle" class="twistyContent twistyMakeHidden twistyRememberSetting"><script type="text/javascript">twiki.JQueryTwistyPlugin.initId("twistyViewSourcetoggle");</script><div class="sourceCode"><textarea rows="10" cols="10" id="source" readonly="readonly">/*
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" encoding="utf-8">
+	<head>
+		<title>VideoLoad | CASA Lib AS3 Docs</title>
+		<link rel="stylesheet" type="text/css" href="../css/shCoreDefault.min.css" />
+		<link rel="stylesheet" type="text/css" href="../css/VisDoc.min.css" />
+		<script type="text/javascript" src="../js/1_jquery.min.js"></script>
+		<script type="text/javascript" src="../js/2_jquery.cookie.min.js"></script>
+		<script type="text/javascript" src="../js/3_jquery.simpletreeview.min.js"></script>
+		<script type="text/javascript" src="../js/4_shCore.min.js"></script>
+		<script type="text/javascript" src="../js/5_shBrushAS3.min.js"></script>
+		<script type="text/javascript" src="../js/6_shBrushJava.min.js"></script>
+		<script type="text/javascript" src="../js/7_VisDoc.min.js"></script>
+	</head>
+	<body class='isShowingNavigation' id='page_org_casalib_load_VideoLoad'>
+	    <div id='page'> 
+			<div id='wrapper'>
+				<div id='outer'> 
+					<div id='floatWrap'> 
+						<div id='main'>
+							<div id='clearHeaderCenter'></div> 
+							<div id='mainContent'>
+																<h1>VideoLoad</h1>									<div class='classProperties'>
+		<table cellspacing='0'>
+				<tr>
+		<th>Kind of class:</th>
+		<td>public class</td>
+	</tr>
+							<tr>
+		<th>Package:</th>
+		<td>
+			<ul>
+								<li>			<a href="package_org_casalib_load.html">org.casalib.load</a>
+</li>
+							</ul>
+		</td>
+	</tr>
+							<tr>
+		<th>Inherits from:</th>
+		<td>
+			<ul>
+								<li>			<a href="org_casalib_load_LoadItem.html">LoadItem</a>
+</li>
+								<li>			<a href="org_casalib_process_Process.html">Process</a>
+</li>
+								<li>			<a href="org_casalib_events_RemovableEventDispatcher.html">RemovableEventDispatcher</a>
+</li>
+								<li>			EventDispatcher</li>
+							</ul>
+		</td>
+	</tr>
+																<tr>
+		<th class='classDetails'>Version:</th>
+		<td class='classDetails'>08/06/10</td>
+	</tr>
+	<tr>
+		<th class='classDetails'>Author:</th>
+		<td class='classDetails'>Aaron Clinger</td>
+	</tr>
+	<tr>
+		<th class='classDetails'>Classpath:</th>
+		<td class='classDetails'>org.casalib.load.VideoLoad</td>
+	</tr>
+	<tr>
+		<th class='classDetails'>File last modified:</th>
+		<td class='classDetails'>Friday, 20 May 2011, 00:59:43</td>
+	</tr>
+		</table>
+	</div>
+	<div class='sourceCode'>
+				<span class='sourceCodeShow'><a href="#"><span class='closure'>&#9658;&nbsp;</span><span class='linkLabel'>View source</span></a></span><span class='sourceCodeHide'><a href="#"><span class='disclosure'>&#9660;&nbsp;</span><span class='linkLabel'>Hide source</span></a></span>	<pre id="source" class="brush:as3">/*
     CASA Lib for ActionScript 3.0
-    Copyright (c) 2010, Aaron Clinger &amp; Contributors of CASA Lib
+    Copyright (c) 2011, Aaron Clinger & Contributors of CASA Lib
     All rights reserved.
     
     Redistribution and use in source and binary forms, with or without
@@ -60,9 +128,9 @@ package org.casalib.load {
         Provides an easy and standardized way to load video files. VideoLoad also includes {@link VideoLoadEvent buffer progress information} in the progress event.
         
         @author Aaron Clinger
-        @version 02/13/10
+        @version 08/06/10
         @example 
-            &lt;code>
+            <code>
                 package {
                     import org.casalib.display.CasaMovieClip;
                     import org.casalib.events.VideoLoadEvent;
@@ -96,7 +164,7 @@ package org.casalib.load {
                         }
                     }
                 }
-            &lt;/code>
+            </code>
     */
     public class VideoLoad extends LoadItem {
         protected var _buffered:Boolean;
@@ -115,10 +183,10 @@ package org.casalib.load {
         /**
             Creates a new VideoLoad.
             
-            @param request: A &lt;code>String&lt;/code> or an &lt;code>URLRequest&lt;/code> reference to the video you wish to load.
-            @param completeWhenBuffered: If the load should be considered complete when buffered &lt;code>true&lt;/code>, or when the video has completely loaded &lt;code>false&lt;/code>; defaults to &lt;code>false&lt;/code>.
-            @throws ArguementTypeError if you pass a type other than a &lt;code>String&lt;/code> or an &lt;code>URLRequest&lt;/code> to parameter &lt;code>request&lt;/code>.
-            @throws Error if you try to load an empty &lt;code>String&lt;/code> or &lt;code>URLRequest&lt;/code>.
+            @param request: A <code>String</code> or an <code>URLRequest</code> reference to the video you wish to load.
+            @param completeWhenBuffered: If the load should be considered complete when buffered <code>true</code>, or when the video has completely loaded <code>false</code>; defaults to <code>false</code>.
+            @throws ArguementTypeError if you pass a type other than a <code>String</code> or an <code>URLRequest</code> to parameter <code>request</code>.
+            @throws <code>Error</code> if you try to load an empty <code>String</code> or <code>URLRequest</code>.
         */
         public function VideoLoad(request:*, completeWhenBuffered:Boolean = false) {
             this._netConnection = new NetConnection();
@@ -152,7 +220,7 @@ package org.casalib.load {
         }
         
         /**
-            Indicates to pause video at start &lt;code>true&lt;/code>, or to let the video automatically play &lt;code>false&lt;/code>; defaults to &lt;code>false&lt;/code>.
+            Indicates to pause video at start <code>true</code>, or to let the video automatically play <code>false</code>; defaults to <code>false</code>.
         */
         public function get pauseStart():Boolean {
             return this._pauseStart;
@@ -186,7 +254,7 @@ package org.casalib.load {
         /**
             The time remaining in milliseconds until the video has completely buffered.
             
-            @usageNote {@link VideoLoad} will report &lt;code>-1&lt;/code> milliseconds until two seconds of load time has elapsed.
+            @usageNote {@link VideoLoad} will report <code>-1</code> milliseconds until two seconds of load time has elapsed.
         */
         public function get millisecondsUntilBuffered():int {
             return this._millisecondsUntilBuffered;
@@ -195,14 +263,14 @@ package org.casalib.load {
         /**
             The percent the video has buffered.
             
-            @usageNote {@link VideoLoad} will report &lt;code>0&lt;/code> percent until two seconds of load time has elapsed.
+            @usageNote {@link VideoLoad} will report <code>0 </code> percent until two seconds of load time has elapsed.
         */
         public function get buffer():Percent {
             return this._buffer.clone();
         }
         
         /**
-            Determines if the requested video has buffered &lt;code>true&lt;/code>, or hasn't finished buffering &lt;code>false&lt;/code>.
+            Determines if the requested video has buffered <code>true</code>, or hasn't finished buffering <code>false</code>.
         */
         public function get buffered():Boolean {
             return this._buffered;
@@ -234,11 +302,11 @@ package org.casalib.load {
         }
         
         /**
-            @usageNote &lt;code>destroy&lt;/code> does not close the internal NetStream object. To completely destroy a VideoLoad you have to close the NetStream object:
-            &lt;code>
+            @usageNote <code>destroy</code> does not close the internal NetStream object. To completely destroy a VideoLoad you have to close the NetStream object:
+            <code>
                 this._videoLoad.netStream.close();
                 this._videoLoad.destroy();
-            &lt;/code>
+            </code>
         */
         override public function destroy():void {
             this._dispatcher.removeEventListener(AsyncErrorEvent.ASYNC_ERROR, this.dispatchEvent);
@@ -273,14 +341,15 @@ package org.casalib.load {
             @sends VideoLoadEvent#BUFFERED - Dispatched when video is buffered.
         */
         override protected function _calculateLoadProgress():void {
-            var justBuffered:Boolean = false;
-            var currentTime:int      = getTimer();
-            this._Bps                = LoadUtil.calculateBps(this.bytesLoaded, this._startTime, currentTime);
-            this._time               = currentTime - this._startTime;
+            var justBuffered:Boolean   = false;
+            const currentTime:int      = getTimer();
+            const loadComplete:Boolean = this.bytesLoaded >= this.bytesTotal;
+            this._Bps                  = LoadUtil.calculateBps(this.bytesLoaded, this._startTime, currentTime);
+            this._time                 = currentTime - this._startTime;
             
             this._progress.decimalPercentage = this.bytesLoaded / this.bytesTotal;
             
-            if (!this.buffered &amp;&amp; this.duration > 0) {
+            if (!this.buffered && this.duration > 0) {
                 if (currentTime - this._startTime > 2000) {
                     var videoLength:uint = uint(Math.max((this.duration - 2) * 1000, 0));
                     
@@ -292,7 +361,10 @@ package org.casalib.load {
                     this._buffered = justBuffered = true;
             }
             
-            if (this.buffered) {
+            if (this.buffered || loadComplete) {
+                if (loadComplete && !this.buffered)
+                    this._buffered = justBuffered = true;
+                
                 this._buffer.decimalPercentage  = 1;
                 this._millisecondsUntilBuffered = 0;
             }
@@ -305,11 +377,13 @@ package org.casalib.load {
             if (justBuffered) {
                 this.dispatchEvent(this._createDefinedVideoLoadEvent(VideoLoadEvent.BUFFERED));
                 
-                if (this._completeWhenBuffered)
+                if (this._completeWhenBuffered) {
                     this._onComplete();
+                    return;
+                }
             }
             
-            if (this.bytesLoaded >= this.bytesTotal &amp;&amp; this.buffered)
+            if (loadComplete && this.buffered)
                 this._onComplete();
         }
         
@@ -383,7 +457,7 @@ package org.casalib.load {
                 this._onOpen(new Event(Event.OPEN));
             }
             
-            if (e.info.level == 'error' &amp;&amp; !this.loaded)
+            if (e.info.level == 'error' && !this.loaded)
                 this._onLoadError(e);
             else
                 this.dispatchEvent(e);
@@ -393,53 +467,729 @@ package org.casalib.load {
             this._calculateLoadProgress();
         }
     }
-}
-</textarea></div></div></div><div class="classDescription"><span class="descriptionSummary">Provides an easy and standardized way to load video files.</span> VideoLoad also includes <a class="className" href="org_casalib_events_VideoLoadEvent.html">buffer progress information</a> in the progress event.<div class="classFields"><div class="boxWithBorder"><div class="boxedElem"><div class="contentHolder"><span class="title">Example:</span><div class="item"><ul><li> <pre>
+}</pre>
+</div>
+	<div class='classDescription'>
+	<span class='descriptionSummary'>Provides an easy and standardized way to load video files. </span>	VideoLoad also includes <a href="org_casalib_events_VideoLoadEvent.html">buffer progress information</a> in the progress event.	<div class='classFields'>
+		<div class='boxWithBorder'>
+								<div class='boxedElem'>
+		<div class='contentHolder'>
+			<span class='title'>Example</span>
+					<div class='item'>
+					<ul>
+								<li>
+					<pre>
 package {
-    <span class="codeKeyword">import</span> org.casalib.display.CasaMovieClip;
-    <span class="codeKeyword">import</span> org.casalib.events.VideoLoadEvent;
-    <span class="codeKeyword">import</span> org.casalib<span class="codeIdentifier">.load</span>.VideoLoad;
-
-
-    <span class="codeKeyword">public</span> <span class="codeKeyword">class</span> MyExample <span class="codeKeyword">extends</span> CasaMovieClip {
+    import org.casalib.display.CasaMovieClip;
+    import org.casalib.events.VideoLoadEvent;
+    import org.casalib<span class="codeIdentifier">.load</span>.VideoLoad;
+    
+    
+    public class MyExample extends CasaMovieClip {
         protected <span class="codeKeyword">var</span> _videoLoad:VideoLoad;
-
-
-        <span class="codeKeyword">public</span> <span class="codeKeyword">function</span> MyExample() {
+        
+        
+        public <span class="codeKeyword">function</span> MyExample() {
             <span class="codeIdentifier">super</span>();
-
-            <span class="codeIdentifier">this</span>._videoLoad = <span class="codeKeyword">new</span> VideoLoad(<span class="codeString">"test.flv"</span>);
+            
+            <span class="codeIdentifier">this</span>._videoLoad = <span class="codeKeyword">new</span> VideoLoad(<span class="codeString">&quot;test.flv&quot;</span>);
             <span class="codeIdentifier">this</span>._videoLoad.pauseStart = <span class="codeIdentifier">true</span>;
             <span class="codeIdentifier">this</span>._videoLoad.addEventListener(VideoLoadEvent.PROGRESS, <span class="codeIdentifier">this</span>._onProgress);
             <span class="codeIdentifier">this</span>._videoLoad.addEventListener(VideoLoadEvent.BUFFERED, <span class="codeIdentifier">this</span>._onBuffered);
             <span class="codeIdentifier">this</span>._videoLoad<span class="codeIdentifier">.start</span>();
-
+            
             <span class="codeIdentifier">this</span>.addChild(<span class="codeIdentifier">this</span>._videoLoad.video);
         }
-
+        
         protected <span class="codeKeyword">function</span> _onProgress(e:VideoLoadEvent):<span class="codeKeyword">void</span> {
-            <span class="codeIdentifier">trace</span>(e.millisecondsUntilBuffered + <span class="codeString">" milliseconds until buffered"</span>);
-            <span class="codeIdentifier">trace</span>(e.buffer.percentage + <span class="codeString">"% buffered"</span>);
-            <span class="codeIdentifier">trace</span>(e.progress.percentage + <span class="codeString">"% loaded"</span>);
+            <span class="codeIdentifier">trace</span>(e.millisecondsUntilBuffered + <span class="codeString">&quot; milliseconds until buffered&quot;</span>);
+            <span class="codeIdentifier">trace</span>(e.buffer.percentage + <span class="codeString">&quot;% buffered&quot;</span>);
+            <span class="codeIdentifier">trace</span>(e.progress.percentage + <span class="codeString">&quot;% loaded&quot;</span>);
         }
-
+        
         protected <span class="codeKeyword">function</span> _onBuffered(e:VideoLoadEvent):<span class="codeKeyword">void</span> {
             e<span class="codeIdentifier">.target</span>.netStream.resume();
         }
     }
-}</pre> </li></ul></div></div></div><div class="boxedElem"><div class="contentHolder"><span class="title">Events broadcasted to listeners:</span><div class="item"><ul><li>AsyncErrorEvent with type: <code>ASYNC_ERROR</code>  - Dispatched when an exception is thrown asynchronously.</li><li>SecurityErrorEvent with type: <code>SECURITY_ERROR</code>  - Dispatched if load is outside the security sandbox.</li><li><a href="org_casalib_events_VideoLoadEvent.html#PROGRESS">VideoLoadEvent</a> with type: <code>PROGRESS</code>  - Dispatched as video is received during the download process.</li><li><a href="org_casalib_events_VideoLoadEvent.html#BUFFERED">VideoLoadEvent</a> with type: <code>BUFFERED</code>  - Dispatched when video is buffered.</li><li><a href="org_casalib_events_VideoInfoEvent.html#CUE_POINT">VideoInfoEvent</a> with type: <code>CUE_POINT</code>  - Dispatched when a video cue point is reached.</li><li><a href="org_casalib_events_VideoInfoEvent.html#META_DATA">VideoInfoEvent</a> with type: <code>META_DATA</code>  - Dispatched when video meta data is received.</li><li>NetStatusEvent with type: <code>NET_STATUS</code>  - Dispatched when a NetStream object has reporting its status.</li></ul></div></div></div></div></div></div><div class="summary"><h2 id="Summary">Summary</h2><div class="docNav"><ul><li><div id="twistyTypeInfo_show" class="twistyTrigger twikiUnvisited twikiMakeVisible twistyInited twistyRememberSetting"><a href="#"><span class="icon">&times;</span>Hide type info</a></div><script type="text/javascript">twiki.JQueryTwistyPlugin.initId("toggleTypeInfo_on");</script><div id="twistyTypeInfo_hide" class="twistyTrigger twikiUnvisited twikiMakeVisible twistyInited twistyRememberSetting"><a href="#"><span class="icon">+</span>Show type info</a></div><span id="twistyTypeInfo_toggle" class="twistyContent"><!----></span><script type="text/javascript">twiki.JQueryTwistyPlugin.initId("toggleTypeInfo_off");</script></li><li><div id="twistySummaries_show" class="twistyTrigger twikiUnvisited twikiMakeVisible twistyInited twistyRememberSetting"><a href="#"><span class="icon">&times;</span>Hide summaries</a></div><script type="text/javascript">twiki.JQueryTwistyPlugin.initId("toggleSummaries_on");</script><div id="twistySummaries_hide" class="twistyTrigger twikiUnvisited twikiMakeVisible twistyInited twistyRememberSetting"><a href="#"><span class="icon">+</span>Show summaries</a></div><span id="twistySummaries_toggle" class="twistyContent"><!----></span><script type="text/javascript">twiki.JQueryTwistyPlugin.initId("toggleSummaries_off");</script></li><li><div id="twistySort_show" class="twistyTrigger twikiUnvisited twikiMakeVisible twistyInited twistyRememberSetting"><a href="#"><span class="icon">&times;</span>Sort by source order</a></div><script type="text/javascript">twiki.JQueryTwistyPlugin.initId("toggleSort_on");</script><div id="twistySort_hide" class="twistyTrigger twikiUnvisited twikiMakeVisible twistyInited twistyRememberSetting"><a href="#"><span class="icon">+</span>Sort alphabetically</a></div><span id="twistySort_toggle" class="twistyContent"><!----></span><script type="text/javascript">twiki.JQueryTwistyPlugin.initId("toggleSort_off");</script></li></ul><br class="clear" /></div><div class="memberList"><div class="memberSummaryPart"><span class="title">Constructor</span><ul class="sortable" id="sortul1"><li class="sortli listnum1"><a href="#VideoLoad">VideoLoad</a><span class="typeInfo"> (request:*, completeWhenBuffered:Boolean = false)</span><ul class="summary"><li>Creates a new VideoLoad.</li></ul></li></ul></div><div class="memberSummaryPart"><span class="title">Class properties</span><div class="boxWithBorder"><div class="boxedElem"><div class="contentHolder"><span class="title">Class properties inherited from <span class="superclass"><a class="className" href="org_casalib_process_Process.html">Process</a></span></span><div class="item inheritedList"><a href="org_casalib_process_Process.html#NORM_PRIORITY">NORM_PRIORITY</a></div></div></div></div></div><div class="memberSummaryPart"><span class="title">Instance properties</span><ul class="sortable" id="sortul3"><li class="sortli listnum1"><a href="#duration">duration</a><span class="typeInfo">  : Number</span><ul class="summary"><li>The duration/length of the video.</li></ul></li><li class="sortli listnum2"><a href="#pauseStart">pauseStart</a><span class="typeInfo">  : Boolean</span><ul class="summary"><li>Indicates to pause video at start <span class="codeIdentifier">true</span>, or to let the video automatically play <span class="codeIdentifier">false</span>; defaults to <span class="codeIdentifier">false</span>.</li></ul></li><li class="sortli listnum3"><a href="#video">video</a><span class="typeInfo">  : Video</span><ul class="summary"><li>A Video class with attached NetStream.</li></ul></li><li class="sortli listnum4"><a href="#netConnection">netConnection</a><span class="typeInfo">  : NetConnection</span><ul class="summary"><li>The NetConnection class used by the VideoLoad class.</li></ul></li><li class="sortli listnum5"><a href="#netStream">netStream</a><span class="typeInfo">  : NetStream</span><ul class="summary"><li>The NetStream class used by the VideoLoad class.</li></ul></li><li class="sortli listnum6"><a href="#millisecondsUntilBuffered">millisecondsUntilBuffered</a><span class="typeInfo">  : int</span><ul class="summary"><li>The time remaining in milliseconds until the video has completely buffered.</li></ul></li><li class="sortli listnum7"><a href="#buffer">buffer</a><span class="typeInfo">  : <a class="className" href="org_casalib_math_Percent.html">Percent</a></span><ul class="summary"><li>The percent the video has buffered.</li></ul></li><li class="sortli listnum8"><a href="#buffered">buffered</a><span class="typeInfo">  : Boolean</span><ul class="summary"><li>Determines if the requested video has buffered <span class="codeIdentifier">true</span>, or hasn't finished buffering <span class="codeIdentifier">false</span>.</li></ul></li><li class="sortli listnum9"><a href="#metaData">metaData</a><span class="typeInfo">  : Object</span><ul class="summary"><li>The meta data information embedded in the video being loaded.</li></ul></li></ul><div class="boxWithBorder"><div class="boxedElem"><div class="contentHolder"><span class="title">Instance properties inherited from <span class="superclass"><a class="className" href="org_casalib_load_LoadItem.html">LoadItem</a></span></span><div class="item inheritedList"><a class="private" href="org_casalib_load_LoadItem.html#_attempts">_attempts</a>  <a class="private" href="org_casalib_load_LoadItem.html#_Bps">_Bps</a>  <a class="private" href="org_casalib_load_LoadItem.html#_dispatcher">_dispatcher</a>  <a class="private" href="org_casalib_load_LoadItem.html#_errrored">_errrored</a>  <a class="private" href="org_casalib_load_LoadItem.html#_httpStatus">_httpStatus</a>  <a class="private" href="org_casalib_load_LoadItem.html#_latency">_latency</a>  <a class="private" href="org_casalib_load_LoadItem.html#_loaded">_loaded</a>  <a class="private" href="org_casalib_load_LoadItem.html#_loadItem">_loadItem</a>  <a class="private" href="org_casalib_load_LoadItem.html#_preventCache">_preventCache</a>  <a class="private" href="org_casalib_load_LoadItem.html#_progress">_progress</a>  <a class="private" href="org_casalib_load_LoadItem.html#_request">_request</a>  <a class="private" href="org_casalib_load_LoadItem.html#_retries">_retries</a>  <a class="private" href="org_casalib_load_LoadItem.html#_startTime">_startTime</a>  <a class="private" href="org_casalib_load_LoadItem.html#_time">_time</a>  <a class="private" href="org_casalib_load_LoadItem.html#_url">_url</a>  <a href="org_casalib_load_LoadItem.html#attempts">attempts</a>  <a href="org_casalib_load_LoadItem.html#Bps">Bps</a>  <a href="org_casalib_load_LoadItem.html#bytesLoaded">bytesLoaded</a>  <a href="org_casalib_load_LoadItem.html#bytesTotal">bytesTotal</a>  <a href="org_casalib_load_LoadItem.html#errored">errored</a>  <a href="org_casalib_load_LoadItem.html#httpStatus">httpStatus</a>  <a href="org_casalib_load_LoadItem.html#latency">latency</a>  <a href="org_casalib_load_LoadItem.html#loaded">loaded</a>  <a href="org_casalib_load_LoadItem.html#loading">loading</a>  <a href="org_casalib_load_LoadItem.html#preventCache">preventCache</a>  <a href="org_casalib_load_LoadItem.html#progress">progress</a>  <a href="org_casalib_load_LoadItem.html#retries">retries</a>  <a href="org_casalib_load_LoadItem.html#time">time</a>  <a href="org_casalib_load_LoadItem.html#url">url</a>  <a href="org_casalib_load_LoadItem.html#urlRequest">urlRequest</a></div></div></div><div class="boxedElem"><div class="contentHolder"><span class="title">Instance properties inherited from <span class="superclass"><a class="className" href="org_casalib_process_Process.html">Process</a></span></span><div class="item inheritedList"><a class="private" href="org_casalib_process_Process.html#_hasCompleted">_hasCompleted</a>  <a class="private" href="org_casalib_process_Process.html#_isRunning">_isRunning</a>  <a class="private" href="org_casalib_process_Process.html#_priority">_priority</a>  <a href="org_casalib_process_Process.html#completed">completed</a>  <a href="org_casalib_process_Process.html#priority">priority</a>  <a href="org_casalib_process_Process.html#running">running</a></div></div></div><div class="boxedElem"><div class="contentHolder"><span class="title">Instance properties inherited from <span class="superclass"><a class="className" href="org_casalib_events_RemovableEventDispatcher.html">RemovableEventDispatcher</a></span></span><div class="item inheritedList"><a class="private" href="org_casalib_events_RemovableEventDispatcher.html#_isDestroyed">_isDestroyed</a>  <a class="private" href="org_casalib_events_RemovableEventDispatcher.html#_listenerManager">_listenerManager</a>  <a href="org_casalib_events_RemovableEventDispatcher.html#destroyed">destroyed</a></div></div></div></div></div><div class="memberSummaryPart"><span class="title">Instance methods</span><ul class="sortable" id="sortul4"><li class="sortli listnum1"><a href="#destroy">destroy</a><span class="typeInfo">  : void</span></li></ul><div class="boxWithBorder"><div class="boxedElem"><div class="contentHolder"><span class="title">Instance methods inherited from <span class="superclass"><a class="className" href="org_casalib_load_LoadItem.html">LoadItem</a></span></span><div class="item inheritedList"><a class="private" href="org_casalib_load_LoadItem.html#_calculateLoadProgress">_calculateLoadProgress</a>  <a class="private" href="org_casalib_load_LoadItem.html#_complete">_complete</a>  <a class="private" href="org_casalib_load_LoadItem.html#_createDefinedLoadEvent">_createDefinedLoadEvent</a>  <a class="private" href="org_casalib_load_LoadItem.html#_createRequest">_createRequest</a>  <a class="private" href="org_casalib_load_LoadItem.html#_initListeners">_initListeners</a>  <a class="private" href="org_casalib_load_LoadItem.html#_load">_load</a>  <a class="private" href="org_casalib_load_LoadItem.html#_onComplete">_onComplete</a>  <a class="private" href="org_casalib_load_LoadItem.html#_onHttpStatus">_onHttpStatus</a>  <a class="private" href="org_casalib_load_LoadItem.html#_onLoadError">_onLoadError</a>  <a class="private" href="org_casalib_load_LoadItem.html#_onOpen">_onOpen</a>  <a class="private" href="org_casalib_load_LoadItem.html#_onProgress">_onProgress</a>  <a href="org_casalib_load_LoadItem.html#destroy">destroy</a>  <a href="org_casalib_load_LoadItem.html#start">start</a>  <a href="org_casalib_load_LoadItem.html#stop">stop</a></div></div></div><div class="boxedElem"><div class="contentHolder"><span class="title">Instance methods inherited from <span class="superclass"><a class="className" href="org_casalib_process_Process.html">Process</a></span></span><div class="item inheritedList"><a class="private" href="org_casalib_process_Process.html#_complete">_complete</a>  <a href="org_casalib_process_Process.html#destroy">destroy</a>  <a href="org_casalib_process_Process.html#start">start</a>  <a href="org_casalib_process_Process.html#stop">stop</a></div></div></div><div class="boxedElem"><div class="contentHolder"><span class="title">Instance methods inherited from <span class="superclass"><a class="className" href="org_casalib_events_RemovableEventDispatcher.html">RemovableEventDispatcher</a></span></span><div class="item inheritedList"><a href="org_casalib_events_RemovableEventDispatcher.html#addEventListener">addEventListener</a>  <a href="org_casalib_events_RemovableEventDispatcher.html#destroy">destroy</a>  <a href="org_casalib_events_RemovableEventDispatcher.html#dispatchEvent">dispatchEvent</a>  <a href="org_casalib_events_RemovableEventDispatcher.html#getTotalEventListeners">getTotalEventListeners</a>  <a href="org_casalib_events_RemovableEventDispatcher.html#removeEventListener">removeEventListener</a>  <a href="org_casalib_events_RemovableEventDispatcher.html#removeEventListeners">removeEventListeners</a>  <a href="org_casalib_events_RemovableEventDispatcher.html#removeEventsForListener">removeEventsForListener</a>  <a href="org_casalib_events_RemovableEventDispatcher.html#removeEventsForType">removeEventsForType</a></div></div></div></div></div></div></div><div class="memberSection"><h2 id="Constructor">Constructor</h2><div class="member" id="VideoLoad"><h3>VideoLoad</h3><div class="fullMemberString"><div class="floatholder"><div class="floatbox code"><span class="memberAccess">public</span> function <b>VideoLoad</b> (
+}
+</pre>									</li>
+							</ul>			</div>
+					</div>
+	</div>
 
-</div><div class="code">request:*,
-completeWhenBuffered:Boolean = false)</div><br class="clear" /></div></div><div class="description"> Creates a new VideoLoad. </div><div class="boxWithBorder"><div class="boxedElem"><div class="contentHolder"><span class="title">Parameters:</span><div class="item"><div class="floatbox code colorizedCode">request             <span class="itemSeparator">:</span></div><div>A <code><span class="codeIdentifier">String</span></code> or an <code>URLRequest</code> reference to the video you wish to load.</div></div><div class="item"><div class="floatbox code colorizedCode">completeWhenBuffered<span class="itemSeparator">:</span></div><div>If the load should be considered complete when buffered <code><span class="codeIdentifier">true</span></code>, or when the video has completely loaded <code><span class="codeIdentifier">false</span></code>; defaults to <code><span class="codeIdentifier">false</span></code>.</div></div></div></div><div class="boxedElem"><div class="contentHolder"><span class="title">Throws:</span><div class="item"><ul><li> <a class="className" href="org_casalib_errors_ArguementTypeError.html">ArguementTypeError</a> if you pass a type other than a <code><span class="codeIdentifier">String</span></code> or an <code>URLRequest</code> to parameter <code>request</code>. </li><li> <span class="doesNotExist"> Error</span> if you try to load an empty <code><span class="codeIdentifier">String</span></code> or <code>URLRequest</code>. </li></ul></div></div></div></div></div></div><div class="memberSection"><h2 id="Instanceproperties">Instance properties</h2><div class="member" id="buffer"><h3>buffer</h3><div class="fullMemberString"><div class="floatholder"><div class="floatbox code"><span class="memberAccess">public</span> <b>buffer</b>:<a class="className" href="org_casalib_math_Percent.html">Percent</a>
-</div><div class="floatbox"><span class="access">(read)</span></div><br class="clear" /></div></div><div class="description"> The percent the video has buffered. </div><div class="boxWithBorder"><div class="boxedElem"><div class="contentHolder"><span class="title">Usage note:</span><div class="item"><ul><li> <a class="className" href="org_casalib_load_VideoLoad.html">VideoLoad</a> will report <code><span class="codeNumber">0</span></code> percent until two seconds of load time has elapsed. </li></ul></div></div></div></div></div><div class="member" id="buffered"><h3>buffered</h3><div class="fullMemberString"><div class="floatholder"><div class="floatbox code"><span class="memberAccess">public</span> <b>buffered</b>:Boolean
-</div><div class="floatbox"><span class="access">(read)</span></div><br class="clear" /></div></div><div class="description"> Determines if the requested video has buffered <code><span class="codeIdentifier">true</span></code>, or hasn't finished buffering <code><span class="codeIdentifier">false</span></code>. </div></div><div class="member" id="duration"><h3>duration</h3><div class="fullMemberString"><div class="floatholder"><div class="floatbox code"><span class="memberAccess">public</span> <b>duration</b>:Number
-</div><div class="floatbox"><span class="access">(read,write)</span></div><br class="clear" /></div></div><div class="description"> The duration/length of the video. </div><div class="boxWithBorder"><div class="boxedElem"><div class="contentHolder"><span class="title">Usage note:</span><div class="item"><ul><li> Setting this value will override the length (provided by the video metadata) that is used to calculate buffer. </li></ul></div></div></div></div></div><div class="member" id="metaData"><h3>metaData</h3><div class="fullMemberString"><div class="floatholder"><div class="floatbox code"><span class="memberAccess">public</span> <b>metaData</b>:Object
-</div><div class="floatbox"><span class="access">(read)</span></div><br class="clear" /></div></div><div class="description"> The meta data information embedded in the video being loaded. </div></div><div class="member" id="millisecondsUntilBuffered"><h3>millisecondsUntilBuffered</h3><div class="fullMemberString"><div class="floatholder"><div class="floatbox code"><span class="memberAccess">public</span> <b>millisecondsUntilBuffered</b>:int
-</div><div class="floatbox"><span class="access">(read)</span></div><br class="clear" /></div></div><div class="description"> The time remaining in milliseconds until the video has completely buffered. </div><div class="boxWithBorder"><div class="boxedElem"><div class="contentHolder"><span class="title">Usage note:</span><div class="item"><ul><li> <a class="className" href="org_casalib_load_VideoLoad.html">VideoLoad</a> will report <code>-<span class="codeNumber">1</span></code> milliseconds until two seconds of load time has elapsed. </li></ul></div></div></div></div></div><div class="member" id="netConnection"><h3>netConnection</h3><div class="fullMemberString"><div class="floatholder"><div class="floatbox code"><span class="memberAccess">public</span> <b>netConnection</b>:NetConnection
-</div><div class="floatbox"><span class="access">(read)</span></div><br class="clear" /></div></div><div class="description"> The NetConnection class used by the VideoLoad class. </div></div><div class="member" id="netStream"><h3>netStream</h3><div class="fullMemberString"><div class="floatholder"><div class="floatbox code"><span class="memberAccess">public</span> <b>netStream</b>:NetStream
-</div><div class="floatbox"><span class="access">(read)</span></div><br class="clear" /></div></div><div class="description"> The NetStream class used by the VideoLoad class. </div></div><div class="member" id="pauseStart"><h3>pauseStart</h3><div class="fullMemberString"><div class="floatholder"><div class="floatbox code"><span class="memberAccess">public</span> <b>pauseStart</b>:Boolean
-</div><div class="floatbox"><span class="access">(read,write)</span></div><br class="clear" /></div></div><div class="description"> Indicates to pause video at start <code><span class="codeIdentifier">true</span></code>, or to let the video automatically play <code><span class="codeIdentifier">false</span></code>; defaults to <code><span class="codeIdentifier">false</span></code>. </div></div><div class="member" id="video"><h3>video</h3><div class="fullMemberString"><div class="floatholder"><div class="floatbox code"><span class="memberAccess">public</span> <b>video</b>:Video
-</div><div class="floatbox"><span class="access">(read)</span></div><br class="clear" /></div></div><div class="description"> A Video class with attached NetStream. </div></div></div><div class="memberSection"><h2 id="Instancemethods">Instance methods</h2><div class="member" id="destroy"><h3>destroy</h3><div class="fullMemberString"><div class="floatholder"><div class="floatbox code"><span class="memberAccess">override public</span> function <b>destroy</b> (
-</div><div class="code">) : void</div><br class="clear" /></div></div><div class="boxWithBorder"><div class="boxedElem"><div class="contentHolder"><span class="title">Usage note:</span><div class="item"><ul><li> <code>destroy</code> does not close the internal NetStream object. To completely destroy a VideoLoad you have to close the NetStream object:<br />        <pre>
+								<div class='boxedElem'>
+		<div class='contentHolder'>
+			<span class='title'>Events broadcasted to listeners</span>
+					<div class='item'>
+					<ul>
+								<li>
+					AsyncErrorEvent with type: <code>ASYNC_ERROR</code> - Dispatched when an exception is thrown asynchronously.									</li>
+								<li>
+					SecurityErrorEvent with type: <code>SECURITY_ERROR</code> - Dispatched if load is outside the security sandbox.									</li>
+								<li>
+					<a href="org_casalib_events_VideoLoadEvent.html#PROGRESS">VideoLoadEvent</a> with type: <code>PROGRESS</code> - Dispatched as video is received during the download process.									</li>
+								<li>
+					<a href="org_casalib_events_VideoLoadEvent.html#BUFFERED">VideoLoadEvent</a> with type: <code>BUFFERED</code> - Dispatched when video is buffered.									</li>
+								<li>
+					<a href="org_casalib_events_VideoInfoEvent.html#CUE_POINT">VideoInfoEvent</a> with type: <code>CUE_POINT</code> - Dispatched when a video cue point is reached.									</li>
+								<li>
+					<a href="org_casalib_events_VideoInfoEvent.html#META_DATA">VideoInfoEvent</a> with type: <code>META_DATA</code> - Dispatched when video meta data is received.									</li>
+								<li>
+					NetStatusEvent with type: <code>NET_STATUS</code> - Dispatched when a NetStream object has reporting its status.									</li>
+							</ul>			</div>
+					</div>
+	</div>
+
+					</div>
+	</div></div>
+
+									<div class='toc'>
+		<h2 id='Summary'>Summary</h2>
+		<div class='docNav'>
+			<ul>
+									<li>
+						<span class='typeInfoHide'><a href="#" class='jqButton jqButtonSmall'><span class='jqButtonIcon'>&times;</span>Hide type info</a></span>
+						<span class='typeInfoShow'><a href="#" class='jqButton jqButtonSmall'><span class='jqButtonIcon'>+</span>Show type info</a></span>
+					</li>									<li>
+						<span class='summariesHide'><a href="#" class='jqButton jqButtonSmall'><span class='jqButtonIcon'>&times;</span>Hide summaries</a></span>
+						<span class='summariesShow'><a href="#" class='jqButton jqButtonSmall'><span class='jqButtonIcon'>+</span>Show summaries</a></span>
+					</li>			</ul>
+			<div class='clear'></div>
+		</div>
+				<div class='memberList'>
+							<div class='memberSummaryPart'>
+					<span class='title'>Constructor</span>
+					<ul>
+													<li class=''>								
+								<a href="#VideoLoad">VideoLoad</a>
+																<span class='typeInfo'>(request = *, completeWhenBuffered:Boolean = false)</span>																<ul class='summary'>
+									<li>Creates a new VideoLoad.</li>
+								</ul>							</li>
+											</ul>
+									</div>
+							<div class='memberSummaryPart'>
+					<span class='title'>Instance properties</span>
+					<ul>
+													<li class=''>								
+								<a href="#duration">duration</a>
+																<span class='typeInfo'> : Number</span>																<ul class='summary'>
+									<li>The duration/length of the video.</li>
+								</ul>							</li>
+													<li class=''>								
+								<a href="#pauseStart">pauseStart</a>
+																<span class='typeInfo'> : Boolean</span>																<ul class='summary'>
+									<li>Indicates to pause video at start true, or to let the video automatically play false; defaults to false.</li>
+								</ul>							</li>
+													<li class=''>								
+								<a href="#video">video</a>
+																<span class='typeInfo'> : Video</span>																<ul class='summary'>
+									<li>A Video class with attached NetStream.</li>
+								</ul>							</li>
+													<li class=''>								
+								<a href="#netConnection">netConnection</a>
+																<span class='typeInfo'> : NetConnection</span>																<ul class='summary'>
+									<li>The NetConnection class used by the VideoLoad class.</li>
+								</ul>							</li>
+													<li class=''>								
+								<a href="#netStream">netStream</a>
+																<span class='typeInfo'> : NetStream</span>																<ul class='summary'>
+									<li>The NetStream class used by the VideoLoad class.</li>
+								</ul>							</li>
+													<li class=''>								
+								<a href="#millisecondsUntilBuffered">millisecondsUntilBuffered</a>
+																<span class='typeInfo'> : int</span>																<ul class='summary'>
+									<li>The time remaining in milliseconds until the video has completely buffered.</li>
+								</ul>							</li>
+													<li class=''>								
+								<a href="#buffer">buffer</a>
+																<span class='typeInfo'> : <a href="org_casalib_math_Percent.html">Percent</a></span>																<ul class='summary'>
+									<li>The percent the video has buffered.</li>
+								</ul>							</li>
+													<li class=''>								
+								<a href="#buffered">buffered</a>
+																<span class='typeInfo'> : Boolean</span>																<ul class='summary'>
+									<li>Determines if the requested video has buffered true, or hasn't finished buffering false.</li>
+								</ul>							</li>
+													<li class=''>								
+								<a href="#metaData">metaData</a>
+																<span class='typeInfo'> : Object</span>																<ul class='summary'>
+									<li>The meta data information embedded in the video being loaded.</li>
+								</ul>							</li>
+											</ul>
+					<div class='boxWithBorder'>
+</div>				</div>
+							<div class='memberSummaryPart'>
+					<span class='title'>Instance methods</span>
+					<ul>
+													<li class=''>								
+								<a href="#destroy">destroy</a>
+																<span class='typeInfo'>() : void</span>																<ul class='summary'>
+									<li><div</li>
+								</ul>							</li>
+											</ul>
+					<div class='boxWithBorder'>
+	<div class='boxedElem'>
+		<div class='contentHolder'>
+			<span class='title'>Instance methods inherited from <span class='superclass'>			<a href="org_casalib_events_RemovableEventDispatcher.html">RemovableEventDispatcher</a>
+</span></span>
+			<div class='item inheritedList'>
+									<a href="org_casalib_events_RemovableEventDispatcher.html#addEventListener">addEventListener</a>
+
+									<a href="org_casalib_events_RemovableEventDispatcher.html#dispatchEvent">dispatchEvent</a>
+
+									<a href="org_casalib_events_RemovableEventDispatcher.html#getTotalEventListeners">getTotalEventListeners</a>
+
+									<a href="org_casalib_events_RemovableEventDispatcher.html#removeEventListener">removeEventListener</a>
+
+									<a href="org_casalib_events_RemovableEventDispatcher.html#removeEventListeners">removeEventListeners</a>
+
+									<a href="org_casalib_events_RemovableEventDispatcher.html#removeEventsForListener">removeEventsForListener</a>
+
+									<a href="org_casalib_events_RemovableEventDispatcher.html#removeEventsForType">removeEventsForType</a>
+
+						</div>
+		</div>
+	</div>
+</div>				</div>
+					</div>	</div>
+																					<div class='memberSection'>
+			<h2 id='Constructor'>Constructor</h2>
+							<div class='member' id='VideoLoad'>
+									<h3>VideoLoad</h3>											<div class='fullMemberString'>
+							<span class='code'>function <strong>VideoLoad</strong>(request = *,
+                   completeWhenBuffered:Boolean = false)</span>						</div>											<div class='description'>
+																			<p>Creates a new VideoLoad.</p>						</div>										<div class='boxWithBorder'>
+														<div class='boxedElem'>
+		<div class='contentHolder'>
+			<span class='title'>Parameters</span>
+						<div class='item'>
+		<span class='colorizedCode code'>request             <span class='itemSeparator'>:</span></span>A <code><span class="codeIdentifier">String</span></code> or an <code>URLRequest</code> reference to the video you wish to load.	</div>
+
+						<div class='item'>
+		<span class='colorizedCode code'>completeWhenBuffered<span class='itemSeparator'>:</span></span>If the load should be considered complete when buffered <code><span class="codeIdentifier">true</span></code>, or when the video has completely loaded <code><span class="codeIdentifier">false</span></code>; defaults to <code><span class="codeIdentifier">false</span></code>.	</div>
+
+					<div class='item'>
+					</div>
+					</div>
+	</div>
+
+														<div class='boxedElem'>
+		<div class='contentHolder'>
+			<span class='title'>Throws</span>
+					<div class='item'>
+					<ul>
+								<li>
+					<a href="org_casalib_errors_ArguementTypeError.html">ArguementTypeError</a>  if you pass a type other than a <code><span class="codeIdentifier">String</span></code> or an <code>URLRequest</code> to parameter <code>request</code>.									</li>
+								<li>
+					<a href="org_casalib_load_VideoLoad.html"></a>  <code><span class="codeIdentifier">Error</span></code> if you try to load an empty <code><span class="codeIdentifier">String</span></code> or <code>URLRequest</code>.									</li>
+							</ul>			</div>
+					</div>
+	</div>
+
+											</div>				</div>
+					</div>
+				<div class='memberSection'>
+			<h2 id='Instanceproperties'>Instance properties</h2>
+							<div class='member' id='buffer'>
+									<h3>buffer</h3>											<div class='fullMemberString'>
+							<span class='code'><strong>buffer</strong>:<a href="org_casalib_math_Percent.html">Percent</a></span><span class='access'>(read)</span>						</div>											<div class='description'>
+																			<p>The percent the video has buffered.</p>						</div>										<div class='boxWithBorder'>
+														<div class='boxedElem'>
+		<div class='contentHolder'>
+			<span class='title'>Usage note</span>
+					<div class='item'>
+					<ul>
+								<li>
+					<a href="org_casalib_load_VideoLoad.html">VideoLoad</a> will report <code><span class="codeNumber">0</span></code> percent until two seconds of load time has elapsed.									</li>
+							</ul>			</div>
+					</div>
+	</div>
+
+											</div>				</div>
+							<div class='member' id='buffered'>
+									<h3>buffered</h3>											<div class='fullMemberString'>
+							<span class='code'><strong>buffered</strong>:Boolean</span><span class='access'>(read)</span>						</div>											<div class='description'>
+																			<p>Determines if the requested video has buffered <code><span class="codeIdentifier">true</span></code>, or hasn't finished buffering <code><span class="codeIdentifier">false</span></code>.</p>						</div>									</div>
+							<div class='member' id='duration'>
+									<h3>duration</h3>											<div class='fullMemberString'>
+							<span class='code'><strong>duration</strong>:Number</span><span class='access'>(read,write)</span>						</div>											<div class='description'>
+																			<p>The duration/length of the video.</p>						</div>										<div class='boxWithBorder'>
+														<div class='boxedElem'>
+		<div class='contentHolder'>
+			<span class='title'>Usage note</span>
+					<div class='item'>
+					<ul>
+								<li>
+					Setting this value will override the length (provided by the video metadata) that is used to calculate buffer.									</li>
+							</ul>			</div>
+					</div>
+	</div>
+
+											</div>				</div>
+							<div class='member' id='metaData'>
+									<h3>metaData</h3>											<div class='fullMemberString'>
+							<span class='code'><strong>metaData</strong>:Object</span><span class='access'>(read)</span>						</div>											<div class='description'>
+																			<p>The meta data information embedded in the video being loaded.</p>						</div>									</div>
+							<div class='member' id='millisecondsUntilBuffered'>
+									<h3>millisecondsUntilBuffered</h3>											<div class='fullMemberString'>
+							<span class='code'><strong>millisecondsUntilBuffered</strong>:int</span><span class='access'>(read)</span>						</div>											<div class='description'>
+																			<p>The time remaining in milliseconds until the video has completely buffered.</p>						</div>										<div class='boxWithBorder'>
+														<div class='boxedElem'>
+		<div class='contentHolder'>
+			<span class='title'>Usage note</span>
+					<div class='item'>
+					<ul>
+								<li>
+					<a href="org_casalib_load_VideoLoad.html">VideoLoad</a> will report <code>-<span class="codeNumber">1</span></code> milliseconds until two seconds of load time has elapsed.									</li>
+							</ul>			</div>
+					</div>
+	</div>
+
+											</div>				</div>
+							<div class='member' id='netConnection'>
+									<h3>netConnection</h3>											<div class='fullMemberString'>
+							<span class='code'><strong>netConnection</strong>:NetConnection</span><span class='access'>(read)</span>						</div>											<div class='description'>
+																			<p>The NetConnection class used by the VideoLoad class.</p>						</div>									</div>
+							<div class='member' id='netStream'>
+									<h3>netStream</h3>											<div class='fullMemberString'>
+							<span class='code'><strong>netStream</strong>:NetStream</span><span class='access'>(read)</span>						</div>											<div class='description'>
+																			<p>The NetStream class used by the VideoLoad class.</p>						</div>									</div>
+							<div class='member' id='pauseStart'>
+									<h3>pauseStart</h3>											<div class='fullMemberString'>
+							<span class='code'><strong>pauseStart</strong>:Boolean</span><span class='access'>(read,write)</span>						</div>											<div class='description'>
+																			<p>Indicates to pause video at start <code><span class="codeIdentifier">true</span></code>, or to let the video automatically play <code><span class="codeIdentifier">false</span></code>; defaults to <code><span class="codeIdentifier">false</span></code>.</p>						</div>									</div>
+							<div class='member' id='video'>
+									<h3>video</h3>											<div class='fullMemberString'>
+							<span class='code'><strong>video</strong>:Video</span><span class='access'>(read)</span>						</div>											<div class='description'>
+																			<p>A Video class with attached NetStream.</p>						</div>									</div>
+					</div>
+				<div class='memberSection'>
+			<h2 id='Instancemethods'>Instance methods</h2>
+							<div class='member' id='destroy'>
+									<h3>destroy</h3>											<div class='fullMemberString'>
+							<span class='code'>override function <strong>destroy</strong>() : void</span>						</div>											<div class='description'>
+																			<p><div class="inheritDoc"><div class="inheritDoc"><div class="inheritDoc">Removes any event listeners and stops all internal processes to help allow for prompt garbage collection.
+			
+			<strong>Always call  before deleting last object pointer.</strong> <span class="inheritDocLink"></span></div> <span class="inheritDocLink"></span></div> <span class="inheritDocLink"><a href="org_casalib_load_LoadItem.html#destroy">&rarr;</a></span></div></p>						</div>										<div class='boxWithBorder'>
+														<div class='boxedElem'>
+		<div class='contentHolder'>
+			<span class='title'>Overrides</span>
+					<div class='item'>
+					<ul>
+								<li>
+					<a href="org_casalib_load_LoadItem.html#destroy">LoadItem.destroy</a>									</li>
+							</ul>			</div>
+					</div>
+	</div>
+
+														<div class='boxedElem'>
+		<div class='contentHolder'>
+			<span class='title'>Usage note</span>
+					<div class='item'>
+					<ul>
+								<li>
+					<code>destroy</code> does not close the internal NetStream object. To completely destroy a VideoLoad you have to close the NetStream object:
+			<pre>
 <span class="codeIdentifier">this</span>._videoLoad.netStream<span class="codeIdentifier">.close</span>();
-<span class="codeIdentifier">this</span>._videoLoad.destroy();</pre> </li></ul></div></div></div><div class="boxedElem"><div class="contentHolder"><span class="title">Overrides:</span><div class="item"><ul><li> <a href="org_casalib_load_LoadItem.html#destroy">LoadItem.destroy</a> </li></ul></div></div></div></div></div></div><div class="footer"><ul class="docFooter"><li class="copyright">&copy; 2010 Aaron Clinger and the CASA Lib Team</li><li class="createdWith">Created with <a href="http://visiblearea.com/visdoc/">VisDoc</a></li></ul></div></div></div></body></html>
+<span class="codeIdentifier">this</span>._videoLoad.destroy();
+</pre>									</li>
+							</ul>			</div>
+					</div>
+	</div>
+
+											</div>				</div>
+					</div>
+		
+							</div>
+						</div>
+											<div id='sidebar'>
+		<div id='clearHeaderLeft'></div> 
+		<div id='sidebarContent'>
+				<div class="list">
+							<ul>
+		<li  class=''>											<li id='menu_index' class=''>				<a href="index.html">CASA Lib AS3 Docs</a>
+</li>
+						</li>
+</ul>
+
+					<ul id='treemenu'>
+		<li  class=''>									<h2>Packages and classes</h2>											<ul>
+		<li  id='menu_package_org_casalib_collection' class='package'>
+																	<a href="package_org_casalib_collection.html">org.casalib.collection</a>
+
+															<ul>
+		<li  class=''>											<li id='menu_org_casalib_collection_IList' class='interface'>				<a href="org_casalib_collection_IList.html"><span class='packagePath'>org.casalib.collection.</span>IList</a>
+</li>
+							<li id='menu_org_casalib_collection_List' class=''>				<a href="org_casalib_collection_List.html"><span class='packagePath'>org.casalib.collection.</span>List</a>
+</li>
+							<li id='menu_org_casalib_collection_UniqueList' class=''>				<a href="org_casalib_collection_UniqueList.html"><span class='packagePath'>org.casalib.collection.</span>UniqueList</a>
+</li>
+						</li>
+</ul>
+
+				</li>
+</ul>
+
+							<ul>
+		<li  id='menu_package_org_casalib_control' class='package'>
+																	<a href="package_org_casalib_control.html">org.casalib.control</a>
+
+															<ul>
+		<li  class=''>											<li id='menu_org_casalib_control_IResumable' class='interface'>				<a href="org_casalib_control_IResumable.html"><span class='packagePath'>org.casalib.control.</span>IResumable</a>
+</li>
+							<li id='menu_org_casalib_control_IRunnable' class='interface'>				<a href="org_casalib_control_IRunnable.html"><span class='packagePath'>org.casalib.control.</span>IRunnable</a>
+</li>
+						</li>
+</ul>
+
+				</li>
+</ul>
+
+							<ul>
+		<li  id='menu_package_org_casalib_core' class='package'>
+																	<a href="package_org_casalib_core.html">org.casalib.core</a>
+
+															<ul>
+		<li  class=''>											<li id='menu_org_casalib_core_Destroyable' class=''>				<a href="org_casalib_core_Destroyable.html"><span class='packagePath'>org.casalib.core.</span>Destroyable</a>
+</li>
+							<li id='menu_org_casalib_core_IDestroyable' class='interface'>				<a href="org_casalib_core_IDestroyable.html"><span class='packagePath'>org.casalib.core.</span>IDestroyable</a>
+</li>
+						</li>
+</ul>
+
+				</li>
+</ul>
+
+							<ul>
+		<li  id='menu_package_org_casalib_display' class='package'>
+																	<a href="package_org_casalib_display.html">org.casalib.display</a>
+
+															<ul>
+		<li  class=''>											<li id='menu_org_casalib_display_CasaBitmap' class=''>				<a href="org_casalib_display_CasaBitmap.html"><span class='packagePath'>org.casalib.display.</span>CasaBitmap</a>
+</li>
+							<li id='menu_org_casalib_display_CasaMovieClip' class=''>				<a href="org_casalib_display_CasaMovieClip.html"><span class='packagePath'>org.casalib.display.</span>CasaMovieClip</a>
+</li>
+							<li id='menu_org_casalib_display_CasaShape' class=''>				<a href="org_casalib_display_CasaShape.html"><span class='packagePath'>org.casalib.display.</span>CasaShape</a>
+</li>
+							<li id='menu_org_casalib_display_CasaSimpleButton' class=''>				<a href="org_casalib_display_CasaSimpleButton.html"><span class='packagePath'>org.casalib.display.</span>CasaSimpleButton</a>
+</li>
+							<li id='menu_org_casalib_display_CasaSprite' class=''>				<a href="org_casalib_display_CasaSprite.html"><span class='packagePath'>org.casalib.display.</span>CasaSprite</a>
+</li>
+							<li id='menu_org_casalib_display_CasaTextField' class=''>				<a href="org_casalib_display_CasaTextField.html"><span class='packagePath'>org.casalib.display.</span>CasaTextField</a>
+</li>
+							<li id='menu_org_casalib_display_ReversibleMovieClip' class=''>				<a href="org_casalib_display_ReversibleMovieClip.html"><span class='packagePath'>org.casalib.display.</span>ReversibleMovieClip</a>
+</li>
+						</li>
+</ul>
+
+				</li>
+</ul>
+
+							<ul>
+		<li  id='menu_package_org_casalib_errors' class='package'>
+																	<a href="package_org_casalib_errors.html">org.casalib.errors</a>
+
+															<ul>
+		<li  class=''>											<li id='menu_org_casalib_errors_ArguementTypeError' class=''>				<a href="org_casalib_errors_ArguementTypeError.html"><span class='packagePath'>org.casalib.errors.</span>ArguementTypeError</a>
+</li>
+							<li id='menu_org_casalib_errors_ArrayContentsError' class=''>				<a href="org_casalib_errors_ArrayContentsError.html"><span class='packagePath'>org.casalib.errors.</span>ArrayContentsError</a>
+</li>
+						</li>
+</ul>
+
+				</li>
+</ul>
+
+							<ul>
+		<li  id='menu_package_org_casalib_events' class='package'>
+																	<a href="package_org_casalib_events.html">org.casalib.events</a>
+
+															<ul>
+		<li  class=''>											<li id='menu_org_casalib_events_InactivityEvent' class=''>				<a href="org_casalib_events_InactivityEvent.html"><span class='packagePath'>org.casalib.events.</span>InactivityEvent</a>
+</li>
+							<li id='menu_org_casalib_events_IRemovableEventDispatcher' class='interface'>				<a href="org_casalib_events_IRemovableEventDispatcher.html"><span class='packagePath'>org.casalib.events.</span>IRemovableEventDispatcher</a>
+</li>
+							<li id='menu_org_casalib_events_KeyComboEvent' class=''>				<a href="org_casalib_events_KeyComboEvent.html"><span class='packagePath'>org.casalib.events.</span>KeyComboEvent</a>
+</li>
+							<li id='menu_org_casalib_events_ListenerManager' class=''>				<a href="org_casalib_events_ListenerManager.html"><span class='packagePath'>org.casalib.events.</span>ListenerManager</a>
+</li>
+							<li id='menu_org_casalib_events_LoadEvent' class=''>				<a href="org_casalib_events_LoadEvent.html"><span class='packagePath'>org.casalib.events.</span>LoadEvent</a>
+</li>
+							<li id='menu_org_casalib_events_ProcessEvent' class=''>				<a href="org_casalib_events_ProcessEvent.html"><span class='packagePath'>org.casalib.events.</span>ProcessEvent</a>
+</li>
+							<li id='menu_org_casalib_events_RemovableEventDispatcher' class=''>				<a href="org_casalib_events_RemovableEventDispatcher.html"><span class='packagePath'>org.casalib.events.</span>RemovableEventDispatcher</a>
+</li>
+							<li id='menu_org_casalib_events_RetryEvent' class=''>				<a href="org_casalib_events_RetryEvent.html"><span class='packagePath'>org.casalib.events.</span>RetryEvent</a>
+</li>
+							<li id='menu_org_casalib_events_SequenceEvent' class=''>				<a href="org_casalib_events_SequenceEvent.html"><span class='packagePath'>org.casalib.events.</span>SequenceEvent</a>
+</li>
+							<li id='menu_org_casalib_events_StageEventProxy' class=''>				<a href="org_casalib_events_StageEventProxy.html"><span class='packagePath'>org.casalib.events.</span>StageEventProxy</a>
+</li>
+							<li id='menu_org_casalib_events_TweenEvent' class=''>				<a href="org_casalib_events_TweenEvent.html"><span class='packagePath'>org.casalib.events.</span>TweenEvent</a>
+</li>
+							<li id='menu_org_casalib_events_VideoInfoEvent' class=''>				<a href="org_casalib_events_VideoInfoEvent.html"><span class='packagePath'>org.casalib.events.</span>VideoInfoEvent</a>
+</li>
+							<li id='menu_org_casalib_events_VideoLoadEvent' class=''>				<a href="org_casalib_events_VideoLoadEvent.html"><span class='packagePath'>org.casalib.events.</span>VideoLoadEvent</a>
+</li>
+						</li>
+</ul>
+
+				</li>
+</ul>
+
+							<ul>
+		<li  id='menu_package_org_casalib_layout' class='package'>
+																	<a href="package_org_casalib_layout.html">org.casalib.layout</a>
+
+															<ul>
+		<li  class=''>											<li id='menu_org_casalib_layout_Distribution' class=''>				<a href="org_casalib_layout_Distribution.html"><span class='packagePath'>org.casalib.layout.</span>Distribution</a>
+</li>
+						</li>
+</ul>
+
+				</li>
+</ul>
+
+							<ul>
+		<li  id='menu_package_org_casalib_load' class='package'>
+																	<a href="package_org_casalib_load.html">org.casalib.load</a>
+
+															<ul>
+		<li  class=''>											<li id='menu_org_casalib_load_AudioLoad' class=''>				<a href="org_casalib_load_AudioLoad.html"><span class='packagePath'>org.casalib.load.</span>AudioLoad</a>
+</li>
+							<li id='menu_org_casalib_load_CasaLoader' class=''>				<a href="org_casalib_load_CasaLoader.html"><span class='packagePath'>org.casalib.load.</span>CasaLoader</a>
+</li>
+							<li id='menu_org_casalib_load_DataLoad' class=''>				<a href="org_casalib_load_DataLoad.html"><span class='packagePath'>org.casalib.load.</span>DataLoad</a>
+</li>
+							<li id='menu_org_casalib_load_GroupLoad' class=''>				<a href="org_casalib_load_GroupLoad.html"><span class='packagePath'>org.casalib.load.</span>GroupLoad</a>
+</li>
+							<li id='menu_org_casalib_load_ImageLoad' class=''>				<a href="org_casalib_load_ImageLoad.html"><span class='packagePath'>org.casalib.load.</span>ImageLoad</a>
+</li>
+							<li id='menu_org_casalib_load_LoadItem' class=''>				<a href="org_casalib_load_LoadItem.html"><span class='packagePath'>org.casalib.load.</span>LoadItem</a>
+</li>
+							<li id='menu_org_casalib_load_SwfLoad' class=''>				<a href="org_casalib_load_SwfLoad.html"><span class='packagePath'>org.casalib.load.</span>SwfLoad</a>
+</li>
+							<li id='menu_org_casalib_load_VideoLoad' class=''>				<a href="org_casalib_load_VideoLoad.html"><span class='packagePath'>org.casalib.load.</span>VideoLoad</a>
+</li>
+						</li>
+</ul>
+
+				</li>
+</ul>
+
+							<ul>
+		<li  id='menu_package_org_casalib_math' class='package'>
+																	<a href="package_org_casalib_math.html">org.casalib.math</a>
+
+															<ul>
+		<li  class=''>											<li id='menu_org_casalib_math_Percent' class=''>				<a href="org_casalib_math_Percent.html"><span class='packagePath'>org.casalib.math.</span>Percent</a>
+</li>
+							<li id='menu_org_casalib_math_Range' class=''>				<a href="org_casalib_math_Range.html"><span class='packagePath'>org.casalib.math.</span>Range</a>
+</li>
+						</li>
+</ul>
+
+				</li>
+</ul>
+
+							<ul>
+		<li  id='menu_package_org_casalib_math_geom' class='package'>
+																	<a href="package_org_casalib_math_geom.html">org.casalib.math.geom</a>
+
+															<ul>
+		<li  class=''>											<li id='menu_org_casalib_math_geom_Ellipse' class=''>				<a href="org_casalib_math_geom_Ellipse.html"><span class='packagePath'>org.casalib.math.geom.</span>Ellipse</a>
+</li>
+							<li id='menu_org_casalib_math_geom_Point3d' class=''>				<a href="org_casalib_math_geom_Point3d.html"><span class='packagePath'>org.casalib.math.geom.</span>Point3d</a>
+</li>
+						</li>
+</ul>
+
+				</li>
+</ul>
+
+							<ul>
+		<li  id='menu_package_org_casalib_process' class='package'>
+																	<a href="package_org_casalib_process.html">org.casalib.process</a>
+
+															<ul>
+		<li  class=''>											<li id='menu_org_casalib_process_Process' class=''>				<a href="org_casalib_process_Process.html"><span class='packagePath'>org.casalib.process.</span>Process</a>
+</li>
+							<li id='menu_org_casalib_process_ProcessGroup' class=''>				<a href="org_casalib_process_ProcessGroup.html"><span class='packagePath'>org.casalib.process.</span>ProcessGroup</a>
+</li>
+						</li>
+</ul>
+
+				</li>
+</ul>
+
+							<ul>
+		<li  id='menu_package_org_casalib_time' class='package'>
+																	<a href="package_org_casalib_time.html">org.casalib.time</a>
+
+															<ul>
+		<li  class=''>											<li id='menu_org_casalib_time_EnterFrame' class=''>				<a href="org_casalib_time_EnterFrame.html"><span class='packagePath'>org.casalib.time.</span>EnterFrame</a>
+</li>
+							<li id='menu_org_casalib_time_FrameDelay' class=''>				<a href="org_casalib_time_FrameDelay.html"><span class='packagePath'>org.casalib.time.</span>FrameDelay</a>
+</li>
+							<li id='menu_org_casalib_time_FrameTime' class=''>				<a href="org_casalib_time_FrameTime.html"><span class='packagePath'>org.casalib.time.</span>FrameTime</a>
+</li>
+							<li id='menu_org_casalib_time_FrameTimeStopwatch' class=''>				<a href="org_casalib_time_FrameTimeStopwatch.html"><span class='packagePath'>org.casalib.time.</span>FrameTimeStopwatch</a>
+</li>
+							<li id='menu_org_casalib_time_Inactivity' class=''>				<a href="org_casalib_time_Inactivity.html"><span class='packagePath'>org.casalib.time.</span>Inactivity</a>
+</li>
+							<li id='menu_org_casalib_time_Interval' class=''>				<a href="org_casalib_time_Interval.html"><span class='packagePath'>org.casalib.time.</span>Interval</a>
+</li>
+							<li id='menu_org_casalib_time_Sequence' class=''>				<a href="org_casalib_time_Sequence.html"><span class='packagePath'>org.casalib.time.</span>Sequence</a>
+</li>
+							<li id='menu_org_casalib_time_Stopwatch' class=''>				<a href="org_casalib_time_Stopwatch.html"><span class='packagePath'>org.casalib.time.</span>Stopwatch</a>
+</li>
+						</li>
+</ul>
+
+				</li>
+</ul>
+
+							<ul>
+		<li  id='menu_package_org_casalib_transitions' class='package'>
+																	<a href="package_org_casalib_transitions.html">org.casalib.transitions</a>
+
+															<ul>
+		<li  class=''>											<li id='menu_org_casalib_transitions_PropertyTween' class=''>				<a href="org_casalib_transitions_PropertyTween.html"><span class='packagePath'>org.casalib.transitions.</span>PropertyTween</a>
+</li>
+							<li id='menu_org_casalib_transitions_Tween' class=''>				<a href="org_casalib_transitions_Tween.html"><span class='packagePath'>org.casalib.transitions.</span>Tween</a>
+</li>
+						</li>
+</ul>
+
+				</li>
+</ul>
+
+							<ul>
+		<li  id='menu_package_org_casalib_ui' class='package'>
+																	<a href="package_org_casalib_ui.html">org.casalib.ui</a>
+
+															<ul>
+		<li  class=''>											<li id='menu_org_casalib_ui_Key' class=''>				<a href="org_casalib_ui_Key.html"><span class='packagePath'>org.casalib.ui.</span>Key</a>
+</li>
+							<li id='menu_org_casalib_ui_KeyCombo' class=''>				<a href="org_casalib_ui_KeyCombo.html"><span class='packagePath'>org.casalib.ui.</span>KeyCombo</a>
+</li>
+						</li>
+</ul>
+
+				</li>
+</ul>
+
+							<ul>
+		<li  id='menu_package_org_casalib_util' class='package'>
+																	<a href="package_org_casalib_util.html">org.casalib.util</a>
+
+															<ul>
+		<li  class=''>											<li id='menu_org_casalib_util_AlignUtil' class=''>				<a href="org_casalib_util_AlignUtil.html"><span class='packagePath'>org.casalib.util.</span>AlignUtil</a>
+</li>
+							<li id='menu_org_casalib_util_ArrayUtil' class=''>				<a href="org_casalib_util_ArrayUtil.html"><span class='packagePath'>org.casalib.util.</span>ArrayUtil</a>
+</li>
+							<li id='menu_org_casalib_util_ClassUtil' class=''>				<a href="org_casalib_util_ClassUtil.html"><span class='packagePath'>org.casalib.util.</span>ClassUtil</a>
+</li>
+							<li id='menu_org_casalib_util_ColorUtil' class=''>				<a href="org_casalib_util_ColorUtil.html"><span class='packagePath'>org.casalib.util.</span>ColorUtil</a>
+</li>
+							<li id='menu_org_casalib_util_ConversionUtil' class=''>				<a href="org_casalib_util_ConversionUtil.html"><span class='packagePath'>org.casalib.util.</span>ConversionUtil</a>
+</li>
+							<li id='menu_org_casalib_util_DateUtil' class=''>				<a href="org_casalib_util_DateUtil.html"><span class='packagePath'>org.casalib.util.</span>DateUtil</a>
+</li>
+							<li id='menu_org_casalib_util_DisplayObjectUtil' class=''>				<a href="org_casalib_util_DisplayObjectUtil.html"><span class='packagePath'>org.casalib.util.</span>DisplayObjectUtil</a>
+</li>
+							<li id='menu_org_casalib_util_DrawUtil' class=''>				<a href="org_casalib_util_DrawUtil.html"><span class='packagePath'>org.casalib.util.</span>DrawUtil</a>
+</li>
+							<li id='menu_org_casalib_util_FlashVarUtil' class=''>				<a href="org_casalib_util_FlashVarUtil.html"><span class='packagePath'>org.casalib.util.</span>FlashVarUtil</a>
+</li>
+							<li id='menu_org_casalib_util_FrameUtil' class=''>				<a href="org_casalib_util_FrameUtil.html"><span class='packagePath'>org.casalib.util.</span>FrameUtil</a>
+</li>
+							<li id='menu_org_casalib_util_GeomUtil' class=''>				<a href="org_casalib_util_GeomUtil.html"><span class='packagePath'>org.casalib.util.</span>GeomUtil</a>
+</li>
+							<li id='menu_org_casalib_util_LibraryManager' class=''>				<a href="org_casalib_util_LibraryManager.html"><span class='packagePath'>org.casalib.util.</span>LibraryManager</a>
+</li>
+							<li id='menu_org_casalib_util_LoadItemUtil' class=''>				<a href="org_casalib_util_LoadItemUtil.html"><span class='packagePath'>org.casalib.util.</span>LoadItemUtil</a>
+</li>
+							<li id='menu_org_casalib_util_LoadUtil' class=''>				<a href="org_casalib_util_LoadUtil.html"><span class='packagePath'>org.casalib.util.</span>LoadUtil</a>
+</li>
+							<li id='menu_org_casalib_util_LocationUtil' class=''>				<a href="org_casalib_util_LocationUtil.html"><span class='packagePath'>org.casalib.util.</span>LocationUtil</a>
+</li>
+							<li id='menu_org_casalib_util_NavigateUtil' class=''>				<a href="org_casalib_util_NavigateUtil.html"><span class='packagePath'>org.casalib.util.</span>NavigateUtil</a>
+</li>
+							<li id='menu_org_casalib_util_NumberUtil' class=''>				<a href="org_casalib_util_NumberUtil.html"><span class='packagePath'>org.casalib.util.</span>NumberUtil</a>
+</li>
+							<li id='menu_org_casalib_util_ObjectUtil' class=''>				<a href="org_casalib_util_ObjectUtil.html"><span class='packagePath'>org.casalib.util.</span>ObjectUtil</a>
+</li>
+							<li id='menu_org_casalib_util_PropertySetter' class=''>				<a href="org_casalib_util_PropertySetter.html"><span class='packagePath'>org.casalib.util.</span>PropertySetter</a>
+</li>
+							<li id='menu_org_casalib_util_QueryStringUtil' class=''>				<a href="org_casalib_util_QueryStringUtil.html"><span class='packagePath'>org.casalib.util.</span>QueryStringUtil</a>
+</li>
+							<li id='menu_org_casalib_util_RatioUtil' class=''>				<a href="org_casalib_util_RatioUtil.html"><span class='packagePath'>org.casalib.util.</span>RatioUtil</a>
+</li>
+							<li id='menu_org_casalib_util_SingletonUtil' class=''>				<a href="org_casalib_util_SingletonUtil.html"><span class='packagePath'>org.casalib.util.</span>SingletonUtil</a>
+</li>
+							<li id='menu_org_casalib_util_StageReference' class=''>				<a href="org_casalib_util_StageReference.html"><span class='packagePath'>org.casalib.util.</span>StageReference</a>
+</li>
+							<li id='menu_org_casalib_util_StringUtil' class=''>				<a href="org_casalib_util_StringUtil.html"><span class='packagePath'>org.casalib.util.</span>StringUtil</a>
+</li>
+							<li id='menu_org_casalib_util_TextFieldUtil' class=''>				<a href="org_casalib_util_TextFieldUtil.html"><span class='packagePath'>org.casalib.util.</span>TextFieldUtil</a>
+</li>
+							<li id='menu_org_casalib_util_UrlVariablesUtil' class=''>				<a href="org_casalib_util_UrlVariablesUtil.html"><span class='packagePath'>org.casalib.util.</span>UrlVariablesUtil</a>
+</li>
+							<li id='menu_org_casalib_util_ValidationUtil' class=''>				<a href="org_casalib_util_ValidationUtil.html"><span class='packagePath'>org.casalib.util.</span>ValidationUtil</a>
+</li>
+						</li>
+</ul>
+
+				</li>
+</ul>
+
+				</li>
+</ul>
+
+			</div>					<div class="globalNav">
+							<ul>
+									<li>
+						<li id='menu_all-packages' class=''>				<a href="all-packages.html">Package tree</a>
+</li>					</li>
+									<li>
+						<li id='menu_all-classes' class=''>				<a href="all-classes.html">Classes</a>
+</li>					</li>
+									<li>
+						<li id='menu_all-methods' class=''>				<a href="all-methods.html">Methods</a>
+</li>					</li>
+									<li>
+						<li id='menu_all-constants' class=''>				<a href="all-constants.html">Constants</a>
+</li>					</li>
+									<li>
+						<li id='menu_all-properties' class=''>				<a href="all-properties.html">Properties</a>
+</li>					</li>
+									<li>
+						<li class=''></li>					</li>
+							</ul>	</div>
+		</div>
+	</div>
+
+					</div>
+					<div class='clear'>&nbsp;</div> 
+				</div>
+			</div>
+			<div id='header'>
+				<div id='headerContentWrapper'>
+					<div id='headerContent'>
+						<ul id='headerButtons'>
+															<li id='toggleTocButton'><a href="#"><span class='disclosure'>&#9660;</span><span class='closure'>&#9658;</span>Navigation</a></li>													</ul>
+					</div>
+				</div>
+			</div>
+			<div id="footer">
+	<div id="footerContent">
+		<ul>
+						<li class="copyright">
+				&copy; 2011 Aaron Clinger and the CASA Lib Team
+			</li>		</ul>
+	</div>
+</div>
+		</div>
+     </body>
+</html>

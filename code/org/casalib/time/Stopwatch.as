@@ -1,6 +1,6 @@
 /*
 	CASA Lib for ActionScript 3.0
-	Copyright (c) 2010, Aaron Clinger & Contributors of CASA Lib
+	Copyright (c) 2011, Aaron Clinger & Contributors of CASA Lib
 	All rights reserved.
 	
 	Redistribution and use in source and binary forms, with or without
@@ -38,7 +38,7 @@ package org.casalib.time {
 		
 		@author Aaron Clinger
 		@author Mike Creighton
-		@version 09/06/09
+		@version 02/11/11
 		@example
 			<code>
 				package {
@@ -107,8 +107,10 @@ package org.casalib.time {
 			Resumes stopwatch from {@link Stopwatch#stop}.
 		*/
 		public function resume():void {
-			if (!this.running)
+			if (!this.running) {
 				this._startTime = this._timer;
+				this._isRunning = true;
+			}
 		}
 		
 		/**

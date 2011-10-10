@@ -1,6 +1,6 @@
-/*
+﻿/*
 	CASA Lib for ActionScript 3.0
-	Copyright (c) 2010, Aaron Clinger & Contributors of CASA Lib
+	Copyright (c) 2011, Aaron Clinger & Contributors of CASA Lib
 	All rights reserved.
 	
 	Redistribution and use in source and binary forms, with or without
@@ -36,7 +36,7 @@ package org.casalib.util {
 		Utilities for validating common string formats.
 		
 		@author Aaron Clinger
-		@version 08/30/08
+		@version 05/06/11
 	*/
 	public class ValidationUtil {
 		
@@ -49,7 +49,7 @@ package org.casalib.util {
 			@see <a href="http://www.regular-expressions.info/email.html">Read more about the regular expression used by this method.</a>
 		*/
 		public static function isEmail(email:String):Boolean {
-			var pattern:RegExp = /^[A-Z0-9._%+-]+@(?:[A-Z0-9-]+\.)+[A-Z]{2,4}$/i;
+			const pattern:RegExp = /^[A-Z0-9._%+-]+@(?:[A-Z0-9-]+\.)+[A-Z]{2,4}$/i;
 			return email.match(pattern) != null;
 		}
 		
@@ -60,8 +60,38 @@ package org.casalib.util {
 			@return Returns <code>true</code> if String is a state abbreviation; otherwise <code>false</code>.
 		*/
 		public static function isUsaStateAbbreviation(state:String):Boolean {
-			var states:Array = new Array('ak', 'al', 'ar', 'az', 'ca', 'co', 'ct', 'dc', 'de', 'fl', 'ga', 'hi', 'ia', 'id', 'il', 'in', 'ks', 'ky', 'la', 'ma', 'md', 'me', 'mi', 'mn', 'mo', 'ms', 'mt', 'nb', 'nc', 'nd', 'nh', 'nj', 'nm', 'nv', 'ny', 'oh', 'ok', 'or', 'pa', 'ri', 'sc', 'sd', 'tn', 'tx', 'ut', 'va', 'vt', 'wa', 'wi', 'wv', 'wy');
+			const states:Array = new Array('ak', 'al', 'ar', 'az', 'ca', 'co', 'ct', 'dc', 'de', 'fl', 'ga', 'hi', 'ia', 'id', 'il', 'in', 'ks', 'ky', 'la', 'ma', 'md', 'me', 'mi', 'mn', 'mo', 'ms', 'mt', 'nb', 'nc', 'nd', 'nh', 'nj', 'nm', 'nv', 'ny', 'oh', 'ok', 'or', 'pa', 'ri', 'sc', 'sd', 'tn', 'tx', 'ut', 'va', 'vt', 'wa', 'wi', 'wv', 'wy');
 			return ArrayUtil.contains(states, state.toLowerCase()) == 1;
+		}
+		
+		/**
+			Determines if the date provided is equal to or greater than a certain age.
+			
+			@param age: The age to validate.
+			@param yearBorn: The year of birth.
+			@param monthBorn: The month of birth, <code>0 </code> for January to <code>11</code> for December.
+			@param dateBorn: The day of the month of birth, from <code>1</code> to <code>31</code>.
+			@return Returns <code>true</code> if the date provided is equal to or greater than the age; otherwise <code>false</code>.
+		*/
+		public static function isAge(age:uint, yearBorn:uint, monthBorn:uint = 0, dateBorn:uint = 1):Boolean {
+			const currentDate:Date = new Date();
+			
+			if (yearBorn > currentDate.getFullYear() - age)
+				return false;
+			
+			if (yearBorn < currentDate.getFullYear() - age)
+				return true;
+			
+			if (monthBorn > currentDate.getMonth())
+				return false;
+			
+			if (monthBorn < currentDate.getMonth())
+				return true;
+			
+			if (dateBorn <= currentDate.getDate())
+				return true;
+			
+			return false;
 		}
 		
 		/**
@@ -74,11 +104,11 @@ package org.casalib.util {
 			if (cardNumber.length < 7 || cardNumber.length > 19 || Number(cardNumber) < 1000000)
 				return false;
 			
-			var pre:Number;
 			var sum:Number  = 0;
 			var alt:Boolean = true;
+			var i:Number    = cardNumber.length;
+			var pre:Number;
 			
-			var i:Number = cardNumber.length;
 			while (--i > -1) {
 				if (alt)
 					sum += Number(cardNumber.substr(i, 1));

@@ -1,6 +1,6 @@
 /*
 	CASA Lib for ActionScript 3.0
-	Copyright (c) 2010, Aaron Clinger & Contributors of CASA Lib
+	Copyright (c) 2011, Aaron Clinger & Contributors of CASA Lib
 	All rights reserved.
 	
 	Redistribution and use in source and binary forms, with or without
@@ -37,7 +37,7 @@ package org.casalib.util {
 		Utilities for determining the location of the SWF and the type of runtime environment.
 		
 		@author Aaron Clinger
-		@version 12/08/09
+		@version 02/29/10
 	*/
 	public class LocationUtil {
 		
@@ -47,7 +47,7 @@ package org.casalib.util {
 			
 			@param location: DisplayObject to get location of.
 			@return Returns <code>true</code> if SWF is being served on the internet; otherwise <code>false</code>.
-			@usage
+			@example
 				<code>
 					trace(LocationUtil.isWeb(this.stage));
 				</code>
@@ -62,7 +62,7 @@ package org.casalib.util {
 			@param location: MovieClip to compare location of.
 			@param domain: Web domain.
 			@return Returns <code>true</code> if file's embed location matched passed domain; otherwise <code>false</code>.
-			@usage
+			@example
 				To check for domain:
 				<code>
 					trace(LocationUtil.isDomain(this.stage, "google.com"));
@@ -83,7 +83,7 @@ package org.casalib.util {
 			
 			@param location: MovieClip to get location of.
 			@return Returns full domain (including sub-domains) of MovieClip's location.
-			@usage
+			@example
 				<code>
 					trace(LocationUtil.getDomain(this.stage));
 				</code>

@@ -1,6 +1,6 @@
 /*
 	CASA Lib for ActionScript 3.0
-	Copyright (c) 2010, Aaron Clinger & Contributors of CASA Lib
+	Copyright (c) 2011, Aaron Clinger & Contributors of CASA Lib
 	All rights reserved.
 	
 	Redistribution and use in source and binary forms, with or without
@@ -44,7 +44,7 @@ package org.casalib.display {
 		A base Sprite that implements {@link IRemovableEventDispatcher} and {@link IDestroyable}.
 		
 		@author Aaron Clinger
-		@version 02/11/10
+		@version 10/09/11
 	*/
 	public class CasaSprite extends Sprite implements IRemovableEventDispatcher, IDestroyable {
 		protected var _listenerManager:ListenerManager;
@@ -52,7 +52,7 @@ package org.casalib.display {
 		
 		
 		/**
-			Creates a new CasaSprite.
+			Creates a new <code>CasaSprite</code>.
 		*/
 		public function CasaSprite() {
 			super();
@@ -116,23 +116,32 @@ package org.casalib.display {
 		}
 		
 		/**
-			Removes and optionally destroys children of the CasaSprite.
+			Returns the current children of the <code>CasaSprite</code> as an <code>Array</code>.
 			
-			@param destroyChildren: If a child implements {@link IDestroyable} call its {@link IDestroyable#destroy destroy} method <code>true</code>, or don't destroy <code>false</code>; defaults to <code>false</code>.
-			@param recursive: Call this method with the same arguments on all of the children's children (all the way down the display list) <code>true</code>, or leave the children's children <code>false</code>; defaults to <code>false</code>.
+			@usageNote The <code>Array</code> is created dynamically when requested. It is best practice to store the result until no longer needed.
 		*/
-		public function removeChildren(destroyChildren:Boolean = false, recursive:Boolean = false):void {
-			DisplayObjectUtil.removeChildren(this, destroyChildren, recursive);
+		public function get children():Array {
+			return DisplayObjectUtil.getChildren(this);
 		}
 		
 		/**
-			Removes and optionally destroys children of the CasaSprite then destroys itself.
+			Removes and optionally destroys children of the <code>CasaSprite</code>.
 			
 			@param destroyChildren: If a child implements {@link IDestroyable} call its {@link IDestroyable#destroy destroy} method <code>true</code>, or don't destroy <code>false</code>; defaults to <code>false</code>.
 			@param recursive: Call this method with the same arguments on all of the children's children (all the way down the display list) <code>true</code>, or leave the children's children <code>false</code>; defaults to <code>false</code>.
 		*/
-		public function removeChildrenAndDestroy(destroyChildren:Boolean = false, recursive:Boolean = false):void {
-			this.removeChildren(destroyChildren, recursive);
+		public function removeAllChildren(destroyChildren:Boolean = false, recursive:Boolean = false):void {
+			DisplayObjectUtil.removeAllChildren(this, destroyChildren, recursive);
+		}
+		
+		/**
+			Removes and optionally destroys children of the <code>CasaSprite</code> then destroys itself.
+			
+			@param destroyChildren: If a child implements {@link IDestroyable} call its {@link IDestroyable#destroy destroy} method <code>true</code>, or don't destroy <code>false</code>; defaults to <code>false</code>.
+			@param recursive: Call this method with the same arguments on all of the children's children (all the way down the display list) <code>true</code>, or leave the children's children <code>false</code>; defaults to <code>false</code>.
+		*/
+		public function removeAllChildrenAndDestroy(destroyChildren:Boolean = false, recursive:Boolean = false):void {
+			this.removeAllChildren(destroyChildren, recursive);
 			this.destroy();
 		}
 		

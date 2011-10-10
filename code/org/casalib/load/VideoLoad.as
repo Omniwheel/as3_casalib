@@ -1,6 +1,6 @@
 /*
 	CASA Lib for ActionScript 3.0
-	Copyright (c) 2010, Aaron Clinger & Contributors of CASA Lib
+	Copyright (c) 2011, Aaron Clinger & Contributors of CASA Lib
 	All rights reserved.
 	
 	Redistribution and use in source and binary forms, with or without
@@ -58,7 +58,7 @@ package org.casalib.load {
 		Provides an easy and standardized way to load video files. VideoLoad also includes {@link VideoLoadEvent buffer progress information} in the progress event.
 		
 		@author Aaron Clinger
-		@version 02/13/10
+		@version 08/06/10
 		@example 
 			<code>
 				package {
@@ -116,7 +116,7 @@ package org.casalib.load {
 			@param request: A <code>String</code> or an <code>URLRequest</code> reference to the video you wish to load.
 			@param completeWhenBuffered: If the load should be considered complete when buffered <code>true</code>, or when the video has completely loaded <code>false</code>; defaults to <code>false</code>.
 			@throws ArguementTypeError if you pass a type other than a <code>String</code> or an <code>URLRequest</code> to parameter <code>request</code>.
-			@throws Error if you try to load an empty <code>String</code> or <code>URLRequest</code>.
+			@throws <code>Error</code> if you try to load an empty <code>String</code> or <code>URLRequest</code>.
 		*/
 		public function VideoLoad(request:*, completeWhenBuffered:Boolean = false) {
 			this._netConnection = new NetConnection();
@@ -193,7 +193,7 @@ package org.casalib.load {
 		/**
 			The percent the video has buffered.
 			
-			@usageNote {@link VideoLoad} will report <code>0</code> percent until two seconds of load time has elapsed.
+			@usageNote {@link VideoLoad} will report <code>0 </code> percent until two seconds of load time has elapsed.
 		*/
 		public function get buffer():Percent {
 			return this._buffer.clone();
@@ -271,10 +271,11 @@ package org.casalib.load {
 			@sends VideoLoadEvent#BUFFERED - Dispatched when video is buffered.
 		*/
 		override protected function _calculateLoadProgress():void {
-			var justBuffered:Boolean = false;
-			var currentTime:int      = getTimer();
-			this._Bps                = LoadUtil.calculateBps(this.bytesLoaded, this._startTime, currentTime);
-			this._time               = currentTime - this._startTime;
+			var justBuffered:Boolean   = false;
+			const currentTime:int      = getTimer();
+			const loadComplete:Boolean = this.bytesLoaded >= this.bytesTotal;
+			this._Bps                  = LoadUtil.calculateBps(this.bytesLoaded, this._startTime, currentTime);
+			this._time                 = currentTime - this._startTime;
 			
 			this._progress.decimalPercentage = this.bytesLoaded / this.bytesTotal;
 			
@@ -290,7 +291,10 @@ package org.casalib.load {
 					this._buffered = justBuffered = true;
 			}
 			
-			if (this.buffered) {
+			if (this.buffered || loadComplete) {
+				if (loadComplete && !this.buffered)
+					this._buffered = justBuffered = true;
+				
 				this._buffer.decimalPercentage  = 1;
 				this._millisecondsUntilBuffered = 0;
 			}
@@ -303,11 +307,13 @@ package org.casalib.load {
 			if (justBuffered) {
 				this.dispatchEvent(this._createDefinedVideoLoadEvent(VideoLoadEvent.BUFFERED));
 				
-				if (this._completeWhenBuffered)
+				if (this._completeWhenBuffered) {
 					this._onComplete();
+					return;
+				}
 			}
 			
-			if (this.bytesLoaded >= this.bytesTotal && this.buffered)
+			if (loadComplete && this.buffered)
 				this._onComplete();
 		}
 		

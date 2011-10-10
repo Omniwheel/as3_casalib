@@ -1,6 +1,6 @@
 /*
 	CASA Lib for ActionScript 3.0
-	Copyright (c) 2010, Aaron Clinger & Contributors of CASA Lib
+	Copyright (c) 2011, Aaron Clinger & Contributors of CASA Lib
 	All rights reserved.
 	
 	Redistribution and use in source and binary forms, with or without
@@ -37,7 +37,7 @@ package org.casalib.util {
 		Utilities for manipulating URLVariables.
 		
 		@author Aaron Clinger
-		@version 10/05/09
+		@version 05/04/11
 	*/
 	public class UrlVariablesUtil {
 		
@@ -54,7 +54,7 @@ package org.casalib.util {
 			return pairs.join('&');
 		}
 		
-		private static function _sortAlphabetically(a:String, b:String):Number {
+		protected static function _sortAlphabetically(a:String, b:String):Number {
 			if (a < b)
 				return -1;
 			else if (a > b)
